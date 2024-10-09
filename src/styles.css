@@ -1,0 +1,13 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Poppins, sans-serif}
+
+
+:root {
+  --cor-primaria: #125887;
+  --cor-secundaria: #2ecc71;
+  --cor-fundo: #101011;
+  --cor-componentes: #080709;
+}
+
+
+

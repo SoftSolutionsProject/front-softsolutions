@@ -1,0 +1,229 @@
+div.desenvolvimento {
+  position: relative;
+  z-index: 5;
+  height: 100%;
+  width: 100%;
+  background-color: #000000;
+  display: block;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+
+.cta-curso {
+    margin:  3rem;
+    background-color: #DEDEDE;
+    border-radius: 20px;
+    place-items: center;
+    padding: 2rem 0 2rem 3rem;
+
+    @media screen and (max-width: 1200px) {
+      padding: 2rem 1rem;
+    }
+  }
+
+  .cta-curso .cta h1 {
+    color: #4687C2;
+    font-family: Poppins;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    @media screen and (max-width:768px) {
+      font-size: 20px;
+    }
+  }
+
+  .cta-curso .cta p {
+    color: #000;
+    font-family: Poppins;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: left;
+    margin-bottom: 3rem;
+
+    @media screen and (max-width:768px) {
+      font-size: 16px;
+    }
+  }
+
+  .cta-curso .cta .detalhes {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: center;
+  }
+
+  .cta-curso .cta .detalhes .detalhe {
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    margin-bottom: 2rem;
+    justify-content: center;
+    place-items: center;
+    margin-right: 20px;
+
+    @media screen and (max-width: 992px) {
+      width: 50%;
+      margin-right: 0;
+      .card-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 100%;
+    }
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .cta-curso .cta .detalhes .detalhe img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cta-curso .cta .detalhes .detalhe p {
+    place-items: center;
+    color: #4687C2;
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin: 0;
+    padding-left: 10px;
+  }
+
+  .cta-curso .curso {
+    @media screen and (max-width: 1200px) {
+      margin: 0 auto;
+    }
+  }
+add 
+
+  .ementa {
+    background-color: #DEDEDE;
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    margin: 3rem 0;
+  }
+
+  .ementa h2 {
+    color: #4687C2;
+    font-family: Poppins;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+  }
+
+  .ementa .row-ementa{
+    margin-top: 2rem;
+  }
+
+  .ementa .modulo {
+    text-align: left;
+    padding: 1rem 2rem;
+  }
+
+  .ementa .modulo h3 {
+    color: #000;
+    font-family: Poppins;
+    font-size: 12.5px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .ementa .modulo ul li {
+    color: #000;
+    font-family: Poppins;
+    font-size: 12.5px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+
+
+
+
+
+
+
+  .card {
+    flex: 1 1 300px; /* Largura inicial dos cards */
+    max-width: 300px; /* Largura máxima dos cards */
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: solid .1px #ffffff;
+  }
+
+  .card-img-top-wrapper {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+    height: 200px; /* Altura fixa para as imagens */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card-img-top {
+    height: 100%;
+    width: auto;
+    display: block;
+  }
+
+  .card-body {
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .card-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rating {
+    display: flex;
+    margin-left: 10px;
+  }
+
+  .rating img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgb(2, 2, 2);
+    background-color: #DEDEDE;
+    transition: background-color 0.3s;
+    border: 1px solid #868282;
+  }
+
+  .btn:hover {
+    background-color: #CCCCCC;
+  }

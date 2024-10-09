@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px; /* Espaço abaixo do logo */
+}
+
+.sidebar-logo {
+  max-width: 70%;
+  height: auto;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--cor-componentes);
+  padding: 1rem;
+  border-bottom: 1px solid #565252;
+}
+
+.navbar-brand {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  margin: 0;
+}
+
+.navbar-menu li {
+  margin-left: 1rem;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.793);
+  font-size: 1.1rem;
+  padding: 5px 5px;
+  transition: color 0.3s, background-color 0.3s; /* Adiciona transição suave */
+  border-radius: 5px;
+}
+
+.navbar-link:hover {
+  color: #000; /* Cor do texto quando o mouse passa por cima */
+  background-color: #ffffff; /* Cor de fundo quando o mouse passa por cima */
+}
+
+.navbar-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+.navbar-icon {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--cor-componentes);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 2;
+}
+
+.sidebar.active {
+  width: 250px; /* Ajuste a largura conforme necessário */
+}
+
+.sidebar a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  display: block;
+  transition: color 0.3s, background-color 0.3s; /* Adiciona transição suave */
+}
+
+.sidebar a:hover {
+  background-color: #575757;
+  color: #ffffff; /* Cor do texto quando o mouse passa por cima */
+  padding-left: 25px; /* Aumenta o espaçamento interno à esquerda */
+  padding-right: 25px; /* Aumenta o espaçamento interno à direita */
+  border-radius: 0px; /* Ajusta o arredondamento das bordas ao passar o mouse */
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: none;
+  }
+  .navbar-toggle {
+    display: block;
+  }
+}

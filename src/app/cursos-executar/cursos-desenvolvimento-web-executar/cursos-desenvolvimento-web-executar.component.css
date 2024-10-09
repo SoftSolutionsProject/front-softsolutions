@@ -1,0 +1,82 @@
+/* Estilos para a seção CTA sobre Desenvolvimento Web */
+div.curso-executar {
+  position: relative;
+  z-index: 5;
+  height: 100%;
+  width: 100%;
+  background-color: #000000;
+  display: block;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+/* Estilos para a seção CTA sobre Desenvolvimento Web */
+.cta-about {
+  padding: 3rem 0 0;
+  margin-bottom: 5rem;
+}
+
+.cta-about h1 {
+  text-transform: uppercase;
+  color: #4687C2;
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Estilos para a seção de cursos MVV */
+.cursos-mvv {
+  margin: 0 auto 5rem;
+}
+
+/* Estilos para as colunas dentro da seção de cursos */
+.col-mvv {
+  background-color: #DEDEDE;
+  padding: 1rem .5rem;
+  margin-bottom: 2rem;
+  border-radius: 20px;
+}
+
+.col-mvv h2 {
+  color: #4687C2;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* Estilos para a lista de conteúdo do curso */
+.conteudo-curso {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem; /* Espaçamento entre as listas de módulos */
+}
+
+/* Estilos para cada item da lista de conteúdo do curso */
+.conteudo-curso li {
+  margin-bottom: 0.5rem; /* Espaçamento entre os itens da lista de módulo */
+}
+
+/* Ajuste para aumentar o espaço após o último item de cada lista de módulo */
+.conteudo-curso li:last-child {
+  margin-bottom: 1.5rem; /* Espaçamento maior após o último item de cada módulo */
+}
+
+/* Estilos para a checkbox */
+.conteudo-curso li label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.conteudo-curso li label input[type="checkbox"] {
+  margin-right: 10px; /* Espaçamento entre o checkbox e o texto */
+}
+
+/* Estilos para o iframe */
+iframe {
+  border: 2px solid #dedede;
+  border-radius: 18px;
+}

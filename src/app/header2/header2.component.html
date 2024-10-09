@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/"><img src="assets/images/logo.png" alt="Logo" class="logo"></a>
+  </div>
+  <div class="navbar-toggle" (click)="toggleMenu()">
+    <span class="navbar-icon">&#9776;</span>
+  </div>
+  <ul class="navbar-menu">
+    <li><a routerLink="/cursos" class="navbar-link">Cursos</a></li>
+        <li><a routerLink="/quem-somos" class="navbar-link">Sobre</a></li>
+    <li><a routerLink="/cadastro" class="navbar-link">Cadastre-se</a></li>
+    <li><a routerLink="/certificados" class="navbar-link">Certificados</a></li>
+    <li><a routerLink="/contato" class="navbar-link">Contato</a></li>
+    <li><a routerLink="/login" class="navbar-link">Login</a></li>
+  </ul>
+</nav>
+
+<div class="sidebar" [ngClass]="{'active': menuActive}">
+  <div class="logo-container">
+  <img src="assets/images/logo.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <a href="javascript:void(0)" class="close-btn" (click)="toggleMenu()">&times;</a>
+  <a routerLink="/" class="navbar-link" (click)="toggleMenu()">Home</a>
+  <a routerLink="/cursos" class="navbar-link" (click)="toggleMenu()">Cursos</a>
+  <a routerLink="/login" class="navbar-link" (click)="toggleMenu()">Login</a>
+  <a routerLink="/quem-somos" class="navbar-link" (click)="toggleMenu()">Sobre</a>
+  <a routerLink="/cadastro" class="navbar-link" (click)="toggleMenu()">Cadastre-se</a>
+  <a routerLink="/certificados" class="navbar-link" (click)="toggleMenu()">Certificados</a>
+  <a routerLink="/contato" class="navbar-link" (click)="toggleMenu()">Contato</a>
+</div>

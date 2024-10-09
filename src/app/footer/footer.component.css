@@ -1,0 +1,13 @@
+mat-toolbar {
+    background-color: var(--cor-componentes);
+    border-top: 1px solid #565252;
+}
+
+.app-footer-style{
+    justify-content: end;
+}
+.app-footer-style span {
+    font-weight: bold;
+    font-size: 12px;
+    color: rgb(67, 67, 125);
+}

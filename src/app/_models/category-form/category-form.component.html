@@ -1,0 +1,49 @@
+<div>
+    <mat-card  class="w-300">
+        <mat-card-header> 
+            <mat-card-title>{{actionName}} Elemento</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form [formGroup]="categoryForm" #tableForm="ngForm">
+            <div fxLayout="column">
+                <mat-form-field>
+                    <mat-label>Item</mat-label>
+                    <input matInput type="text" formControlName = "position">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Nome</mat-label>
+                    <input matInput type="text" formControlName = "name">
+
+                    <!--
+                    <mat-error *ngif="categoryForm?.controls.name.erros?.request">Nome é obrigatório</mat-error>
+                    -->
+
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Peso</mat-label>
+                    <input matInput type="text" formControlName = "weight">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Simbulo</mat-label>
+                    <input matInput type="text" formControlName = "symbol">
+                </mat-form-field>
+            </div>
+            </form>
+            
+        </mat-card-content>
+
+        <mat-card-actions class="flx-center-row flx-evly">
+            <button mat-raised-button color="warn" (click)="clickCancelar()">
+                Cancelar
+            </button>
+            <button mat-raised-button color="primary" (click)="clickSalvar()">
+                Salvar
+            </button>
+        </mat-card-actions>
+
+    </mat-card>
+</div>

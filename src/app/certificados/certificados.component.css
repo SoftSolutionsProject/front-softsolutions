@@ -1,0 +1,109 @@
+body.certificado {
+    background-color: #aaaaaa !important;
+    height: 100%;
+  }
+
+  div.certificado {
+    position: relative;
+    z-index: 5;
+    height: 100%;
+    width: 100%;
+    color: #9b9b9b;
+    display: block;
+    padding-bottom: 5rem;
+  }
+
+  div.certificado .bg {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url('/assets/images/certificados/bg-certificados.jpg') center center;
+    background-size: cover;
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cta-certificados {
+    margin: 0rem 0;
+
+  }
+
+  .cta-certificados .cta input {
+    padding: .5rem 1rem;
+    background-color: #4687C2;
+    color: #FFF;
+    font-family: Poppins;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 60%;
+    border: none;
+    border-radius: 15px;
+    margin-right: 2rem;
+  }
+
+  .cta-certificados .cta input::placeholder {
+    color: #FFF;
+  }
+
+  .cta-certificados .cta button {
+    background-color: #000081;
+    color: #FFF;
+    padding: .5rem 1rem;
+    border-radius: 20px;
+    border: none;
+    font-family: Poppins;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 30%;
+  }
+
+  .txt-certificados .txt {
+    color: #000081;
+  }
+
+  .txt-certificados .txt h1 {
+    text-align: justify;
+    font-family: Poppins;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .txt-certificados .txt p {
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  @media (max-width: 768px) {
+
+    .cta-certificados .cta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cta-certificados .cta h1 {
+      text-align: center;
+    }
+
+    .cta-certificados .cta input {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .cta-certificados .cta button {
+      width: 40%;
+    }
+
+  }

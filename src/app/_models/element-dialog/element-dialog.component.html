@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-header>
+    <h1>{{actionName}}</h1>
+  </mat-card-header>
+
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Number</mat-label>
+      <input matInput [(ngModel)]="data.position">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="data.name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Weight</mat-label>
+      <input matInput [(ngModel)]="data.weight">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Symbol</mat-label>
+      <input matInput [(ngModel)]="data.symbol">
+    </mat-form-field>
+    
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  </mat-dialog-actions>
+   
+</mat-card>

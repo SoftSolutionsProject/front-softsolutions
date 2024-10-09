@@ -1,0 +1,141 @@
+body {
+  background-color: #2a2728;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+}
+
+.conteudo {
+  padding: 20px;
+}
+
+.perfil {
+  background-color: #000;
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  max-width: 350px;
+  margin: auto;
+}
+
+.card-perfil {
+  max-width: 100%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-img-top-wrapper {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-img-top {
+  height: 100%;
+  width: auto;
+}
+
+.user-info {
+  max-width: 600px;
+  margin: auto;
+}
+
+.user-info h1 {
+  color: #4687C2;
+  font-size: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.user-info .form-label {
+  color: #ffffff;
+}
+
+.form-control {
+  border-radius: 0;
+  background-color: #D9D9D9;
+}
+
+.btn {
+  background-color: #D9D9D9;
+  color: black;
+}
+
+.historico-cursos {
+  width: 100%;
+  background-color: #DEDEDE;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.historico-cursos h2 {
+  color: #4687C2;
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  flex: 1 1 300px;
+  max-width: 300px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1em;
+}
+
+.perfil-opcoes {
+  list-style: none;
+  padding: 0;
+}
+
+.perfil-opcoes li {
+  margin-bottom: 10px;
+}
+
+.perfil-opcoes a {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #4687C2;
+  padding: 10px 15px;
+  border-radius: 10px;
+  display: block;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .perfil {
+      max-width: 100%;
+  }
+
+  .user-info {
+      max-width: 100%;
+  }
+}
