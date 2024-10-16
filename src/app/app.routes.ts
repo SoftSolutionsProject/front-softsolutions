@@ -18,6 +18,8 @@ import { CursoDesenvolvimentoAppComponent } from './curso-desenvolvimento-app/cu
 import { CursosDesenvolvimentoWebExecutarComponent } from './cursos-executar/cursos-desenvolvimento-web-executar/cursos-desenvolvimento-web-executar.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
+import { TesteComponent } from './teste/teste.component';
+import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 
 
 export const routes: Routes = [
@@ -40,6 +42,8 @@ export const routes: Routes = [
     { path: 'curso-python-iniciante-executar', component:CursosPythonExecutarComponent},
     { path: 'perfil', component:PerfilComponent},
     { path: 'recuperar-senha', component: RecuperarSenhaComponent},
+    { path: 'teste', component: TesteComponent },
+    { path: 'editar-perfil/:idUser', component: EditarPerfilComponent },
 
 ];
 
