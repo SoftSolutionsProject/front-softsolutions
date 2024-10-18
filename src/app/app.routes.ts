@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { CursosPythonExecutarComponent } from './cursos-executar/cursos-python-executar/cursos-python-executar.component';
-import { CursoPythonInicianteComponent } from './curso-python-iniciante/curso-python-iniciante.component';
-import {  Routes } from '@angular/router';
+//app.routes.ts
+import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
@@ -15,35 +13,46 @@ import { CertificadosComponent } from './certificados/certificados.component';
 import { CursoDesenvolvimentoWebComponent } from './curso-desenvolvimento-web/curso-desenvolvimento-web.component';
 import { ContatoComponent } from './contato/contato.component';
 import { CursoDesenvolvimentoAppComponent } from './curso-desenvolvimento-app/curso-desenvolvimento-app.component';
+import { CursoPythonInicianteComponent } from './curso-python-iniciante/curso-python-iniciante.component';
 import { CursosDesenvolvimentoWebExecutarComponent } from './cursos-executar/cursos-desenvolvimento-web-executar/cursos-desenvolvimento-web-executar.component';
+import { CursosPythonExecutarComponent } from './cursos-executar/cursos-python-executar/cursos-python-executar.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
-import { TesteComponent } from './teste/teste.component';
-import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'home', component: HomeComponent },
-    { path: 'login', component: LoginComponent},
-    { path: 'about', component: AboutComponent},
-    { path: 'cursos', component: CursosComponent},
-    { path: 'categoria', component: CategoriaComponent, canActivate: [autorizacaoGuard] },
-    { path: 'quem-somos', component: QuemSomosComponent},
-    { path: 'cadastro', component: CadastroComponent},
-    { path: 'tabela', component: TabelaComponent},
-    { path: 'cadastro', component: CadastroComponent},
-    { path: 'certificados', component: CertificadosComponent},
-    { path: 'curso-desenvolvimento-web', component: CursoDesenvolvimentoWebComponent},
-    { path: 'contato', component: ContatoComponent},
-    { path: 'curso-desenvolvimento-app', component: CursoDesenvolvimentoAppComponent},
-    { path: 'curso-python-iniciante', component: CursoPythonInicianteComponent},
-    { path: 'curso-desenvolvimento-web-executar', component: CursosDesenvolvimentoWebExecutarComponent},
-    { path: 'curso-python-iniciante-executar', component:CursosPythonExecutarComponent},
-    { path: 'perfil', component:PerfilComponent},
-    { path: 'recuperar-senha', component: RecuperarSenhaComponent},
-    { path: 'teste', component: TesteComponent },
-    { path: 'editar-perfil/:idUser', component: EditarPerfilComponent },
 
+  {
+    path: 'profile/:id',
+    loadComponent: () => import('./profile/profile.component')
+      .then(m => m.ProfileComponent)
+  },
+
+
+  // Rotas principais
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  // Rotas de autenticação
+  { path: 'login', component: LoginComponent },
+  { path: 'cadastro', component: CadastroComponent },
+  { path: 'recuperar-senha', component: RecuperarSenhaComponent },
+  // Rotas protegidas
+  { path: 'categoria', component: CategoriaComponent, canActivate: [autorizacaoGuard] },
+  // Rotas de perfil e usuário
+  { path: 'perfil', component: PerfilComponent, canActivate: [autorizacaoGuard] },
+
+  // Rotas de cursos
+  { path: 'cursos', component: CursosComponent },
+  { path: 'curso-desenvolvimento-web', component: CursoDesenvolvimentoWebComponent },
+  { path: 'curso-desenvolvimento-app', component: CursoDesenvolvimentoAppComponent },
+  { path: 'curso-python-iniciante', component: CursoPythonInicianteComponent },
+  { path: 'curso-desenvolvimento-web-executar', component: CursosDesenvolvimentoWebExecutarComponent, canActivate: [autorizacaoGuard] },
+  { path: 'curso-python-iniciante-executar', component: CursosPythonExecutarComponent, canActivate: [autorizacaoGuard] },
+  // Rotas informativas
+  { path: 'about', component: AboutComponent },
+  { path: 'quem-somos', component: QuemSomosComponent },
+  { path: 'contato', component: ContatoComponent },
+  // Rotas administrativas e utilitárias
+  { path: 'tabela', component: TabelaComponent },
+  { path: 'certificados', component: CertificadosComponent, canActivate: [autorizacaoGuard] },
 ];
-
