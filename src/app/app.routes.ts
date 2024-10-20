@@ -4,7 +4,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
 import { CategoriaComponent } from './categoria/categoria.component';
-import { autorizacaoGuard } from './_guard/autorizacao.guard';
 import { CursosComponent } from './cursos/cursos.component';
 import { QuemSomosComponent } from './quem-somos/quem-somos.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
@@ -37,22 +36,22 @@ export const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent },
   { path: 'recuperar-senha', component: RecuperarSenhaComponent },
   // Rotas protegidas
-  { path: 'categoria', component: CategoriaComponent, canActivate: [autorizacaoGuard] },
+  { path: 'categoria', component: CategoriaComponent},
   // Rotas de perfil e usuário
-  { path: 'perfil', component: PerfilComponent, canActivate: [autorizacaoGuard] },
+  { path: 'perfil', component: PerfilComponent},
 
   // Rotas de cursos
   { path: 'cursos', component: CursosComponent },
   { path: 'curso-desenvolvimento-web', component: CursoDesenvolvimentoWebComponent },
   { path: 'curso-desenvolvimento-app', component: CursoDesenvolvimentoAppComponent },
   { path: 'curso-python-iniciante', component: CursoPythonInicianteComponent },
-  { path: 'curso-desenvolvimento-web-executar', component: CursosDesenvolvimentoWebExecutarComponent, canActivate: [autorizacaoGuard] },
-  { path: 'curso-python-iniciante-executar', component: CursosPythonExecutarComponent, canActivate: [autorizacaoGuard] },
+  { path: 'curso-desenvolvimento-web-executar', component: CursosDesenvolvimentoWebExecutarComponent },
+  { path: 'curso-python-iniciante-executar', component: CursosPythonExecutarComponent},
   // Rotas informativas
   { path: 'about', component: AboutComponent },
   { path: 'quem-somos', component: QuemSomosComponent },
   { path: 'contato', component: ContatoComponent },
   // Rotas administrativas e utilitárias
   { path: 'tabela', component: TabelaComponent },
-  { path: 'certificados', component: CertificadosComponent, canActivate: [autorizacaoGuard] },
+  { path: 'certificados', component: CertificadosComponent},
 ];

@@ -43,7 +43,7 @@ interface Curso {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'https://softsolutions.onrender.com/api';
 
   constructor(private http: HttpClient) { }
 
