@@ -9,18 +9,18 @@
     <div class="d-flex justify-content-center align-items-center h-100">
       <div class="col-md-6">
         <h1 class="text-center mb-4">RECUPERAR SENHA</h1>
-        <form (submit)="onSubmit($event)">
+        <form>
           <div class="secao">
             <div class="mb-3">
               <label for="inputEmail" class="form-label">EMAIL</label>
-              <input type="email" class="form-control" id="inputEmail" [(ngModel)]="email" name="email" placeholder="Digite seu email">
+              <input type="email" class="form-control" id="inputEmail" placeholder="Digite seu email">
             </div>
           </div>
           <div class="text-center secao">
             <div class="mb-3">
               <button type="submit" class="btn btn-secondary btn-md w-50">Enviar</button>
             </div>
-            <p *ngIf="message" class="text-light">{{ message }}</p>
+            <p class="text-light">Mensagem de exemplo</p>
           </div>
         </form>
       </div>
