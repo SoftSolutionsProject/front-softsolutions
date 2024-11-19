@@ -1,0 +1,13 @@
+
+*{
+  background-color: black;
+  padding: 10px;
+}
+
+.cont{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+

@@ -1,1 +1,9 @@
-<p>cursos-lista works!</p>
+<div class="cont">
+  <app-card-cursos *ngFor="let curso of cursos"
+  [titulo]="curso.titulo"
+  [professor]="curso.professor"
+  [imagemCurso]="curso.imagemCurso"
+  [avaliacao]="curso.avaliacao"
+  [estrelas]="curso.estrelas">
+  </app-card-cursos>
+ </div>

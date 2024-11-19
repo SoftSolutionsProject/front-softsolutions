@@ -1,1 +1,16 @@
 <p>card-cursos works!</p>
+<div class="card-container">  <div class="card">
+  <div class="card-img-top-wrapper">
+    <img [src]="imagemCurso" class="card-img-top" alt="Imagem do Curso">
+  </div>
+  <div class="card-body">
+    <h2 class="card-title">{{ titulo }}</h2>
+    <p class="card-text">
+      <span>{{ professor }}</span>
+      <span class="rating">
+        <img *ngFor="let estrela of estrelas" [src]="estrela" alt="Estrela de avaliação">
+      </span>
+    </p>
+    <button [routerLink]="['/curso-python-iniciante-executar']" type="button" class="btn">Mais Detalhes</button>
+  </div>
+</div>
