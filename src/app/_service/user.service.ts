@@ -43,7 +43,7 @@ interface Curso {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'https://softsolutions.onrender.com/api';
+  private apiUrl = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) { }
 
@@ -118,5 +118,20 @@ export class UserService {
       tap(() => console.log('Inscrição cancelada com sucesso')),
       catchError(this.handleError)
     );
+  }
+
+  login(email: string, senha: string): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/usuarios/login`, { email, senha }).pipe(
+      tap(response => {
+        localStorage.setItem('token', response.token); // Armazena o token no localStorage
+        console.log('Login realizado com sucesso');
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  logout() {
+    localStorage.removeItem('token'); // Remove o token ao sair
+    console.log('Usuário deslogado');
   }
 }

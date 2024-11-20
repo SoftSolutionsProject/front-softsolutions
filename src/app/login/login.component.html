@@ -1,39 +1,61 @@
 <div class="fundo">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+  />
+
+  <!-- Imagem à esquerda -->
   <div class="half-screen image-container">
-    <img src="assets/images/login/bg-login.png" class="img-fluid" alt="Imagem">
+    <img src="assets/images/login/bg-login.png" class="img-fluid" alt="Imagem" />
   </div>
 
+  <!-- Formulário de login -->
   <div class="half-screen">
     <div class="d-flex justify-content-center align-items-center h-100">
       <div class="col-md-6">
         <h1 class="text-center mb-4">LOGIN</h1>
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="secao">
             <div class="mb-3">
               <label for="inputEmail" class="form-label">EMAIL</label>
-              <input type="email" class="form-control" id="inputEmail" placeholder="Digite seu email">
+              <input
+                formControlName="email"
+                type="email"
+                class="form-control"
+                id="inputEmail"
+                placeholder="Digite seu email"
+              />
+              <small class="text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                Email é obrigatório e deve ser válido.
+              </small>
             </div>
             <div class="mb-3 senha">
               <label for="inputSenha" class="form-label">SENHA</label>
-              <input type="password" class="form-control" id="inputSenha" placeholder="Digite sua senha">
+              <input
+                formControlName="senha"
+                type="password"
+                class="form-control"
+                id="inputSenha"
+                placeholder="Digite sua senha"
+              />
+              <small class="text-danger" *ngIf="loginForm.get('senha')?.invalid && loginForm.get('senha')?.touched">
+                Senha é obrigatória.
+              </small>
             </div>
           </div>
           <div class="text-center secao">
-            <div class="mb-3">
+            <div class="mb-4">
               <button type="submit" class="btn btn-secondary btn-md w-50">Entrar</button>
             </div>
-            <p class="mb-4 light">
-              <!-- Link para a rota de "Esqueci minha senha" usando routerLink -->
-              <a [routerLink]="['/esqueci-senha']">ESQUECI MINHA SENHA!</a>
+            <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+            <p class="mb-3 light">
+              <a routerLink="/recuperar-senha">Esqueci minha senha!</a>
             </p>
             <p class="light">
-              <!-- Link para a rota de "Cadastro" usando routerLink -->
-              <a [routerLink]="['/cadastro']">Não possui cadastro?</a>
+              <a routerLink="/cadastro">Não possuo cadastro!</a>
             </p>
-            <div class="mt-4">
-              <!-- Botão para a rota de "Cadastro" usando routerLink -->
-              <button type="button" class="btn btn-secondary btn-md w-50" [routerLink]="['/cadastro']">Cadastrar</button>
-            </div>
           </div>
         </form>
       </div>

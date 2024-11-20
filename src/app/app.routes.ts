@@ -1,4 +1,3 @@
-//app.routes.ts
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -18,6 +17,7 @@ import { CardCursosComponent } from './card-cursos/card-cursos.component';
 import path from 'path';
 import { Component } from '@angular/core';
 import { CursosListaComponent } from './cursos-lista/cursos-lista.component';
+import { AuthGuard } from './_guard/auth.guard';
 
 
 export const routes: Routes = [
@@ -38,7 +38,7 @@ export const routes: Routes = [
   { path: 'recuperar-senha', component: RecuperarSenhaComponent },
 
   // Rotas de perfil e usuário
-  { path: 'perfil', component: PerfilComponent},
+  { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
 
   // Rotas de cursos
   { path: 'cursos', component: CursosComponent },
