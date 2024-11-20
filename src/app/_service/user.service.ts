@@ -120,13 +120,17 @@ export class UserService {
     );
   }
 
-  login(email: string, senha: string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/usuarios/login`, { email, senha }).pipe(
+  login(email: string, senha: string): Observable<{ user: { _idUser: number }; token: string }> {
+    return this.http.post<{ user: { _idUser: number }; token: string }>(`${this.apiUrl}/usuarios/login`, { email, senha }).pipe(
       tap(response => {
         localStorage.setItem('token', response.token); // Armazena o token no localStorage
-        console.log('Login realizado com sucesso');
+        localStorage.setItem('_idUser', response.user._idUser.toString()); // Armazena o ID do usuário
+        console.log('Login realizado com sucesso:', response);
       }),
-      catchError(this.handleError)
+      catchError(error => {
+        console.error('Erro no login:', error);
+        return throwError(() => new Error('Login ou senha inválidos.'));
+      })
     );
   }
 

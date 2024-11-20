@@ -29,9 +29,15 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, senha } = this.loginForm.value;
+      console.log('Tentativa de login com:', email, senha); // Log do formulário
       this.userService.login(email, senha).subscribe({
         next: () => {
-          this.router.navigate(['/perfil']); // Redireciona para o perfil após login
+          const userId = localStorage.getItem('_idUser'); // Obtém o ID do usuário do localStorage
+          if (userId) {
+            this.router.navigate([`/profile/${userId}`]); // Redireciona para a página do perfil com o ID do usuário
+          } else {
+            console.error('ID do usuário não encontrado no localStorage.');
+          }
         },
         error: err => {
           this.errorMessage = 'Login ou senha inválidos.';
@@ -40,5 +46,5 @@ export class LoginComponent {
       });
     }
   }
-}
 
+}

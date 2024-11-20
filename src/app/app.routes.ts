@@ -40,6 +40,8 @@ export const routes: Routes = [
   // Rotas de perfil e usuário
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
 
+  { path: 'profile/:id', component: PerfilComponent, canActivate: [AuthGuard] }, // Rota protegida
+
   // Rotas de cursos
   { path: 'cursos', component: CursosComponent },
   { path: 'curso-desenvolvimento-web', component: CursoDesenvolvimentoWebComponent },
