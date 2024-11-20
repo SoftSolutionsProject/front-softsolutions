@@ -52,29 +52,31 @@ export class UserService {
     return throwError(() => new Error('Algo deu errado. Por favor, tente novamente mais tarde.'));
   }
 
+  private getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+  }
+
   getProfile(userId: number): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}/usuarios/${userId}`).pipe(
+    return this.http.get<Usuario>(`${this.apiUrl}/usuarios/${userId}`, this.getAuthHeaders()).pipe(
       catchError(this.handleError)
     );
   }
 
   updateProfile(userId: number, userData: Partial<Usuario>): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.apiUrl}/usuarios/${userId}`, userData).pipe(
+    return this.http.put<Usuario>(`${this.apiUrl}/usuarios/${userId}`, userData, this.getAuthHeaders()).pipe(
       tap(() => console.log('Perfil atualizado com sucesso')),
       catchError(this.handleError)
     );
   }
 
   getInscricoes(userId: number): Observable<Inscricao[]> {
-    return this.http.get<Inscricao[]>(`${this.apiUrl}/inscricoes/${userId}`).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 404) {
-          console.log('Nenhuma inscrição encontrada para este usuário.');
-          return [];
-        } else {
-          return this.handleError(error);
-        }
-      })
+    return this.http.get<Inscricao[]>(`${this.apiUrl}/inscricoes/${userId}`, this.getAuthHeaders()).pipe(
+      catchError(this.handleError)
     );
   }
 
@@ -114,7 +116,7 @@ export class UserService {
   }
 
   cancelarInscricao(userId: number, moduleId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/inscricoes/${userId}/cursos/${moduleId}`).pipe(
+    return this.http.delete(`${this.apiUrl}/inscricoes/${userId}/cursos/${moduleId}`, this.getAuthHeaders()).pipe(
       tap(() => console.log('Inscrição cancelada com sucesso')),
       catchError(this.handleError)
     );
