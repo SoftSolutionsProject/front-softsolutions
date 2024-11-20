@@ -141,10 +141,14 @@ export class UserService {
     console.log('Usuário deslogado');
   }
 
-  
-  cadastrarUsuario(userData: any): Observable<any> {
-    const apiUrl = 'http://localhost:3000/api/usuarios/cadastro';
-    return this.http.post(apiUrl, userData);
+
+  cadastrarUsuario(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/usuarios/cadastro`, data).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Erro ao cadastrar usuário:', error);
+        return throwError(() => error); // Retorna o erro completo para o componente
+      })
+    );
   }
 
 

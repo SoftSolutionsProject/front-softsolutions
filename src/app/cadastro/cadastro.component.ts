@@ -14,18 +14,18 @@ import { UserService } from '../_service/user.service';
   styleUrl: './cadastro.component.css'
 })
 export class CadastroComponent implements OnInit {
-  cadastroForm!: FormGroup;
-  message: string | null = null;
-  errorMessage: string | null = null;
+  cadastroForm!: FormGroup; // Formulário reativo
+  message: string | null = null; // Mensagem de sucesso
+  errorMessage: string | null = null; // Mensagem de erro global
 
   constructor(private formBuilder: FormBuilder, private userService: UserService) {}
 
   ngOnInit(): void {
     this.cadastroForm = this.formBuilder.group({
       nomeUsuario: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]], // Validação do e-mail no frontend
       senha: ['', [Validators.required, Validators.minLength(6)]],
-      cpfUsuario: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]]
+      cpfUsuario: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
     });
   }
 
@@ -33,19 +33,21 @@ export class CadastroComponent implements OnInit {
     if (this.cadastroForm.valid) {
       this.userService.cadastrarUsuario(this.cadastroForm.value).subscribe({
         next: () => {
-          this.message = 'Usuário cadastrado com sucesso!';
-          this.errorMessage = null;
-          this.cadastroForm.reset();
+          this.message = 'Cadastro realizado com sucesso!';
+          this.errorMessage = null; // Limpa erros anteriores
+          this.cadastroForm.reset(); // Reseta o formulário
         },
         error: (err: HttpErrorResponse) => {
-          this.errorMessage = 'Ocorreu um erro ao cadastrar. Tente novamente.';
           this.message = null;
-          console.error('Erro ao cadastrar:', err);
-        }
+          if (err.status === 400 && err.error?.message) {
+            this.errorMessage = err.error.message; // Mensagem do backend
+          } else {
+            this.errorMessage = 'Ocorreu um erro ao cadastrar. Tente novamente.';
+          }
+        },
       });
     } else {
       this.errorMessage = 'Preencha todos os campos corretamente.';
-      this.message = null;
     }
   }
 }
