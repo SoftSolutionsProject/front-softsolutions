@@ -1,33 +1,71 @@
 <div class="container-fluid">
   <div class="row">
-      <div class="col-md-6 half-screen order-md-1 image-container">
-          <img src="/assets/images/contato/contato.png" class="img-fluid" alt="Imagem">
-      </div>
-      <div class="col-md-6 half-screen d-flex justify-content-center align-items-center order-md-2 form-container">
-          <div class="col-md-10">
-              <h1 class="text-center mb-4 margintit">ENTRE EM CONTATO</h1>
-              <form>
-                  <div class="secao">
-                      <div class="mb-5">
-                          <input type="text" class="form-control" id="inputNome" placeholder="Nome">
-                      </div>
-                      <div class="mb-5">
-                          <input type="email" class="form-control" id="inputEmail" placeholder="Endereço de Email">
-                      </div>
-                      <div class="mb-5">
-                          <input type="text" class="form-control" id="inputAssunto" placeholder="Assunto">
-                      </div>
-                      <div class="mb-5">
-                          <textarea class="form-control" id="inputMensagem" rows="5" placeholder="Digite aqui sua mensagem"></textarea>
-                      </div>
-                  </div>
-                  <div class="text-center secao">
-                      <div class="mb-5">
-                          <button type="submit" class="btn btn-secondary btn-md w-50">Enviar</button>
-                      </div>
-                  </div>
-              </form>
+    <div class="col-md-6 half-screen order-md-1 image-container">
+      <img src="/assets/images/contato/contato.png" class="img-fluid" alt="Imagem">
+    </div>
+    <div class="col-md-6 half-screen d-flex justify-content-center align-items-center order-md-2 form-container">
+      <div class="col-md-10">
+        <h1 class="text-center mb-4 margintit">ENTRE EM CONTATO</h1>
+        <form [formGroup]="contatoForm" (ngSubmit)="onSubmit()">
+          <div class="secao">
+            <!-- Nome -->
+            <div class="mb-5">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="nome"
+                placeholder="Nome">
+              <small class="text-danger" *ngIf="contatoForm.get('nome')?.invalid && contatoForm.get('nome')?.touched">
+                Nome é obrigatório.
+              </small>
+            </div>
+            <!-- Email -->
+            <div class="mb-5">
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="Endereço de Email">
+              <small class="text-danger" *ngIf="contatoForm.get('email')?.invalid && contatoForm.get('email')?.touched">
+                Email válido é obrigatório.
+              </small>
+            </div>
+            <!-- Assunto -->
+            <div class="mb-5">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="assunto"
+                placeholder="Assunto">
+              <small class="text-danger" *ngIf="contatoForm.get('assunto')?.invalid && contatoForm.get('assunto')?.touched">
+                Assunto é obrigatório.
+              </small>
+            </div>
+            <!-- Mensagem -->
+            <div class="mb-5">
+              <textarea
+                class="form-control"
+                formControlName="mensagem"
+                rows="5"
+                placeholder="Digite aqui sua mensagem"></textarea>
+              <small class="text-danger" *ngIf="contatoForm.get('mensagem')?.invalid && contatoForm.get('mensagem')?.touched">
+                Mensagem é obrigatória.
+              </small>
+            </div>
           </div>
+          <!-- Botão de Envio -->
+          <div class="text-center secao">
+            <div class="mb-5">
+              <button type="submit" class="btn btn-secondary btn-md w-50" [disabled]="contatoForm.invalid">Enviar</button>
+            </div>
+          </div>
+          <!-- Mensagens Globais -->
+          <div class="text-center">
+            <p class="text-success" *ngIf="message">{{ message }}</p>
+            <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+          </div>
+        </form>
       </div>
+    </div>
   </div>
 </div>
