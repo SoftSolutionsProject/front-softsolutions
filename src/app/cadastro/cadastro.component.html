@@ -6,29 +6,57 @@
     <div class="col-md-6 half-screen d-flex justify-content-center align-items-center order-md-2 form-container">
       <div class="col-md-10">
         <h1 class="text-center mb-4">CADASTRE-SE</h1>
-        <form>
+        <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
           <div class="secao">
             <div class="mb-5">
-              <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="nomeUsuario"
+                placeholder="Nome">
+              <small class="text-danger" *ngIf="cadastroForm.get('nomeUsuario')?.invalid && cadastroForm.get('nomeUsuario')?.touched">
+                Nome é obrigatório.
+              </small>
             </div>
             <div class="mb-5">
-              <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="Email">
+              <small class="text-danger" *ngIf="cadastroForm.get('email')?.invalid && cadastroForm.get('email')?.touched">
+                Email válido é obrigatório.
+              </small>
             </div>
             <div class="mb-5">
-              <input type="password" class="form-control" id="inputSenha" placeholder="Senha">
+              <input
+                type="password"
+                class="form-control"
+                formControlName="senha"
+                placeholder="Senha">
+              <small class="text-danger" *ngIf="cadastroForm.get('senha')?.invalid && cadastroForm.get('senha')?.touched">
+                Senha deve ter pelo menos 6 caracteres.
+              </small>
             </div>
             <div class="mb-5">
-              <input type="tel" class="form-control" id="inputTel" placeholder="Tel">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="cpfUsuario"
+                placeholder="CPF (somente números)">
+              <small class="text-danger" *ngIf="cadastroForm.get('cpfUsuario')?.invalid && cadastroForm.get('cpfUsuario')?.touched">
+                CPF válido é obrigatório (11 dígitos).
+              </small>
             </div>
           </div>
           <div class="text-center secao">
             <div class="mb-5">
-              <button type="submit" class="btn btn-secondary btn-md w-50">Cadastrar</button>
+              <button type="submit" class="btn btn-secondary btn-md w-50" [disabled]="cadastroForm.invalid">Cadastrar</button>
             </div>
           </div>
           <div class="text-center">
-            <p class="text-danger">O e-mail informado já possui cadastro</p>
-            <p class="text-success">Usuário cadastrado com sucesso</p>
+            <p class="text-success" *ngIf="message">{{ message }}</p>
+            <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
           </div>
         </form>
       </div>

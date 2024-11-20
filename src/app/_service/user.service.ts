@@ -140,4 +140,14 @@ export class UserService {
     localStorage.removeItem('token'); // Remove o token ao sair
     console.log('Usuário deslogado');
   }
+
+  
+  cadastrarUsuario(userData: any): Observable<any> {
+    const apiUrl = 'http://localhost:3000/api/usuarios/cadastro';
+    return this.http.post(apiUrl, userData);
+  }
+
+
+
+
 }
