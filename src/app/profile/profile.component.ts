@@ -66,19 +66,15 @@ export class ProfileComponent implements OnInit {
   loadInscricoes() {
     this.userService.getInscricoes(this.userId).subscribe(
       (inscricoes: Inscricao[]) => {
-        this.inscricoes = inscricoes;
-        if (inscricoes.length === 0) {
-          console.log('Nenhuma inscrição encontrada para este usuário.');
-          // Opcionalmente, você pode mostrar uma mensagem amigável para o usuário
-          this.showSnackBar('Você ainda não tem inscrições em cursos.');
-        }
+        this.inscricoes = inscricoes; // Atualiza a lista de inscrições
       },
       (error) => {
         console.error('Erro ao carregar inscrições:', error);
-        this.showSnackBar('Erro ao carregar inscrições. Tente novamente mais tarde.');
+        this.inscricoes = []; // Garante que a lista esteja vazia no caso de erro
       }
     );
   }
+
 
   onSubmit() {
     if (this.profileForm.valid) {

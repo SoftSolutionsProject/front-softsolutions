@@ -1,4 +1,3 @@
-<!-- src/app/profile/profile.component.html -->
 <div class="profile-container">
   <mat-card class="profile-card">
     <mat-card-header>
@@ -80,7 +79,8 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="inscricoes-card">
+  <!-- Seção de Inscrições -->
+  <mat-card class="inscricoes-card" *ngIf="inscricoes.length > 0">
     <mat-card-header>
       <mat-card-title>Minhas Inscrições</mat-card-title>
     </mat-card-header>
