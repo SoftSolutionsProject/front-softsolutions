@@ -1,102 +1,109 @@
-<div class="profile-container">
-  <mat-card class="profile-card">
-    <mat-card-header>
-      <mat-card-title>Perfil do Usuário</mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content>
-      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-        <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>Nome</mat-label>
-            <input matInput formControlName="nomeUsuario" placeholder="Seu nome">
-            <mat-error *ngIf="profileForm.get('nomeUsuario')?.hasError('required')">
-              Nome é obrigatório
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" placeholder="seu@email.com">
-            <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
-              Email é obrigatório
-            </mat-error>
-            <mat-error *ngIf="profileForm.get('email')?.hasError('email')">
-              Email inválido
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>Telefone</mat-label>
-            <input matInput formControlName="telefone" placeholder="(00) 00000-0000">
-          </mat-form-field>
-        </div>
-
-        <div formGroupName="endereco">
-          <div class="form-row address-grid">
-            <mat-form-field appearance="outline">
-              <mat-label>Rua</mat-label>
-              <input matInput formControlName="rua">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Número</mat-label>
-              <input matInput formControlName="numero">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Bairro</mat-label>
-              <input matInput formControlName="bairro">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Cidade</mat-label>
-              <input matInput formControlName="cidade">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Estado</mat-label>
-              <input matInput formControlName="estado">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>País</mat-label>
-              <input matInput formControlName="pais">
-            </mat-form-field>
+<div class="conteudo">
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <div class="perfil">
+        <div class="card card-perfil">
+          <div class="card-img-top-wrapper">
+            <img src="/assets/images/perfil.png" class="card-img-top" alt="Foto do Usuário">
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">{{profileForm.get('nomeUsuario')?.value || 'Nome do Usuário'}}</h2>
+            <p class="card-text">
+              <span>{{profileForm.get('email')?.value || 'email@exemplo.com'}}</span>
+            </p>
           </div>
         </div>
+        <ul class="perfil-opcoes">
+          <li><a [routerLink]="['/certificados']">Consultar Certificados</a></li>
+          <li><a [routerLink]="['/contato']">Contao e Suporte</a></li>
+          <li><a [routerLink]="['/encerrar-conta']">Encerrar Conta</a></li>
+        </ul>
 
-        <div class="form-actions">
-          <button mat-raised-button color="primary" type="submit">
-            Salvar Alterações
+      </div>
+    </div>
+    <div class="col-12 col-md-8">
+      <div class="user-info">
+        <h1>Atualizar Informações</h1>
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="inputNome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="inputNome"
+              formControlName="nomeUsuario" placeholder="Digite seu nome">
+            <div *ngIf="profileForm.get('nomeUsuario')?.invalid && profileForm.get('nomeUsuario')?.touched" class="text-danger">
+              Nome é obrigatório
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail"
+              formControlName="email" placeholder="Digite seu email">
+            <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="text-danger">
+              Email inválido
+            </div>
+          </div>
+          <div class="mb-5">
+            <label for="inputTelefone" class="form-label">Telefone</label>
+            <input type="tel" class="form-control" id="inputTelefone"
+              formControlName="telefone" placeholder="(00) 00000-0000">
+          </div>
+
+          <div formGroupName="endereco">
+            <div class="mb-3">
+              <label class="form-label mb-3" >Endereço</label>
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  <label for="inputRua" class="form-label">Rua</label>
+                  <input type="text" class="form-control" id="inputRua" formControlName="rua" placeholder="Rua">
+                </div>
+                <div class="col-md-6 mb-2">
+                  <label for="inputNumero" class="form-label">Número</label>
+                  <input type="text" class="form-control" id="inputNumero" formControlName="numero" placeholder="Número">
+                </div>
+                <div class="col-md-6 mb-2">
+                  <label for="inputBairro" class="form-label">Bairro</label>
+                  <input type="text" class="form-control" id="inputBairro" formControlName="bairro" placeholder="Bairro">
+                </div>
+                <div class="col-md-6 mb-2">
+                  <label for="inputCidade" class="form-label">Cidade</label>
+                  <input type="text" class="form-control" id="inputCidade" formControlName="cidade" placeholder="Cidade">
+                </div>
+                <div class="col-md-6 mb-2">
+                  <label for="inputEstado" class="form-label">Estado</label>
+                  <input type="text" class="form-control" id="inputEstado" formControlName="estado" placeholder="Estado">
+                </div>
+                <div class="col-md-6 mb-2">
+                  <label for="inputPais" class="form-label">País</label>
+                  <input type="text" class="form-control" id="inputPais" formControlName="pais" placeholder="País">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-secondary btn-md" [disabled]="!profileForm.valid">
+            Atualizar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="historico-cursos mt-5" *ngIf="inscricoes.length > 0">
+    <h2>Histórico de Cursos</h2>
+    <div class="container">
+      <div class="card" *ngFor="let inscricao of inscricoes">
+        <div class="card-img-top-wrapper">
+          <img src="assets/images/cursos/placeholder.jpg" class="card-img-top" alt="Curso">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Módulo {{inscricao._idModulo}}</h3>
+          <p class="card-text">
+            Status: {{inscricao.statusInscricao === 0 ? 'Em andamento' : 'Concluído'}}
+          </p>
+          <button class="btn btn-danger" (click)="cancelarInscricao(inscricao._idModulo)">
+            Cancelar Inscrição
           </button>
         </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-
-  <!-- Seção de Inscrições -->
-  <mat-card class="inscricoes-card" *ngIf="inscricoes.length > 0">
-    <mat-card-header>
-      <mat-card-title>Minhas Inscrições</mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item *ngFor="let inscricao of inscricoes">
-          <div class="inscricao-item">
-            <span>Módulo {{inscricao._idModulo}}</span>
-            <span>Status: {{inscricao.statusInscricao === 0 ? 'Em andamento' : 'Concluído'}}</span>
-            <button mat-icon-button color="warn" (click)="cancelarInscricao(inscricao._idModulo)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+      </div>
+    </div>
+  </div>
 </div>
