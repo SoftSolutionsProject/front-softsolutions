@@ -1,88 +1,83 @@
 
-<div class="conteudo">
-
-<div class="certificado">
-  <div class="a"></div>
-
-<div class="course-header">
-  <div class="text-section">
-    <h1>Cursos de programação <br><span>com aulas ao vivo</span></h1>
-      <p>Aprenda técnicas, linguagens e estratégias em desenvolvimento de software</p>
-      <p>Certificados reconhecidos e valorizados.</p>
-      <button type="button" class="btnhome">Quero saber mais</button>
-  </div>
-  <div class="image-section">
-      <img src="assets/images/home1.png" alt="Imagem de cursos">
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="card">
-    <div class="card-img-top-wrapper">
-      <img src="assets/images/cursos/desenvolvimento-web.jpg" class="card-img-top" alt="Imagem do Curso">
-    </div>
-    <div class="card-body">
-      <h2 class="card-title">Desenvolvimento Web</h2>
-      <p class="card-text">
-        <span>Prof. Paulo Sérgio Coelho</span>
-        <span class="rating">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-        </span>
-      </p>
-      <button type="button" class="btn">Conheça o curso</button>
+<div class="home-container">
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="text-section">
+        <h1>Transforme sua Carreira em Tecnologia</h1>
+        <p>Aprenda programação com professores experientes e conteúdo atualizado</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <h3>+5000</h3>
+            <p>Alunos Formados</p>
+          </div>
+          <div class="stat">
+            <h3>100%</h3>
+            <p>Cursos Online</p>
+          </div>
+          <div class="stat">
+            <h3>24/7</h3>
+            <p>Suporte Dedicado</p>
+          </div>
+        </div>
+        <button class="btn-primary">Iniciar Jornada</button>
+      </div>
+      <div class="image-section">
+        <img src="https://www.valuehost.com.br/blog/wp-content/uploads/2016/10/linguagens-de-programacao.jpeg.webp" alt="Cursos de Programação">
+      </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-img-top-wrapper">
-      <img src="assets/images/cursos/desenvolvimento-apps.jpg" class="card-img-top" alt="Imagem do Curso">
+  <section class="courses-section">
+    <div class="section-header">
+      <h2>Nossos Cursos em Destaque</h2>
+      <p>Escolha o caminho certo para sua carreira em tecnologia</p>
     </div>
-    <div class="card-body">
-      <h2 class="card-title">Desenvolvimento de Apps</h2>
-      <p class="card-text">
-        <span>Prof. Marcos Andrade</span>
-        <span class="rating">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-        </span>
-      </p>
-      <button type="button" class="btn">Conheça o curso</button>
+    <div class="course-grid">
+      <div class="course-card" *ngFor="let course of featuredCourses">
+        <div class="course-card-header">
+          <img [src]="course.image" [alt]="course.title">
+          <div class="course-badge">{{course.level}}</div>
+        </div>
+        <div class="course-card-body">
+          <h3>{{course.title}}</h3>
+          <div class="course-meta">
+            <span><i class="icon-clock"></i> {{course.duration}}</span>
+            <span><i class="icon-chart"></i> {{course.modules}} Módulos</span>
+          </div>
+          <p>{{course.description}}</p>
+          <div class="course-footer">
+            <button class="btn-secondary mb-2" >Detalhes</button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-
-  <div class="card">
-    <div class="card-img-top-wrapper">
-      <img src="assets/images/cursos/python.png" class="card-img-top" alt="Imagem do Curso">
+  <section class="features-section">
+    <div class="section-header">
+      <h2>Por que Escolher Nossa Plataforma?</h2>
     </div>
-    <div class="card-body">
-      <h2 class="card-title">Python para Iniciantes</h2>
-      <p class="card-text">
-        <span>Prof. Júlio Santos</span>
-        <span class="rating">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-          <img src="assets/images/home/estrela.png" alt="Imagem Ilustrativa">
-        </span>
-      </p>
-      <button type="button" class="btn">Conheça o curso</button>
+    <div class="features-grid">
+      <div class="feature-card">
+        <i class="icon-video"></i>
+        <h3>Aulas ao Vivo</h3>
+        <p>Interação em tempo real com professores especializados</p>
+      </div>
+      <div class="feature-card">
+        <i class="icon-certificate"></i>
+        <h3>Certificados Reconhecidos</h3>
+        <p>Certificados válidos no mercado de trabalho</p>
+      </div>
+      <div class="feature-card">
+        <i class="icon-community"></i>
+        <h3>Comunidade Ativa</h3>
+        <p>Networking e suporte de outros alunos</p>
+      </div>
+      <div class="feature-card">
+        <i class="icon-laptop"></i>
+        <h3>Conteúdo Atualizado</h3>
+        <p>Tecnologias e práticas mais recentes do mercado</p>
+      </div>
     </div>
-  </div>
-
-
-
-</div>
-
-</div>
-
+  </section>
 </div>

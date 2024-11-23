@@ -1,213 +1,182 @@
-div.certificado {
-  position: relative;
-  z-index: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #000000;
-  display: block;
-  padding-bottom: 5rem;
+.home-container {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
 }
 
-div.certificado .a {
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: url('/assets/images/home/bg-home.jpg') center center;
-  background-size: cover;
-  opacity: 0.25;
-  width: 100%;
-  height: 100%;
+.hero-section {
+  background: linear-gradient(135deg, rgba(18,18,18,0.9), rgba(70,135,194,0.3));
+  padding: 5rem 2rem;
 }
 
-.course-header {
+.image-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  margin-bottom: 50px;
-
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .text-section {
-  text-align: center;
-  margin-bottom: 20px;
-  line-height: normal;
+  flex: 1;
 }
 
 .text-section h1 {
-  font-size: 2.5em;
-  margin-bottom: 35px;
-  color: #4687C2; /* Defina a cor que desejar */
-  text-transform: uppercase; /* Transforma o texto em maiúsculas */
-}
-
-.text-section h1 span {
-  color: #ffffff; /* Defina a cor que desejar */
-  text-transform: uppercase; /* Transforma o texto em maiúsculas */
-  display: block;
-  margin-top: 20px;
-
+  font-size: 3rem;
+  color: #4687C2;
+  margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .text-section p {
-  font-size: 1.8em;
-  margin-bottom: 15px;
-  color: #ffffff;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: rgba(255,255,255,0.8);
+}
 
+.hero-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.hero-stats .stat {
+  text-align: center;
+}
+
+.hero-stats .stat h3 {
+  font-size: 2rem;
+  color: #4687C2;
+}
+
+.hero-stats .stat p {
+  font-size: 0.9rem;
+  opacity: 0.7;
 }
 
 .image-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  flex: 1;
 }
 
 .image-section img {
-  max-width: 100%;  /* Garante que a imagem não ultrapasse o tamanho do contêiner */
+  max-width: 100%;
   height: auto;
-  border-radius: 10px;
-  opacity: 0.8;
 }
 
-@media (min-width: 768px) {
-  .course-header {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-  }
-
-  .text-section {
-      flex: 3;  /* 60% da largura */
-      margin-right: 20px;
-      text-align: center;  /* Centraliza o texto */
-  }
-
-  .image-section {
-      flex: 2;  /* 40% da largura */
-      margin-left: 20px;
-      text-align: center;  /* Centraliza a imagem horizontalmente */
-  }
-
-}
-
-.btnhome {
-  padding: 10px 20px;
-  margin-top: 30px;
+.btn-primary {
+  background-color: #4687C2;
+  color: #ffffff;
   border: none;
-  border-radius: 15px;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: transform 0.3s ease;
   cursor: pointer;
-  color: rgb(2, 2, 2);
-  background-color: #DEDEDE;
-  transition: background-color 0.3s;
-  border: 1px solid #cdcbcb;
-  padding: 15px 30px;
-  font-size: 1.2em;
 }
 
-.btnhome:hover {
-  background-color: #CCCCCC;
+.btn-primary:hover {
+  transform: scale(1.05);
 }
 
+.courses-section, .features-section {
+  padding: 5rem 2rem;
+  text-align: center;
+  background-color: #0b0b0bdb;
+}
 
+.section-header {
+  margin-bottom: 3rem;
+}
 
+.section-header h2 {
+  color: #4687C2;
+  font-size: 2.5rem;
+}
 
+.section-header p {
+  color: rgba(255,255,255,0.7);
+}
 
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* Centraliza os cards */
-  gap: 50px;
-  padding: 20px;
-  }
+.course-card {
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
 
-  .card {
-    flex: 1 1 300px; /* Largura inicial dos cards */
-    max-width: 300px; /* Largura máxima dos cards */
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.course-card:hover {
+  transform: translateY(-10px);
+}
+
+.course-card-header {
+  position: relative;
+}
+
+.course-card-header img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.course-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #4687C2;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background-color: rgba(255,255,255,0.05);
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.feature-card:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.feature-card i {
+  font-size: 3rem;
+  color: #4687C2;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
     text-align: center;
-    border: solid .1px #ffffff;
   }
 
-  .card-img-top-wrapper {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    overflow: hidden;
-    height: 200px; /* Altura fixa para as imagens */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .card-img-top {
-    height: 100%;
-    width: auto;
-    display: block;
-  }
-
-  .card-body {
-    padding: 20px;
-    overflow: hidden;
-  }
-
-  .card-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
-
-  .card-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .rating {
-    display: flex;
-    margin-left: 10px;
-  }
-
-  .rating img {
-    width: 15px;
-    height: 15px;
-  }
-
-  .btn {
-    padding: 10px 20px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: rgb(2, 2, 2);
-    background-color: #DEDEDE;
-    transition: background-color 0.3s;
-    border: 1px solid #868282;
-  }
-
-  .btn:hover {
-    background-color: #CCCCCC;
-  }
-
-/* Media queries para ajustar a quantidade de colunas com base no tamanho da tela */
-@media screen and (max-width: 768px) {
-  .card {
-    flex: 1 1 100%; /* Para uma coluna em telas menores */
+  .hero-stats {
+    flex-direction: column;
+    gap: 1rem;
   }
 }
-
-@media screen and (min-width: 769px) and (max-width: 1200px) {
-  .card {
-    flex: 1 1 45%; /* Para duas colunas em telas médias */
-  }
-}
-
-
-
-
