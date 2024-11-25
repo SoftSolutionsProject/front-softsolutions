@@ -5,7 +5,7 @@
   <div class="card-body">
     <h2 class="card-title">{{ titulo }}</h2>
     <p class="card-text">
-      <span>{{ professor }}</span>
+      <span>{{ 'Prof. ' + professor }}</span>
       <span class="rating">
         <img *ngFor="let estrela of estrelas" [src]="estrela" alt="Estrela de avaliação">
       </span>
