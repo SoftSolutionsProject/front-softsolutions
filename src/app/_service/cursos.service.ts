@@ -14,7 +14,7 @@ export interface Curso {
   providedIn: 'root'
 })
 export class CursosService {
-  private readonly API_URL = 'http://localhost:3000/api/cursos';
+  private readonly API_URL = 'https://softsolutions.onrender.com/api/cursos';
 
   constructor(private http: HttpClient) {}
 
