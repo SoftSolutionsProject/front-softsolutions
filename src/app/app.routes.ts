@@ -11,7 +11,7 @@ import { CursoDesenvolvimentoAppComponent } from './curso-desenvolvimento-app/cu
 import { CursoPythonInicianteComponent } from './curso-python-iniciante/curso-python-iniciante.component';
 import { CursosDesenvolvimentoWebExecutarComponent } from './cursos-executar/cursos-desenvolvimento-web-executar/cursos-desenvolvimento-web-executar.component';
 import { CursosPythonExecutarComponent } from './cursos-executar/cursos-python-executar/cursos-python-executar.component';
-import { PerfilComponent } from './perfil/perfil.component';
+
 import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
 import { CardCursosComponent } from './card-cursos/card-cursos.component';
 import path from 'path';
@@ -28,7 +28,6 @@ export const routes: Routes = [
       .then(m => m.ProfileComponent)
   },
 
-
   // Rotas principais
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -36,11 +35,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'recuperar-senha', component: RecuperarSenhaComponent },
-
-  // Rotas de perfil e usuário
-  { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
-
-  { path: 'profile/:id', component: PerfilComponent, canActivate: [AuthGuard] }, // Rota protegida
 
   // Rotas de cursos
   { path: 'cursos', component: CursosComponent },
