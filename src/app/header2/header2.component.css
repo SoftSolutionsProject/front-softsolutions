@@ -57,8 +57,8 @@ body {
 }
 
 .navbar-link:hover {
-  color: #000; /* Cor do texto quando o mouse passa por cima */
-  background-color: #ffffff; /* Cor de fundo quando o mouse passa por cima */
+  color: #000;
+  background-color: #ffffff;
 }
 
 .navbar-toggle {
@@ -85,7 +85,7 @@ body {
 }
 
 .sidebar.active {
-  width: 250px; /* Ajuste a largura conforme necessário */
+  width: 250px;
 }
 
 .sidebar a {
@@ -99,10 +99,10 @@ body {
 
 .sidebar a:hover {
   background-color: #575757;
-  color: #ffffff; /* Cor do texto quando o mouse passa por cima */
-  padding-left: 25px; /* Aumenta o espaçamento interno à esquerda */
-  padding-right: 25px; /* Aumenta o espaçamento interno à direita */
-  border-radius: 0px; /* Ajusta o arredondamento das bordas ao passar o mouse */
+  color: #ffffff;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 0px; 
 }
 
 .close-btn {

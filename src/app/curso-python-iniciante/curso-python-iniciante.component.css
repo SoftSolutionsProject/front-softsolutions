@@ -9,9 +9,6 @@ div.desenvolvimento {
   padding-top: 1rem;
 }
 
-
-
-
 .cta-curso {
     margin:  3rem;
     background-color: #DEDEDE;
@@ -153,13 +150,6 @@ div.desenvolvimento {
     font-weight: 400;
     line-height: normal;
   }
-
-
-
-
-
-
-
 
   .card {
     flex: 1 1 300px; /* Largura inicial dos cards */

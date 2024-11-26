@@ -17,6 +17,4 @@ export class CardCursosComponent {
   @Input() estrelas: string[] = [];
   @Input() id: number = 0;
 
-
-
 }

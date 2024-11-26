@@ -59,7 +59,6 @@ div.curso-executar {
   margin-bottom: 0.5rem; /* Espaçamento entre os itens da lista de módulo */
 }
 
-/* Ajuste para aumentar o espaço após o último item de cada lista de módulo */
 .conteudo-curso li:last-child {
   margin-bottom: 1.5rem; /* Espaçamento maior após o último item de cada módulo */
 }

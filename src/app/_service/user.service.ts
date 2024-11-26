@@ -187,8 +187,6 @@ export class UserService {
     );
   }
 
-
-
   updateAulaProgresso(
     userId: number,
     cursoId: number,
