@@ -127,3 +127,16 @@
     max-width: 100%;
   }
 }
+
+.botoes-card {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.botoes-card .btn {
+  flex: 1;
+  margin: 0 5px;
+  font-size: 14px;
+  padding: 5px;
+}

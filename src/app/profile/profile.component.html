@@ -88,14 +88,13 @@
   </div>
 
   <div class="historico-cursos mt-5" *ngIf="inscricoes.length > 0">
-    <h2>Meus de Cursos</h2>
+    <h2>Meus Cursos</h2>
     <div class="container">
       <div class="card" *ngFor="let inscricao of inscricoes">
         <div class="card-img-top-wrapper">
           <img [src]="inscricao.imagemCurso || 'assets/images/default-course.jpg'"
-     class="card-img-top"
-     alt="Imagem do Curso">
-
+               class="card-img-top"
+               alt="Imagem do Curso">
         </div>
         <div class="card-body">
           <h3 class="card-title">{{ inscricao.nomeCurso }}</h3>
@@ -110,12 +109,18 @@
                     : 'Status desconhecido'
             }}
           </p>
-          <button class="btn btn-danger" (click)="cancelarInscricao(inscricao._idCurso)">
-            Cancelar Inscrição
-          </button>
+          <div class="botoes-card">
+            <button class="btn btn-danger" (click)="cancelarInscricao(inscricao._idCurso)">
+              Desinscrever
+            </button>
+            <button class="btn btn-primary" [routerLink]="['/curso', inscricao._idCurso, 'aulas']">
+              Assistir
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 
 </div>

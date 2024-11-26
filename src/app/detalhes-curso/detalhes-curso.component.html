@@ -17,6 +17,14 @@
               <img src="/assets/images/curso-desenvolvimento-view/icon-people.png" alt="Número de participantes">
               <p>{{ curso.participantes || 0 }} inscritos</p>
             </div>
+            <div class="detalhe">
+              <img src="/assets/images/curso-desenvolvimento-view/icon-medal-star.png" alt="Certificado de conclusão">
+              <p>Certificado de conclusão</p>
+            </div>
+            <div class="detalhe">
+              <img src="/assets/images/curso-desenvolvimento-view/icon-star.png" alt="Avaliação média">
+              <p>Avaliação média: {{ curso.avaliacao || 'N/A' }}</p>
+            </div>
           </div>
 
           <!-- Botões de Inscrição -->
