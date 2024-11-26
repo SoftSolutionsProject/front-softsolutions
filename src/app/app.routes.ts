@@ -11,16 +11,15 @@ import { CursoDesenvolvimentoAppComponent } from './curso-desenvolvimento-app/cu
 import { CursoPythonInicianteComponent } from './curso-python-iniciante/curso-python-iniciante.component';
 import { CursosDesenvolvimentoWebExecutarComponent } from './cursos-executar/cursos-desenvolvimento-web-executar/cursos-desenvolvimento-web-executar.component';
 import { CursosPythonExecutarComponent } from './cursos-executar/cursos-python-executar/cursos-python-executar.component';
-
 import { RecuperarSenhaComponent } from './recuperar-senha/recuperar-senha.component';
 import { CardCursosComponent } from './card-cursos/card-cursos.component';
 import path from 'path';
 import { Component } from '@angular/core';
 import { CursosListaComponent } from './cursos-lista/cursos-lista.component';
 import { AuthGuard } from './_guard/auth.guard';
-
 import { DetalhesCursoComponent } from './detalhes-curso/detalhes-curso.component';
-
+import { AulasCursoComponent } from './aulas-curso/aulas-curso.component';
+import { CourseGuard } from './_guard/curso.guard';
 
 export const routes: Routes = [
 
@@ -31,6 +30,12 @@ export const routes: Routes = [
   },
 
   { path: 'curso/:id', component: DetalhesCursoComponent },
+
+  {
+    path: 'curso/:id/aulas',
+    component: AulasCursoComponent,
+    canActivate: [CourseGuard], // Adiciona o guard para proteger a rota
+  },
 
 
   // Rotas principais

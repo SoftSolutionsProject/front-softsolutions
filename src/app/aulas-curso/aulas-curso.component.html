@@ -1,0 +1,31 @@
+<div class="aulas-curso-container">
+  <div class="video-player">
+    <iframe
+      *ngIf="currentVideoUrl"
+      [src]="currentVideoUrl"
+      frameborder="0"
+      allowfullscreen
+      class="video-frame"
+    ></iframe>
+    <p *ngIf="!currentVideoUrl">Selecione uma aula para assistir.</p>
+  </div>
+
+  <div class="lista-modulos">
+    <h3>Lista de Módulos</h3>
+    <div *ngIf="curso?.modulos; else noModulos">
+      <div *ngFor="let modulo of curso?.modulos" class="modulo">
+        <h4>{{ modulo.nomeModulo }}</h4>
+        <ul>
+          <li *ngFor="let aula of modulo.aulas">
+            <span (click)="playAula(aula.videoUrl)" class="aula-nome">
+              {{ aula.nomeAula }}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <ng-template #noModulos>
+      <p>Nenhum módulo encontrado para este curso.</p>
+    </ng-template>
+  </div>
+</div>

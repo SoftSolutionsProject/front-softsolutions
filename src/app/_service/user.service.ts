@@ -189,6 +189,24 @@ export class UserService {
 
 
 
+  updateAulaProgresso(
+    userId: number,
+    cursoId: number,
+    moduloId: number,
+    aulaId: number,
+    concluida: boolean
+  ): Observable<any> {
+    const body = { userId, cursoId, moduloId, aulaId, concluida };
+    return this.http.put(`${this.apiUrl}/inscricoes/progresso`, body, this.getAuthHeaders()).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Erro ao atualizar progresso:', error);
+        return throwError(() => new Error('Erro ao atualizar progresso.'));
+      })
+    );
+  }
+
+
+
 
 
 }
