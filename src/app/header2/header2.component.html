@@ -6,14 +6,16 @@
     <span class="navbar-icon">&#9776;</span>
   </div>
   <ul class="navbar-menu">
-    <li><a routerLink="/cursos" class="navbar-link">Cursos</a></li>
+    <li><a routerLink="/cursos-lista" class="navbar-link">Cursos</a></li>
     <li><a routerLink="/quem-somos" class="navbar-link">Sobre</a></li>
+
+
+    <li><a routerLink="/contato" class="navbar-link">Contato</a></li>
+    <li><a routerLink="/certificados" class="navbar-link">Certificados</a></li>
     <li *ngIf="!isLoggedIn()"><a routerLink="/cadastro" class="navbar-link">Cadastre-se</a></li>
     <li *ngIf="!isLoggedIn()"><a routerLink="/login" class="navbar-link">Login</a></li>
     <li *ngIf="isLoggedIn()"><a [routerLink]="['/profile', getUserId()]" class="navbar-link">Perfil</a></li>
     <li *ngIf="isLoggedIn()"><a href="javascript:void(0)" class="navbar-link" (click)="logout()">Logout</a></li>
-    <li><a routerLink="/contato" class="navbar-link">Contato</a></li>
-    <li><a routerLink="/certificados" class="navbar-link">Certificados</a></li>
   </ul>
 </nav>
 
@@ -23,12 +25,14 @@
   </div>
   <a href="javascript:void(0)" class="close-btn" (click)="toggleMenu()">&times;</a>
   <a routerLink="/" class="navbar-link" (click)="toggleMenu()">Home</a>
-  <a routerLink="/cursos" class="navbar-link" (click)="toggleMenu()">Cursos</a>
-  <a *ngIf="!isLoggedIn()" routerLink="/cadastro" class="navbar-link" (click)="toggleMenu()">Cadastre-se</a>
-  <a *ngIf="!isLoggedIn()" routerLink="/login" class="navbar-link" (click)="toggleMenu()">Login</a>
-  <a *ngIf="isLoggedIn()" [routerLink]="['/profile', getUserId()]" class="navbar-link" (click)="toggleMenu()">Perfil</a>
+  <a routerLink="/cursos-lista" class="navbar-link" (click)="toggleMenu()">Cursos</a>
+
+
   <a *ngIf="isLoggedIn()" href="javascript:void(0)" class="navbar-link" (click)="logout(); toggleMenu()">Logout</a>
   <a routerLink="/quem-somos" class="navbar-link" (click)="toggleMenu()">Sobre</a>
   <a routerLink="/certificados" class="navbar-link" (click)="toggleMenu()">Certificados</a>
   <a routerLink="/contato" class="navbar-link" (click)="toggleMenu()">Contato</a>
+  <a *ngIf="!isLoggedIn()" routerLink="/cadastro" class="navbar-link" (click)="toggleMenu()">Cadastre-se</a>
+  <a *ngIf="!isLoggedIn()" routerLink="/login" class="navbar-link" (click)="toggleMenu()">Login</a>
+  <a *ngIf="isLoggedIn()" [routerLink]="['/profile', getUserId()]" class="navbar-link" (click)="toggleMenu()">Perfil</a>
 </div>
