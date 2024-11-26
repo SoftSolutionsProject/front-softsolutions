@@ -172,4 +172,24 @@ export class UserService {
       })
     );
   }
+
+  inscreverCurso(idCurso: number, idUser: number): Observable<any> {
+    const body = {
+      _idCurso: idCurso,
+      _idUser: idUser,
+    };
+
+    return this.http.post(`${this.apiUrl}/inscricoes`, body, this.getAuthHeaders()).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Erro ao inscrever no curso:', error);
+        return throwError(() => new Error('Erro ao se inscrever no curso. Por favor, tente novamente.'));
+      })
+    );
+  }
+
+
+
+
+
 }
+

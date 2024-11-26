@@ -19,6 +19,8 @@ import { Component } from '@angular/core';
 import { CursosListaComponent } from './cursos-lista/cursos-lista.component';
 import { AuthGuard } from './_guard/auth.guard';
 
+import { DetalhesCursoComponent } from './detalhes-curso/detalhes-curso.component';
+
 
 export const routes: Routes = [
 
@@ -27,6 +29,9 @@ export const routes: Routes = [
     loadComponent: () => import('./profile/profile.component')
       .then(m => m.ProfileComponent)
   },
+
+  { path: 'curso/:id', component: DetalhesCursoComponent },
+
 
   // Rotas principais
   { path: '', component: HomeComponent },

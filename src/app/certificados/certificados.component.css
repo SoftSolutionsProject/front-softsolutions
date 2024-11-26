@@ -5,7 +5,7 @@ body.certificado {
 
   div.certificado {
     position: relative;
-    z-index: 5;
+    z-index: 1;
     height: 100%;
     width: 100%;
     color: #9b9b9b;
@@ -20,12 +20,12 @@ body.certificado {
     bottom: 0;
     left: 0;
     right: 0;
-    background: url('/assets/images/certificados/bg-certificados.jpg') center center;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+                url('/assets/images/certificados/bg-certificados.jpg') center center;
     background-size: cover;
-    opacity: .6;
     width: 100%;
     height: 100%;
-  }
+}
 
   .cta-certificados {
     margin: 0rem 0;
@@ -52,7 +52,7 @@ body.certificado {
   }
 
   .cta-certificados .cta button {
-    background-color: #000081;
+    background-color: #3737b8f4;
     color: #FFF;
     padding: .5rem 1rem;
     border-radius: 20px;
@@ -66,7 +66,7 @@ body.certificado {
   }
 
   .txt-certificados .txt {
-    color: #000081;
+    color: #ece5e5;
   }
 
   .txt-certificados .txt h1 {

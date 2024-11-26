@@ -1,0 +1,55 @@
+<div class="desenvolvimento" *ngIf="!isLoading">
+  <section class="cta-curso">
+    <div class="row align-items-center">
+      <!-- Informações do Curso -->
+      <div class="col-12 col-lg-8">
+        <div class="cta">
+          <h1 class="curso-titulo">{{ curso.nomeCurso }}</h1>
+          <p class="curso-descricao">{{ curso.descricaoDetalhada }}</p>
+
+          <!-- Detalhes do Curso -->
+          <div class="detalhes">
+            <div class="detalhe">
+              <img src="/assets/images/curso-desenvolvimento-view/icon-clock.png" alt="Duração do curso">
+              <p>{{ curso.tempoCurso }} horas</p>
+            </div>
+            <div class="detalhe">
+              <img src="/assets/images/curso-desenvolvimento-view/icon-people.png" alt="Número de participantes">
+              <p>{{ curso.participantes || 0 }} inscritos</p>
+            </div>
+          </div>
+
+          <!-- Botões de Inscrição -->
+          <div class="botoes-inscricao">
+            <div *ngIf="isInscrito()">
+              <button class="btn cancelar-inscricao" (click)="cancelarInscricao()">Cancelar inscrição</button>
+            </div>
+            <div *ngIf="!isInscrito()">
+              <button class="btn inscrever" (click)="inscrever()">Inscrever-se</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Imagem do Curso -->
+      <div class="col-12 col-lg-4 text-center">
+        <img [src]="curso.imagemCurso" alt="Imagem do Curso" class="img-fluid imagem-curso">
+      </div>
+    </div>
+  </section>
+
+  <!-- Ementa -->
+  <section class="ementa">
+    <h2>Ementa do Curso</h2>
+    <div *ngFor="let modulo of curso.modulos" class="modulo">
+      <h3>{{ modulo.nomeModulo }}</h3>
+      <ul>
+        <li *ngFor="let aula of modulo.aulas">{{ aula.nomeAula }}</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<div *ngIf="isLoading" class="loading">
+  <p>Carregando detalhes do curso...</p>
+</div>

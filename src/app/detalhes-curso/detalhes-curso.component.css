@@ -1,0 +1,152 @@
+/* Estilo Geral */
+div.desenvolvimento {
+  position: relative;
+  z-index: 5;
+  height: auto;
+  width: 100%;
+  background-color: #000000;
+  padding: 2rem 1rem;
+}
+
+/* Seção de Informações do Curso */
+.cta-curso {
+  background-color: #dedede;
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem auto;
+}
+
+.cta-curso .cta {
+  text-align: left;
+}
+
+.curso-titulo {
+  color: #4687c2;
+  font-family: Poppins, sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.curso-descricao {
+  color: #000;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.detalhes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.detalhes .detalhe {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.detalhes .detalhe img {
+  width: 30px;
+  height: 30px;
+}
+
+.detalhes .detalhe p {
+  color: #4687c2;
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.botoes-inscricao {
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.inscrever {
+  background-color: #4687c2;
+  color: #fff;
+  border: 1px solid #4687c2;
+}
+
+.inscrever:hover {
+  background-color: #376a9e;
+}
+
+.cancelar-inscricao {
+  background-color: #d9534f;
+  color: #fff;
+  border: 1px solid #d9534f;
+}
+
+.cancelar-inscricao:hover {
+  background-color: #c9302c;
+}
+
+.imagem-curso {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+/* Ementa */
+.ementa {
+  background-color: #dedede;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.ementa h2 {
+  color: #4687c2;
+  font-family: Poppins, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.modulo {
+  margin-bottom: 1.5rem;
+}
+
+.modulo h3 {
+  color: #000;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.modulo ul {
+  padding-left: 1.5rem;
+  list-style: disc;
+}
+
+.modulo ul li {
+  color: #000;
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  color: #fff;
+  font-family: Poppins, sans-serif;
+  font-size: 18px;
+  margin-top: 2rem;
+}
