@@ -12,24 +12,26 @@ import { MaterialModule } from '../material.module';
 export class HomeComponent implements OnInit {
   featuredCourses = [
     {
-      title: 'Desenvolvimento Web Completo',
+      title: 'Desenvolvimento Web',
       description: 'Aprenda do zero ao avançado com HTML, CSS, JavaScript e frameworks modernos',
       image: 'assets/images/cursos/desenvolvimento-web.jpg',
       instructor: 'Paulo Sérgio',
       instructorImage: 'assets/images/instructors/paulo.jpg',
-      duration: '120h',
-      modules: 12,
-      level: 'Iniciante'
+      duration: '40h',
+      modules: 4,
+      level: 'Iniciante',
+      id:6
     },
     {
-      title: 'Desenvolvimento de Apps Mobile',
-      description: 'Crie aplicativos iOS e Android com React Native e Flutter',
+      title: 'Introdução ao React Native Para Mobile',
+      description: 'Crie aplicativos iOS e Android com React Native',
       image: 'assets/images/cursos/desenvolvimento-apps.jpg',
       instructor: 'Marcos Andrade',
       instructorImage: 'assets/images/instructors/marcos.jpg',
-      duration: '100h',
-      modules: 10,
-      level: 'Intermediário'
+      duration: '40h',
+      modules: 4,
+      level: 'Intermediário',
+      id:2
     },
     {
       title: 'Python para Análise de Dados',
@@ -37,9 +39,10 @@ export class HomeComponent implements OnInit {
       image: 'assets/images/cursos/python.png',
       instructor: 'Júlio Santos',
       instructorImage: 'assets/images/instructors/julio.jpg',
-      duration: '90h',
-      modules: 8,
-      level: 'Avançado'
+      duration: '50h',
+      modules: 4,
+      level: 'Avançado',
+      id:1
     }
   ];
 
