@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
       level: 'Intermediário'
     },
     {
-      title: 'Python para Dados',
+      title: 'Python para Análise de Dados',
       description: 'Análise de dados, machine learning e visualização com Python',
       image: 'assets/images/cursos/python.png',
       instructor: 'Júlio Santos',

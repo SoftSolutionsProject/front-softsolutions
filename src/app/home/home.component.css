@@ -306,3 +306,20 @@ body {
     max-height: 200px;
   }
 }
+
+
+.botao-card-home {
+  padding: 0.5rem 1rem;
+  background-color: transparent; /* Sem fundo */
+  color: #4687c2; /* Cor discreta */
+  border: 1px solid #4687c2; /* Borda sutil */
+  border-radius: 5px; /* Bordas levemente arredondadas */
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.botao-card-home:hover {
+  background-color: #4687c2; /* Fundo aparece no hover */
+  color: #ffffff; /* Texto branco no hover */
+}

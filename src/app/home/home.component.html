@@ -21,7 +21,7 @@
             <p>Acesso Vitalício</p>
           </div>
         </div>
-        <button class="botao-acoes">Iniciar Jornada</button>
+        <button [routerLink]="['/login']" class="botao-acoes">Iniciar Jornada</button>
       </div>
     </div>
     <div class="imagem-destaque">
@@ -51,7 +51,8 @@
           </div>
           <p>{{course.description}}</p>
           <div class="course-footer">
-            <button class="btn-secondary mb-2" >Detalhes</button>
+            <button class="botao-card-home mb-2" >Detalhes</button>
+
           </div>
         </div>
       </div>
