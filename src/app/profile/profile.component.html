@@ -87,23 +87,35 @@
     </div>
   </div>
 
-  <div class="historico-cursos mt-5" *ngIf="inscricoes.length > 0">
+  <<div class="historico-cursos mt-5" *ngIf="inscricoes.length > 0">
     <h2>Histórico de Cursos</h2>
     <div class="container">
       <div class="card" *ngFor="let inscricao of inscricoes">
         <div class="card-img-top-wrapper">
-          <img src="assets/images/cursos/placeholder.jpg" class="card-img-top" alt="Curso">
+          <img [src]="inscricao.imagemCurso || 'assets/images/default-course.jpg'"
+     class="card-img-top"
+     alt="Imagem do Curso">
+
         </div>
         <div class="card-body">
-          <h3 class="card-title">Módulo {{inscricao._idModulo}}</h3>
+          <h3 class="card-title">{{ inscricao.nomeCurso }}</h3>
           <p class="card-text">
-            Status: {{inscricao.statusInscricao === 0 ? 'Em andamento' : 'Concluído'}}
+            Status:  {{
+              inscricao.statusInscricao === 0
+                ? 'Não iniciado'
+                : inscricao.statusInscricao === 1
+                  ? 'Em andamento'
+                  : inscricao.statusInscricao === 2
+                    ? 'Concluído'
+                    : 'Status desconhecido'
+            }}
           </p>
-          <button class="btn btn-danger" (click)="cancelarInscricao(inscricao._idModulo)">
+          <button class="btn btn-danger" (click)="cancelarInscricao(inscricao._idCurso)">
             Cancelar Inscrição
           </button>
         </div>
       </div>
     </div>
   </div>
+
 </div>

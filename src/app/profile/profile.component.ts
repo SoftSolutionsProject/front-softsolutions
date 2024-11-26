@@ -64,9 +64,9 @@ export class ProfileComponent implements OnInit {
   }
 
   loadInscricoes() {
-    this.userService.getInscricoes(this.userId).subscribe(
+    this.userService.getInscricoesWithCourseInfo(this.userId).subscribe(
       (inscricoes: Inscricao[]) => {
-        this.inscricoes = inscricoes; // Atualiza a lista de inscrições
+        this.inscricoes = inscricoes; // Atualiza a lista de inscrições com as informações do curso
       },
       (error) => {
         console.error('Erro ao carregar inscrições:', error);
@@ -74,8 +74,7 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
-
-
+  
   onSubmit() {
     if (this.profileForm.valid) {
       this.userService.updateProfile(this.userId, this.profileForm.value)
