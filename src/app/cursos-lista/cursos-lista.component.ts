@@ -25,7 +25,8 @@ export class CursosListaComponent implements OnInit {
           professor: curso.professor,
           imagemCurso: curso.imagemCurso,
           avaliacao: curso.avaliacao,
-          estrelas: Array(Math.round(curso.avaliacao)).fill('assets/images/home/estrela.png')
+          estrelas: Array(Math.round(curso.avaliacao)).fill('assets/images/home/estrela.png'),
+          id: curso._idCurso
         }));
       },
       error: (err) => {

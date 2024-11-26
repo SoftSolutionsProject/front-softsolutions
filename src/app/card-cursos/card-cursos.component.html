@@ -10,6 +10,6 @@
         <img *ngFor="let estrela of estrelas" [src]="estrela" alt="Estrela de avaliação">
       </span>
     </p>
-    <button [routerLink]="['/curso-python-iniciante-executar']" type="button" class="btn">Mais Detalhes</button>
+    <button type="button" class="btn" [routerLink]="['/curso', id]">Mais Detalhes</button>
   </div>
 </div>
