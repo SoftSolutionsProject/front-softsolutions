@@ -150,3 +150,18 @@ div.desenvolvimento {
   font-size: 18px;
   margin-top: 2rem;
 }
+
+.assistir-curso {
+  background-color: #007bff;
+  color: #fff;
+  margin-left: 10px;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.assistir-curso:hover {
+  background-color: #0056b3;
+}

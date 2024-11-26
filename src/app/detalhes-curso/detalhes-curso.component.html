@@ -23,11 +23,13 @@
           <div class="botoes-inscricao">
             <div *ngIf="isInscrito()">
               <button class="btn cancelar-inscricao" (click)="cancelarInscricao()">Cancelar inscrição</button>
+              <button class="btn assistir-curso" [routerLink]="['/curso', curso._idCurso, 'aulas']">Assistir curso</button>
             </div>
             <div *ngIf="!isInscrito()">
               <button class="btn inscrever" (click)="inscrever()">Inscrever-se</button>
             </div>
           </div>
+
         </div>
       </div>
 
