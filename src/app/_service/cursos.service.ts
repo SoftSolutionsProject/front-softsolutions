@@ -14,7 +14,7 @@ export interface Curso {
   providedIn: 'root'
 })
 export class CursosService {
-  private readonly API_URL = 'https://softsolutions.onrender.com/api/cursos';
+  private readonly API_URL = 'https://soft-solutions-chi.vercel.app/api/cursos';
 
   constructor(private http: HttpClient) {}
 

@@ -15,7 +15,7 @@ export class ContatoComponent implements OnInit {
   message: string | null = null; // Mensagem de sucesso
   errorMessage: string | null = null; // Mensagem de erro
 
-  private apiUrl = 'http://localhost:3000/api/email/suporte'; // URL do endpoint
+  private apiUrl = 'https://soft-solutions-chi.vercel.app/api/email/suporte'; // URL do endpoint
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 

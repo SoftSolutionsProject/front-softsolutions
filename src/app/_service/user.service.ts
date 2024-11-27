@@ -56,7 +56,7 @@ interface Curso {
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'https://softsolutions.onrender.com/api';
+  private apiUrl = 'https://soft-solutions-chi.vercel.app/api';
 
   constructor(private http: HttpClient) {}
 
