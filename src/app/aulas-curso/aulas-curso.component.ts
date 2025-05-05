@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { UserService } from '../_service/user.service';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
+import { BService } from '../_service/bservice.service';
 
 @Component({
   selector: 'app-aulas-curso',
@@ -12,38 +12,52 @@ import { MaterialModule } from '../material.module';
   templateUrl: './aulas-curso.component.html',
   styleUrl: './aulas-curso.component.css'
 })
-
-
 export class AulasCursoComponent implements OnInit {
-  curso: any; // Dados do curso
-  currentVideoUrl: SafeResourceUrl | undefined; // URL do vídeo atual
-  userId: number = parseInt(localStorage.getItem('_idUser') || '0'); // Usuário autenticado
+  curso: any;
+  modulos: any[] = [];
+  inscricao: any;
+  currentVideoUrl: SafeResourceUrl | undefined;
+  userId: number = parseInt(localStorage.getItem('_idUser') || '0');
 
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private userService: UserService
+    private bservice: BService
   ) {}
 
   ngOnInit(): void {
-    const idCurso = this.route.snapshot.params['id']; // Obter ID do curso da rota
-    this.userService.getCursos().subscribe((cursos) => {
-      this.curso = cursos.find((c) => c._idCurso === parseInt(idCurso));
+    const idCurso = Number(this.route.snapshot.params['id']);
 
-      // Logs para debugging
-      console.log('Curso carregado:', this.curso);
-      console.log('Módulos:', this.curso?.modulos);
-      this.curso?.modulos.forEach((modulo: any) => {
-        console.log('Aulas no módulo', modulo.nomeModulo, ':', modulo.aulas);
-      });
+    this.bservice.obterCurso(idCurso).subscribe({
+      next: (curso: any) => {
+        this.curso = curso;
+        this.carregarModulos(idCurso);
+      },
+      error: (err: any) => {
+        console.error('Erro ao carregar curso:', err);
+      }
+    });
 
-      if (this.curso && this.curso.modulos?.length > 0) {
-        const primeiroModulo = this.curso.modulos[0];
-        if (primeiroModulo.aulas?.length > 0) {
-          this.currentVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-            primeiroModulo.aulas[0].videoUrl
-          );
+    this.bservice.listarInscricoesUsuario().subscribe({
+      next: (inscricoes: any[]) => {
+        this.inscricao = inscricoes.find((i: any) => i.curso?.id === idCurso && i.status === 'ativo');
+      },
+      error: (err: any) => {
+        console.error('Erro ao carregar inscrições:', err);
+      }
+    });
+  }
+
+  carregarModulos(idCurso: number): void {
+    this.bservice.listarModulosEAulasDoCurso(idCurso).subscribe({
+      next: (modulos: any[]) => {
+        this.modulos = modulos;
+        if (modulos.length > 0 && modulos[0].aulas.length > 0) {
+          this.playAula(modulos[0].aulas[0].videoUrl);
         }
+      },
+      error: (err: any) => {
+        console.error('Erro ao carregar módulos e aulas:', err);
       }
     });
   }
@@ -55,38 +69,4 @@ export class AulasCursoComponent implements OnInit {
       console.warn('URL de vídeo inválida.');
     }
   }
-
-  //**********IMPLEMENTAÇÕES FUTURAS PARA ENVIAR AO BACKEND
-/*
-
-  isAulaConcluida(aulaId: number): boolean {
-    // Verifica se o progresso contém o ID da aula como concluído
-    const progresso = this.curso.progresso || [];
-    return progresso.some((modulo: any) =>
-      modulo.aulasConcluidas?.includes(aulaId)
-    );
-  }
-
-  toggleAulaConcluida(moduloId: number, aulaId: number, event: Event): void {
-    const checked = (event.target as HTMLInputElement).checked;
-
-    this.userService
-      .updateAulaProgresso(this.userId, this.curso._idCurso, moduloId, aulaId, checked)
-      .subscribe(
-        () => {
-          console.log('Progresso atualizado!');
-          const modulo = this.curso.progresso.find((p: any) => p._idModulo === moduloId);
-          if (checked) {
-            modulo.aulasConcluidas.push(aulaId);
-          } else {
-            modulo.aulasConcluidas = modulo.aulasConcluidas.filter((id: any) => id !== aulaId);
-          }
-        },
-        (error) => {
-          console.error('Erro ao atualizar progresso:', error);
-        }
-      );
-  }
-
-  */
 }

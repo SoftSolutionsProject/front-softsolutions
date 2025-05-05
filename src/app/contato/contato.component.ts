@@ -11,11 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./contato.component.css']
 })
 export class ContatoComponent implements OnInit {
-  contatoForm!: FormGroup; // Formulário reativo
-  message: string | null = null; // Mensagem de sucesso
-  errorMessage: string | null = null; // Mensagem de erro
+  contatoForm!: FormGroup;
+  message: string | null = null;
+  errorMessage: string | null = null;
 
-  private apiUrl = 'https://soft-solutions-chi.vercel.app/api/email/suporte'; // URL do endpoint
+  private apiUrl = 'http://localhost:4000/email/suporte';
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
@@ -34,12 +34,11 @@ export class ContatoComponent implements OnInit {
         next: () => {
           this.message = 'E-mail enviado com sucesso!';
           this.errorMessage = null;
-          this.contatoForm.reset(); // Reseta o formulário após sucesso
+          this.contatoForm.reset();
         },
         error: (err: HttpErrorResponse) => {
           this.message = null;
 
-          // Detecta problemas de conexão ou backend offline
           if (err.status === 0) {
             this.errorMessage = 'Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde.';
           } else if (err.error?.message) {

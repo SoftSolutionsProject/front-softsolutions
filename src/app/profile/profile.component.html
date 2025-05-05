@@ -18,7 +18,6 @@
           <li><a [routerLink]="['/contato']">Contao e Suporte</a></li>
           <li><a [routerLink]="['/encerrar-conta']">Encerrar Conta</a></li>
         </ul>
-
       </div>
     </div>
     <div class="col-12 col-md-8">
@@ -92,14 +91,14 @@
     <div class="container">
       <div class="card" *ngFor="let inscricao of inscricoes">
         <div class="card-img-top-wrapper">
-          <img [src]="inscricao.imagemCurso || 'assets/images/default-course.jpg'"
+          <img [src]="inscricao.curso?.imagemCurso || 'assets/images/default-course.jpg'"
                class="card-img-top"
                alt="Imagem do Curso">
         </div>
         <div class="card-body">
-          <h3 class="card-title">{{ inscricao.nomeCurso }}</h3>
+          <h3 class="card-title">{{ inscricao.curso?.nomeCurso }}</h3>
           <p class="card-text">
-            Status:  {{
+            Status: {{
               inscricao.statusInscricao === 0
                 ? 'Não iniciado'
                 : inscricao.statusInscricao === 1
@@ -110,10 +109,10 @@
             }}
           </p>
           <div class="botoes-card">
-            <button class="btn btn-danger" (click)="cancelarInscricao(inscricao._idCurso)">
+            <button class="btn btn-danger" (click)="cancelarInscricao(inscricao.id)">
               Desinscrever
             </button>
-            <button class="btn btn-primary" [routerLink]="['/curso', inscricao._idCurso, 'aulas']">
+            <button class="btn btn-primary" [routerLink]="['/curso', inscricao.curso?.id, 'aulas']">
               Assistir
             </button>
           </div>
@@ -121,6 +120,4 @@
       </div>
     </div>
   </div>
-
-
 </div>

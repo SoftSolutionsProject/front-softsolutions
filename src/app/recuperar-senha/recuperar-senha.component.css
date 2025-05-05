@@ -82,9 +82,7 @@ a {
 
   .half-screen img {
     width: 100%;
-    /* Ocupando toda a largura */
     height: 20vh;
-    /* Reduzindo a altura da imagem para 30% da altura da tela */
     object-fit: cover;
   }
 

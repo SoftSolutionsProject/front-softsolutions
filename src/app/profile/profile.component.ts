@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MaterialModule } from '../material.module';
-import { UserService, Usuario, Inscricao } from '../_service/user.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BService } from '../_service/bservice.service';
 
 @Component({
   selector: 'app-profile',
@@ -21,12 +20,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
-  inscricoes: Inscricao[] = [];
+  inscricoes: any[] = [];
   userId!: number;
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
+    private bservice: BService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
   ) {
@@ -52,8 +51,8 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfile() {
-    this.userService.getProfile(this.userId).subscribe(
-      (user: Usuario) => {
+    this.bservice.getProfile(this.userId).subscribe(
+      (user) => {
         this.profileForm.patchValue(user);
       },
       (error) => {
@@ -64,49 +63,46 @@ export class ProfileComponent implements OnInit {
   }
 
   loadInscricoes() {
-    this.userService.getInscricoesWithCourseInfo(this.userId).subscribe(
-      (inscricoes: Inscricao[]) => {
-        this.inscricoes = inscricoes; // Atualiza a lista de inscrições com as informações do curso
+    this.bservice.listarInscricoesUsuario().subscribe(
+      (dados) => {
+        const ativas = dados.filter(insc => insc.status === 'ativo');
+        this.inscricoes = this.bservice.mapearInscricoes(ativas);
       },
       (error) => {
         console.error('Erro ao carregar inscrições:', error);
-        this.inscricoes = []; // Garante que a lista esteja vazia no caso de erro
+        this.inscricoes = [];
       }
     );
   }
-  
+
   onSubmit() {
     if (this.profileForm.valid) {
-      this.userService.updateProfile(this.userId, this.profileForm.value)
-        .subscribe(
-          (response: Usuario) => {
-            console.log('Perfil atualizado com sucesso', response);
-            this.showSnackBar('Perfil atualizado com sucesso!');
-            this.loadProfile(); // Recarrega o perfil para exibir as informações atualizadas
-          },
-          (error) => {
-            console.error('Erro ao atualizar perfil:', error);
-            this.showSnackBar('Erro ao atualizar perfil. Tente novamente.');
-          }
-        );
+      this.bservice.updateProfile(this.userId, this.profileForm.value).subscribe(
+        () => {
+          this.showSnackBar('Perfil atualizado com sucesso!');
+          this.loadProfile();
+        },
+        (error) => {
+          console.error('Erro ao atualizar perfil:', error);
+          this.showSnackBar('Erro ao atualizar perfil. Tente novamente.');
+        }
+      );
     } else {
       this.showSnackBar('Por favor, preencha todos os campos obrigatórios.');
     }
   }
 
-  cancelarInscricao(moduleId: number) {
-    this.userService.cancelarInscricao(this.userId, moduleId)
-      .subscribe(
-        () => {
-          console.log('Inscrição cancelada com sucesso');
-          this.showSnackBar('Inscrição cancelada com sucesso!');
-          this.loadInscricoes(); // Recarrega as inscrições para atualizar a lista
-        },
-        (error) => {
-          console.error('Erro ao cancelar inscrição:', error);
-          this.showSnackBar('Erro ao cancelar inscrição. Tente novamente.');
-        }
-      );
+  cancelarInscricao(idInscricao: number) {
+    this.bservice.cancelarInscricao(idInscricao).subscribe(
+      () => {
+        this.showSnackBar('Inscrição cancelada com sucesso!');
+        this.loadInscricoes();
+      },
+      (error) => {
+        console.error('Erro ao cancelar inscrição:', error);
+        this.showSnackBar('Erro ao cancelar inscrição. Tente novamente.');
+      }
+    );
   }
 
   private showSnackBar(message: string) {
