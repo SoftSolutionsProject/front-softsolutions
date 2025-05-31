@@ -49,18 +49,17 @@ export class AulasCursoComponent implements OnInit {
   }
 
   carregarModulos(idCurso: number): void {
-    this.bservice.listarModulosEAulasDoCurso(idCurso).subscribe({
-      next: (modulos: any[]) => {
-        this.modulos = modulos;
-        if (modulos.length > 0 && modulos[0].aulas.length > 0) {
-          this.playAula(modulos[0].aulas[0].videoUrl);
-        }
-      },
-      error: (err: any) => {
-        console.error('Erro ao carregar módulos e aulas:', err);
-      }
-    });
-  }
+  this.bservice.listarModulosEAulasDoCurso(idCurso).subscribe({
+    next: (modulos: any[]) => {
+      this.modulos = modulos;
+      this.curso.modulos = modulos;
+    },
+    error: (err: any) => {
+      console.error('Erro ao carregar módulos e aulas:', err);
+    }
+  });
+}
+
 
   playAula(videoUrl: string): void {
     if (videoUrl) {

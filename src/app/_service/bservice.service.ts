@@ -23,16 +23,16 @@ export class BService {
 
   // ---------- AUTENTICAÇÃO ----------
 
-  login(email: string, senha: string): Observable<{ usuario: any; token: string }> {
-    return this.http.post<{ usuario: any; token: string }>(`${this.API_URL}/usuarios/login`, { email, senha }).pipe(
-      tap((res) => {
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('_idUser', res.usuario.id.toString());
-        localStorage.setItem('tipoUser', res.usuario.tipo);
-      }),
-      catchError(this.handleError)
-    );
-  }
+  login(email: string, senha: string): Observable<{ usuario: any; access_token: string }> {
+  return this.http.post<{ usuario: any; access_token: string }>(`${this.API_URL}/usuarios/login`, { email, senha }).pipe(
+    tap((res) => {
+      localStorage.setItem('token', res.access_token); // Corrigido
+      localStorage.setItem('_idUser', res.usuario.id.toString());
+      localStorage.setItem('tipoUser', res.usuario.tipo);
+    }),
+    catchError(this.handleError)
+  );
+}
 
   cadastrarUsuario(data: any): Observable<any> {
     return this.http.post(`${this.API_URL}/usuarios/cadastro`, data).pipe(
