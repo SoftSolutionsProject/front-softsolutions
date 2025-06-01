@@ -33,6 +33,12 @@
 .card-title {
   font-size: 1.29em;
   margin-bottom: 10px;
+  height: 60px; /* ou ajuste esse valor para se adaptar ao maior título */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
 }
 
 .card-text {
