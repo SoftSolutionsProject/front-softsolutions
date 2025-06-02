@@ -8,6 +8,13 @@
       class="video-frame"
     ></iframe>
     <p *ngIf="!currentVideoUrl" class="texto-instrucao">Selecione uma aula para assistir.</p>
+
+    <div class="progresso-geral" *ngIf="progresso !== null">
+      <p>Progresso do curso: {{ progresso }}%</p>
+      <div class="barra-externa">
+        <div class="barra-interna" [style.width.%]="progresso"></div>
+      </div>
+    </div>
   </div>
 
   <div class="lista-modulos">
