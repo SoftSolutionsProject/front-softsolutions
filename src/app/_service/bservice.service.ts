@@ -140,4 +140,22 @@ export class BService {
     return this.http.get<any[]>(`${this.API_URL}/cursos/${idCurso}/aulas`, this.getAuthHeaders())
       .pipe(catchError(this.handleError));
   }
+
+
+
+
+
+
+desmarcarAula(idInscricao: number, idAula: number): Observable<any> {
+  return this.http.post(
+    `${this.API_URL}/inscricoes/${idInscricao}/desmarcar-aula/${idAula}`,
+    {},
+    this.getAuthHeaders()
+  ).pipe(
+    tap(() => console.log('Aula desmarcada como concluída')),
+    catchError(this.handleError)
+  );
+}
+
+
 }

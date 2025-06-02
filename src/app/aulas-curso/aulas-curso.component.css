@@ -2,45 +2,102 @@
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  height: 100vh; /* Ocupa toda a altura da janela */
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .video-player {
   flex: 3;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff; /* Fundo branco para o player */
 }
 
 .video-frame {
   width: 100%;
-  height: 500px;
+  aspect-ratio: 16 / 9; /* Mantém proporção de vídeo */
   border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.texto-instrucao {
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 1rem;
 }
 
 .lista-modulos {
   flex: 1;
-  background-color: #f9f9f9;
+  background-color: #ffffff; /* Fundo branco mais clean */
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Rolagem vertical */
+  max-height: 100%;
+  border: 1px solid #e0e0e0; /* Leve contorno */
+}
+
+.modulo {
+  margin-bottom: 1.5rem; /* Espaçamento entre módulos */
 }
 
 .modulo h4 {
-  margin-top: 1rem;
-  font-size: 1.2rem;
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
   color: #333;
+  padding: 0.3rem;
+  background-color: #f1f1f1; /* Destaque do título do módulo */
+  border-radius: 4px;
+}
+
+.aulas-lista {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.aula-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.2rem 0;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aula-item:hover {
+  background-color: #e6f0ff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.aula-info {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .aula-nome {
-  cursor: pointer;
   color: #007bff;
-  text-decoration: underline;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 0.5rem;
 }
 
 .aula-nome:hover {
   color: #0056b3;
+  text-decoration: underline;
 }
 
 input[type="checkbox"] {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
+  transform: scale(1.1);
+  cursor: pointer;
+  accent-color: #007bff; /* Azul para o checkbox */
 }
