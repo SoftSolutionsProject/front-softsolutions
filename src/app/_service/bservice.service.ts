@@ -116,6 +116,7 @@ export class BService {
     );
   }
 
+  // ---------- PROGRESSO ----------
   mapearInscricoes(inscricoes: any[]): any[] {
     return inscricoes.map(insc => {
       let statusInscricao = 0;
@@ -136,15 +137,11 @@ export class BService {
     });
   }
 
+
   listarModulosEAulasDoCurso(idCurso: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.API_URL}/cursos/${idCurso}/aulas`, this.getAuthHeaders())
       .pipe(catchError(this.handleError));
   }
-
-
-
-
-
 
 desmarcarAula(idInscricao: number, idAula: number): Observable<any> {
   return this.http.post(
@@ -157,5 +154,10 @@ desmarcarAula(idInscricao: number, idAula: number): Observable<any> {
   );
 }
 
+obterProgresso(idInscricao: number): Observable<any> {
+  return this.http.get(`${this.API_URL}/inscricoes/${idInscricao}/progresso`, this.getAuthHeaders()).pipe(
+    catchError(this.handleError)
+  );
+}
 
 }
