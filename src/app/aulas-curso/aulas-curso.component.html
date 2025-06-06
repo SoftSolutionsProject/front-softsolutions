@@ -7,19 +7,30 @@
       allowfullscreen
       class="video-frame"
     ></iframe>
-    <p *ngIf="!currentVideoUrl">Selecione uma aula para assistir.</p>
+    <p *ngIf="!currentVideoUrl" class="texto-instrucao">Selecione uma aula para assistir.</p>
+
+    <div class="progresso-geral" *ngIf="progresso !== null">
+      <p>Progresso do curso: {{ progresso }}%</p>
+      <div class="barra-externa">
+        <div class="barra-interna" [style.width.%]="progresso"></div>
+      </div>
+    </div>
   </div>
 
   <div class="lista-modulos">
-    <h3>Lista de Módulos</h3>
     <div *ngIf="curso?.modulos; else noModulos">
       <div *ngFor="let modulo of curso?.modulos" class="modulo">
         <h4>{{ modulo.nomeModulo }}</h4>
-        <ul>
-          <li *ngFor="let aula of modulo.aulas">
-            <span (click)="playAula(aula.videoUrl)" class="aula-nome">
-              {{ aula.nomeAula }}
-            </span>
+        <ul class="aulas-lista">
+          <li *ngFor="let aula of modulo.aulas" class="aula-item">
+            <div class="aula-info" (click)="playAula(aula.videoUrl)">
+              <span class="aula-nome">{{ aula.nomeAula }}</span>
+            </div>
+            <input
+              type="checkbox"
+              [checked]="isAulaConcluida(aula.id)"
+              (change)="alternarConclusaoAula(aula.id, getCheckboxValue($event))"
+            />
           </li>
         </ul>
       </div>

@@ -4,9 +4,7 @@ import { MaterialModule } from '../material.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { UserService } from '../_service/user.service';
-
-
+import { BService } from '../_service/bservice.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +17,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
 
-  constructor(private userService: UserService, private fb: FormBuilder, private router: Router) {
+  constructor(private bservice: BService, private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]]
@@ -29,22 +27,20 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, senha } = this.loginForm.value;
-      console.log('Tentativa de login com:', email, senha); // Log do formulário
-      this.userService.login(email, senha).subscribe({
+      this.bservice.login(email, senha).subscribe({
         next: () => {
-          const userId = localStorage.getItem('_idUser'); // Obtém o ID do usuário do localStorage
+          const userId = localStorage.getItem('_idUser');
           if (userId) {
-            this.router.navigate([`/profile/${userId}`]); // Redireciona para a página do perfil com o ID do usuário
+            this.router.navigate([`/profile/${userId}`]);
           } else {
             console.error('ID do usuário não encontrado no localStorage.');
           }
         },
         error: err => {
-          this.errorMessage = 'Login ou senha inválidos.';
+          this.errorMessage = err.error?.message || 'Login ou senha inválidos.';
           console.error('Erro no login:', err);
         }
       });
     }
   }
-
 }

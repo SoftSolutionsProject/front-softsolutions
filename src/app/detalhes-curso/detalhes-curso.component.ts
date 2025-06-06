@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '../material.module';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../_service/user.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { BService } from '../_service/bservice.service';
 
 @Component({
   selector: 'app-detalhes-curso',
@@ -12,49 +11,50 @@ import { UserService } from '../_service/user.service';
   templateUrl: './detalhes-curso.component.html',
   styleUrl: './detalhes-curso.component.css'
 })
-
 export class DetalhesCursoComponent implements OnInit {
-  curso: any = null; // Dados do curso
-  inscricoes: any[] = []; // Inscrições do usuário
-  isLoading = true; // Controle de carregamento
-  userId = Number(localStorage.getItem('_idUser')); // ID do usuário autenticado
+  curso: any = null;
+  inscricoes: any[] = [];
+  isLoading = true;
+  userId = Number(localStorage.getItem('_idUser'));
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService
+    private router: Router,
+    private bservice: BService
   ) {}
 
   ngOnInit(): void {
     const idCurso = this.route.snapshot.paramMap.get('id');
     if (idCurso) {
-      this.carregarCurso(idCurso);
+      this.carregarCurso(Number(idCurso));
       this.carregarInscricoes();
     }
   }
 
-  carregarCurso(idCurso: string): void {
-    this.userService.getCursos().subscribe(
-      (cursos) => {
-        this.curso = cursos.find((curso) => curso._idCurso === Number(idCurso));
+  carregarCurso(idCurso: number): void {
+    this.bservice.obterCurso(idCurso).subscribe({
+      next: (curso) => {
+        this.curso = curso;
         this.isLoading = false;
       },
-      (error) => {
-        console.error('Erro ao carregar o curso:', error);
+      error: (err) => {
+        console.error('Erro ao carregar curso:', err);
         this.isLoading = false;
       }
-    );
+    });
   }
 
   carregarInscricoes(): void {
-    this.userService.getInscricoes(this.userId).subscribe(
-      (inscricoes) => {
-        this.inscricoes = inscricoes;
+    this.bservice.listarInscricoesUsuario().subscribe({
+      next: (inscricoes) => {
+        this.inscricoes = inscricoes.filter(i => i.status === 'ativo'); // só as ativas
       },
-      (error) => {
-        console.error('Erro ao carregar inscrições:', error);
+      error: (err) => {
+        console.error('Erro ao carregar inscrições:', err);
       }
-    );
+    });
   }
+
 
   inscrever(): void {
     if (!this.userId) {
@@ -62,38 +62,47 @@ export class DetalhesCursoComponent implements OnInit {
       return;
     }
 
-    this.userService
-      .inscreverCurso(this.curso._idCurso, this.userId)
-      .subscribe(
-        (response) => {
-          alert('Inscrição realizada com sucesso!');
-          this.carregarInscricoes(); // Recarrega as inscrições do usuário
-        },
-        (error) => {
-          console.error('Erro ao realizar inscrição:', error);
-          alert(error.message || 'Erro ao realizar inscrição. Tente novamente.');
-        }
-      );
+    this.bservice.inscreverUsuario(this.curso.id).subscribe({
+      next: () => {
+        alert('Inscrição realizada com sucesso!');
+        this.carregarInscricoes();
+      },
+      error: (err) => {
+        console.error('Erro ao se inscrever:', err);
+        alert(err.message || 'Erro ao se inscrever. Tente novamente.');
+      }
+    });
   }
 
-
   cancelarInscricao(): void {
-    this.userService
-      .cancelarInscricao(this.userId, this.curso._idCurso)
-      .subscribe(
-        () => {
-          alert('Inscrição cancelada com sucesso!');
-          this.carregarInscricoes();
-        },
-        (error) => {
-          console.error('Erro ao cancelar inscrição:', error);
-          alert('Erro ao cancelar inscrição. Tente novamente.');
-        }
-      );
+    const inscricao = this.inscricoes.find(i => i.curso?.id === this.curso.id);
+    if (!inscricao) {
+      alert('Inscrição não encontrada.');
+      return;
+    }
+
+    this.bservice.cancelarInscricao(inscricao.id).subscribe({
+      next: () => {
+        alert('Inscrição cancelada com sucesso!');
+        this.carregarInscricoes();
+      },
+      error: (err) => {
+        console.error('Erro ao cancelar inscrição:', err);
+        alert('Erro ao cancelar inscrição. Tente novamente.');
+      }
+    });
   }
 
   isInscrito(): boolean {
-    return this.inscricoes.some((i) => i._idCurso === this.curso._idCurso);
+    return this.inscricoes.some(i => i.curso?.id === this.curso.id);
+  }
+
+  assistirCurso(): void {
+    if (this.curso?.id) {
+      this.router.navigate(['/curso', this.curso.id, 'aulas']);
+    } else {
+      alert('Curso inválido. Tente novamente.');
+    }
   }
 
 }

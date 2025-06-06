@@ -5,9 +5,6 @@ import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 
-
-
-
 @Component({
   selector: 'app-header2',
   standalone: true,
@@ -17,8 +14,6 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 })
 export class Header2Component {
   menuActive = false;
-
-
 
   constructor(
     private router: Router,
@@ -37,8 +32,6 @@ export class Header2Component {
     }
     return false; // Retorna false em ambientes que não suportam localStorage
   }
-
-
 
   logout() {
     localStorage.removeItem('token');

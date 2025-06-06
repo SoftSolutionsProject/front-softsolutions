@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '../material.module';
 import { CommonModule } from '@angular/common';
-import { CardCursosComponent } from "../card-cursos/card-cursos.component";
-import { CursosService } from '../_service/cursos.service';
+import { CardCursosComponent } from '../card-cursos/card-cursos.component';
+import { BService } from '../_service/bservice.service';
 
 @Component({
   selector: 'app-cursos-lista',
@@ -13,20 +13,20 @@ import { CursosService } from '../_service/cursos.service';
 })
 export class CursosListaComponent implements OnInit {
 
-  cursos: any[] = []; // Inicialize como um array vazio
+  cursos: any[] = [];
 
-  constructor(private cursosService: CursosService) {}
+  constructor(private bservice: BService) {}
 
   ngOnInit(): void {
-    this.cursosService.getCursos().subscribe({
+    this.bservice.listarCursos().subscribe({
       next: (data) => {
         this.cursos = data.map(curso => ({
           titulo: curso.nomeCurso,
           professor: curso.professor,
           imagemCurso: curso.imagemCurso,
           avaliacao: curso.avaliacao,
-          estrelas: Array(Math.round(curso.avaliacao)).fill('assets/images/home/estrela.png'),
-          id: curso._idCurso
+          estrelas: Array(Math.round(curso.avaliacao || 0)).fill('assets/images/home/estrela.png'),
+          id: curso.id
         }));
       },
       error: (err) => {

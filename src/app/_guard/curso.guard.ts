@@ -1,40 +1,40 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { CursosService } from '../_service/cursos.service';
-import { UserService } from '../_service/user.service';
+import { BService } from '../_service/bservice.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CourseGuard implements CanActivate {
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private bservice: BService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-    const cursoId = route.params['id'];
+  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
+    const cursoId = Number(route.params['id']);
     const userId = localStorage.getItem('_idUser');
 
     if (!userId || !cursoId) {
       this.router.navigate(['/']);
-      return Promise.resolve(false);
+      return false;
     }
 
-    return this.userService.getInscricoes(parseInt(userId)).toPromise().then((inscricoes) => {
-      if (!inscricoes || inscricoes.length === 0) {
-        this.router.navigate(['/']);
-        return false;
-      }
+    try {
+      const inscricoes = await this.bservice.listarInscricoesUsuario().toPromise();
 
-      const inscrito = inscricoes.some((i) => i._idCurso === parseInt(cursoId));
-      if (!inscrito) {
+      const temInscricaoAtiva = Array.isArray(inscricoes) && inscricoes.some(
+        (i: any) => i.curso?.id === cursoId && i.status === 'ativo'
+      );
+
+
+      if (!temInscricaoAtiva) {
         this.router.navigate(['/']);
         return false;
       }
 
       return true;
-    }).catch(() => {
-      // Caso ocorra algum erro na API
+    } catch (err) {
+      console.error('Erro ao verificar inscrição:', err);
       this.router.navigate(['/']);
       return false;
-    });
+    }
   }
 }

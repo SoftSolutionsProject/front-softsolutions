@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
       duration: '40h',
       modules: 4,
       level: 'Iniciante',
-      id:6
+      id:7
     },
     {
       title: 'Introdução ao React Native Para Mobile',
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
       duration: '40h',
       modules: 4,
       level: 'Intermediário',
-      id:2
+      id:8
     },
     {
       title: 'Python para Análise de Dados',
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
       duration: '50h',
       modules: 4,
       level: 'Avançado',
-      id:1
+      id:8
     }
   ];
 

@@ -10,7 +10,7 @@ body {
 
 .logo-container {
   text-align: center;
-  margin-bottom: 20px; /* Espaço abaixo do logo */
+  margin-bottom: 20px;
 }
 
 .sidebar-logo {
@@ -52,7 +52,7 @@ body {
   color: rgba(255, 255, 255, 0.793);
   font-size: 1.1rem;
   padding: 5px 5px;
-  transition: color 0.3s, background-color 0.3s; /* Adiciona transição suave */
+  transition: color 0.3s, background-color 0.3s;
   border-radius: 5px;
 }
 
@@ -94,7 +94,7 @@ body {
   font-size: 20px;
   color: white;
   display: block;
-  transition: color 0.3s, background-color 0.3s; /* Adiciona transição suave */
+  transition: color 0.3s, background-color 0.3s;
 }
 
 .sidebar a:hover {
@@ -102,7 +102,7 @@ body {
   color: #ffffff;
   padding-left: 25px;
   padding-right: 25px;
-  border-radius: 0px; 
+  border-radius: 0px;
 }
 
 .close-btn {

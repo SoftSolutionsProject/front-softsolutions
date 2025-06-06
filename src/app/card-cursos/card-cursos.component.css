@@ -1,7 +1,7 @@
 .card {
-  flex: 1 1 300px; /* Largura inicial dos cards */
-  min-width: 250px; /* Define uma largura mínima para maior responsividade */
-  max-width: 300px; /* Largura máxima dos cards */
+  flex: 1 1 300px;
+  min-width: 250px;
+  max-width: 300px;
   background-color: #ffffff;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -13,7 +13,7 @@
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
-  height: 200px; /* Altura fixa para as imagens */
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,6 +33,12 @@
 .card-title {
   font-size: 1.29em;
   margin-bottom: 10px;
+  height: 60px; /* ou ajuste esse valor para se adaptar ao maior título */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
 }
 
 .card-text {
