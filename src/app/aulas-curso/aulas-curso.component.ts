@@ -1,9 +1,11 @@
+// ... imports mantidos
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 import { BService } from '../_service/bservice.service';
+
 @Component({
   selector: 'app-aulas-curso',
   standalone: true,
@@ -17,7 +19,8 @@ export class AulasCursoComponent implements OnInit {
   inscricao: any;
   currentVideoUrl: SafeResourceUrl | undefined;
   userId: number = parseInt(localStorage.getItem('_idUser') || '0');
-  progresso: number | null = null; // valor inicial
+  progresso: number | null = null;
+  certificadoEmitido: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,9 +44,9 @@ export class AulasCursoComponent implements OnInit {
     this.bservice.listarInscricoesUsuario().subscribe({
       next: (inscricoes: any[]) => {
         this.inscricao = inscricoes.find((i: any) => i.curso?.id === idCurso && i.status === 'ativo');
-
         if (this.inscricao) {
           this.atualizarProgresso();
+          this.verificarCertificadoBackend();
         }
       },
       error: (err: any) => {
@@ -78,25 +81,22 @@ export class AulasCursoComponent implements OnInit {
       return;
     }
 
-    if (concluida) {
-      this.bservice.concluirAula(this.inscricao.id, idAula).subscribe({
-        next: () => {
-          console.log('Aula marcada como concluída.');
-          this.atualizarInscricao();
-          this.atualizarProgresso();
-        },
-        error: (err) => console.error('Erro ao marcar aula como concluída:', err)
-      });
-    } else {
-      this.bservice.desmarcarAula(this.inscricao.id, idAula).subscribe({
-        next: () => {
-          console.log('Aula desmarcada como concluída.');
-          this.atualizarInscricao();
-          this.atualizarProgresso();
-        },
-        error: (err) => console.error('Erro ao desmarcar aula como concluída:', err)
-      });
+    if (this.certificadoEmitido && !concluida) {
+      alert('Não é possível desmarcar aulas após a emissão do certificado.');
+      return;
     }
+
+    const acao = concluida ? this.bservice.concluirAula : this.bservice.desmarcarAula;
+
+    acao.call(this.bservice, this.inscricao.id, idAula).subscribe({
+      next: () => {
+        this.atualizarInscricao();
+        this.atualizarProgresso();
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar aula:', err);
+      }
+    });
   }
 
   isAulaConcluida(idAula: number): boolean {
@@ -123,6 +123,33 @@ export class AulasCursoComponent implements OnInit {
         this.progresso = Math.round(dados.progresso);
       },
       error: (err) => console.error('Erro ao obter progresso:', err)
+    });
+  }
+
+  verificarCertificadoBackend(): void {
+    this.bservice.getCertificado(this.inscricao.id).subscribe({
+      next: () => this.certificadoEmitido = true,
+      error: () => this.certificadoEmitido = false
+    });
+  }
+
+  verCertificado(): void {
+    if (!this.inscricao) {
+      console.warn('Inscrição não encontrada!');
+      return;
+    }
+
+    const idInscricao = this.inscricao.id;
+
+    this.bservice.getCertificado(idInscricao).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+        this.certificadoEmitido = true;
+      },
+      error: (err) => {
+        console.error('Erro ao abrir certificado:', err);
+      }
     });
   }
 

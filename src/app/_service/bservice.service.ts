@@ -160,4 +160,20 @@ obterProgresso(idInscricao: number): Observable<any> {
   );
 }
 
+getCertificado(idInscricao: number): Observable<Blob> {
+  return this.http.get(`${this.API_URL}/certificados/${idInscricao}`, {
+    headers: this.getAuthHeaders().headers,
+    responseType: 'blob', // ✅ Importante para receber o PDF
+  }).pipe(
+    catchError(this.handleError)
+  );
+}
+
+verificarCertificado(idInscricao: number): Observable<any> {
+  return this.http.get(`${this.API_URL}/certificados/${idInscricao}`, {
+    headers: this.getAuthHeaders().headers,
+    responseType: 'blob' // mesmo tipo da geração
+  });
+}
+
 }
