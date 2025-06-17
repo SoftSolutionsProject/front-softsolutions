@@ -1,4 +1,6 @@
 <div class="aulas-curso-container">
+
+  <!-- Player de vídeo -->
   <div class="video-player">
     <iframe
       *ngIf="currentVideoUrl"
@@ -15,8 +17,16 @@
         <div class="barra-interna" [style.width.%]="progresso"></div>
       </div>
     </div>
-  </div>
 
+    <!-- Botão de ver certificado abaixo da barra de progresso -->
+    <div *ngIf="inscricao && progresso === 100" class="certificado-btn-container">
+      <button (click)="verCertificado()" class="btn-certificado">
+        {{ certificadoEmitido ? 'Ver Certificado' : 'Gerar Certificado' }}
+      </button>
+    </div>
+  </div> <!-- FECHAMENTO CORRETO DA VIDEO-PLAYER -->
+
+  <!-- Lista de módulos e aulas -->
   <div class="lista-modulos">
     <div *ngIf="curso?.modulos; else noModulos">
       <div *ngFor="let modulo of curso?.modulos" class="modulo">
@@ -30,6 +40,7 @@
               type="checkbox"
               [checked]="isAulaConcluida(aula.id)"
               (change)="alternarConclusaoAula(aula.id, getCheckboxValue($event))"
+              [disabled]="certificadoEmitido"
             />
           </li>
         </ul>
@@ -39,4 +50,5 @@
       <p>Nenhum módulo encontrado para este curso.</p>
     </ng-template>
   </div>
+
 </div>
