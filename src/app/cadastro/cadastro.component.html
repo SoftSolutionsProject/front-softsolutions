@@ -68,9 +68,8 @@
               <button type="submit" class="btn btn-secondary btn-md w-50" [disabled]="false">Cadastrar</button>
             </div>
           </div>
-          <!-- Mensagem Global de Erro ou Sucesso -->
+          <!-- Mensagem Global de Erro -->
           <div class="text-center">
-            <p class="text-success" *ngIf="message">{{ message }}</p>
             <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
           </div>
         </form>

@@ -3,6 +3,7 @@ import { MaterialModule } from '../material.module';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BService } from '../_service/bservice.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-detalhes-curso',
@@ -20,7 +21,8 @@ export class DetalhesCursoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private bservice: BService
+    private bservice: BService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -47,7 +49,7 @@ export class DetalhesCursoComponent implements OnInit {
   carregarInscricoes(): void {
     this.bservice.listarInscricoesUsuario().subscribe({
       next: (inscricoes) => {
-        this.inscricoes = inscricoes.filter(i => i.status === 'ativo'); // só as ativas
+        this.inscricoes = inscricoes.filter(i => i.status === 'ativo');
       },
       error: (err) => {
         console.error('Erro ao carregar inscrições:', err);
@@ -55,21 +57,30 @@ export class DetalhesCursoComponent implements OnInit {
     });
   }
 
-
   inscrever(): void {
     if (!this.userId) {
-      alert('É necessário estar logado para se inscrever.');
+      this.snackBar.open('É necessário estar logado para se inscrever.', 'Fechar', {
+        duration: 3000,
+        panelClass: ['snackbar-error']
+      });
       return;
     }
 
     this.bservice.inscreverUsuario(this.curso.id).subscribe({
       next: () => {
-        alert('Inscrição realizada com sucesso!');
+        this.snackBar.open('Inscrição realizada com sucesso!', undefined, {
+          duration: 3100,
+          panelClass: ['snackbar-success']
+        });
         this.carregarInscricoes();
       },
       error: (err) => {
         console.error('Erro ao se inscrever:', err);
-        alert(err.message || 'Erro ao se inscrever. Tente novamente.');
+        this.snackBar.open(
+          err.message || 'Erro ao se inscrever. Tente novamente.',
+          undefined,
+          { duration: 3000, panelClass: ['snackbar-error'] }
+        );
       }
     });
   }
@@ -77,18 +88,28 @@ export class DetalhesCursoComponent implements OnInit {
   cancelarInscricao(): void {
     const inscricao = this.inscricoes.find(i => i.curso?.id === this.curso.id);
     if (!inscricao) {
-      alert('Inscrição não encontrada.');
+      this.snackBar.open('Inscrição não encontrada.', undefined, {
+        duration: 3000,
+        panelClass: ['snackbar-error']
+      });
       return;
     }
 
     this.bservice.cancelarInscricao(inscricao.id).subscribe({
       next: () => {
-        alert('Inscrição cancelada com sucesso!');
+        this.snackBar.open('Inscrição cancelada com sucesso!', undefined, {
+          duration: 3000,
+          panelClass: ['snackbar-success']
+        });
         this.carregarInscricoes();
       },
       error: (err) => {
         console.error('Erro ao cancelar inscrição:', err);
-        alert('Erro ao cancelar inscrição. Tente novamente.');
+        this.snackBar.open(
+          'Erro ao cancelar inscrição. Tente novamente.',
+          undefined,
+          { duration: 3000, panelClass: ['snackbar-error'] }
+        );
       }
     });
   }
@@ -101,8 +122,10 @@ export class DetalhesCursoComponent implements OnInit {
     if (this.curso?.id) {
       this.router.navigate(['/curso', this.curso.id, 'aulas']);
     } else {
-      alert('Curso inválido. Tente novamente.');
+      this.snackBar.open('Curso inválido. Tente novamente.', undefined, {
+        duration: 3000,
+        panelClass: ['snackbar-error']
+      });
     }
   }
-
 }
