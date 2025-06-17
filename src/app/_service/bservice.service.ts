@@ -176,4 +176,9 @@ verificarCertificado(idInscricao: number): Observable<any> {
   });
 }
 
+consultarCertificadoPorNumeroSerie(numeroSerie: string) {
+  return this.http.get(`${this.API_URL}/certificados/publico/${numeroSerie}`);
+}
+
+
 }

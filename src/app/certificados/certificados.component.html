@@ -1,59 +1,80 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<div class="certificado">
+  <div class="bg"></div>
 
-<body class="certificado">
-    <div class="certificado">
-        <div class="bg"></div>
-
-        <section class="cta-certificados">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-xl-6"></div>
-                    <div class="col-12 col-xl-6 col-cta">
-                        <div class="cta">
-                            <h1>Consultar certificado</h1>
-                            <input type="email" class="busca-certificado" id="inputcertificado"
-                                placeholder="Qual é o nº do seu certificado?">
-                            <button>Pesquisar</button>
-                        </div>
-                    </div>
-                </div>
+  <section class="cta-certificados">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-xl-8 col-lg-10 col-cta">
+          <div class="cta">
+            <h1>Consultar Certificado</h1>
+            <div class="search-form">
+              <input
+                type="text"
+                class="busca-certificado"
+                [(ngModel)]="numeroSerie"
+                placeholder="Digite o número do certificado"
+                (keyup.enter)="consultarCertificado()"
+              >
+              <button (click)="consultarCertificado()">
+                <i class="fas fa-search" style="margin-right: 0.5rem;"></i>
+                Pesquisar
+              </button>
             </div>
-        </section>
 
-        <section>
-            <div class="container">
-                <div class="txt-certificados">
-                    <div class="txt mt-5">
-                        <h2>A Certificação</h2>
-                        <p><strong>Saiba mais sobre nossos certificados</strong></p>
-                        <p> O Certificado Digital é a melhor maneira de comprovar seus conhecimentos, você pode
-                            acessá-lo onde e quando quiser! Além de obter praticidade e agilidade, você também contribui
-                            para a preservação do meio-ambiente e um futuro melhor para todos nós, o Planeta agradece!
-                        </p>
-                    </div>
-                    <div class="txt">
-                        <h2>Sobre certificação</h2>
-                        <p>Os cursos oferecidos pelo SoftSolutions são denominados de Cursos Livres, que caracterizam-se
-                            pela modalidade de educação não formal de duração variável, destinada a proporcionar ao
-                            trabalhador conhecimentos que lhe permitam reprofissionalizar-se, qualificar-se e
-                            atualizar-se para o trabalho. Não há exigência de escolaridade anterior. O certificado tem
-                            validade para fins curriculares e em provas de títulos, como certificado de
-                            atualização/aperfeiçoamento, respeitando a carga-horária descrita e não podendo ser usado
-                            para outros fins.
-                        </p>
-                    </div>
-                    <div class="txt">
-                        <h2>Emitindo seu certificado</h2>
-                        <p> O aluno será aprovado se alcançar nota igual ou superior a 60% de acertos. Em caso de
-                            reprovação, o aluno terá o direito de realizar a avaliação quantas vezes forem necessárias
-                            até ser aprovado. Sendo aprovado o aluno terá a opção de emitir seu certificado digital de
-                            conclusão do curso.
-                        </p>
-                    </div>
-                </div>
+            <div *ngIf="mensagemErro" class="error-message">
+              <i class="fas fa-exclamation-triangle"></i>
+              {{ mensagemErro }}
             </div>
-        </section>
+
+            <div *ngIf="resultado" class="certificate-result">
+              <h3>
+                <i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i>
+                Certificado Encontrado
+              </h3>
+              <p><strong>Número de Série:</strong> {{ resultado.numeroSerie }}</p>
+              <p><strong>Aluno:</strong> {{ resultado.aluno }}</p>
+              <p><strong>Curso:</strong> {{ resultado.curso }}</p>
+              <p><strong>Carga Horária:</strong> {{ resultado.cargaHoraria }} horas</p>
+              <p><strong>Data de Emissão:</strong> {{ resultado.dataEmissao | date: "d 'de' MMMM 'de' y" : 'pt-BR' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </section>
 
+  <div class="content-wrapper">
+    <section>
+      <div class="container">
+        <div class="txt-certificados">
+          <div class="txt">
+            <h2>
+              <i class="fas fa-award" style="color: #4687C2; margin-right: 0.5rem;"></i>
+              A Certificação
+            </h2>
+            <p><strong>Saiba mais sobre nossos certificados</strong></p>
+            <p>O Certificado Digital é a melhor maneira de comprovar seus conhecimentos, você pode acessá-lo onde e quando quiser! Além de obter praticidade e agilidade, você também contribui para a preservação do meio-ambiente e um futuro melhor para todos nós, o Planeta agradece!</p>
+          </div>
+
+          <div class="txt">
+            <h2>
+              <i class="fas fa-graduation-cap" style="color: #4687C2; margin-right: 0.5rem;"></i>
+              Sobre Certificação
+            </h2>
+            <p>Os cursos oferecidos pelo SoftSolutions são denominados de <strong>Cursos Livres</strong>, que caracterizam-se pela modalidade de educação não formal de duração variável, destinada a proporcionar ao trabalhador conhecimentos que lhe permitam reprofissionalizar-se, qualificar-se e atualizar-se para o trabalho. Não há exigência de escolaridade anterior.</p>
+            <p>O certificado tem validade para fins curriculares e em provas de títulos, como certificado de atualização/aperfeiçoamento, respeitando a carga-horária descrita e não podendo ser usado para outros fins.</p>
+          </div>
+
+          <div class="txt">
+            <h2>
+              <i class="fas fa-file-certificate" style="color: #4687C2; margin-right: 0.5rem;"></i>
+              Emitindo seu Certificado
+            </h2>
+            <p>O aluno será aprovado se alcançar nota igual ou superior a <strong>60% de acertos</strong>. Em caso de reprovação, o aluno terá o direito de realizar a avaliação quantas vezes forem necessárias até ser aprovado.</p>
+            <p>Sendo aprovado, o aluno terá a opção de emitir seu certificado digital de conclusão do curso.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
