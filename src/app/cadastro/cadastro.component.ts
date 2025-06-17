@@ -4,21 +4,26 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BService } from '../_service/bservice.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [MaterialModule, CommonModule, ReactiveFormsModule,],
+  imports: [MaterialModule, CommonModule, ReactiveFormsModule],
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.css'
 })
 export class CadastroComponent implements OnInit {
   cadastroForm!: FormGroup;
-  message: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private formBuilder: FormBuilder, private bservice: BService) {}
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private bservice: BService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.cadastroForm = this.formBuilder.group({
@@ -31,20 +36,23 @@ export class CadastroComponent implements OnInit {
 
   onSubmit(): void {
     if (this.cadastroForm.valid) {
-      console.log('Enviando cadastro:', this.cadastroForm.value);
       this.bservice.cadastrarUsuario(this.cadastroForm.value).subscribe({
         next: () => {
-          this.message = 'Cadastro realizado com sucesso!';
+          this.snackBar.open('Cadastro realizado com sucesso!', 'Fechar', {
+            duration: 3500,
+            panelClass: ['snackbar-success']
+          });
           this.errorMessage = null;
           this.cadastroForm.reset();
+
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1500);
         },
         error: (err: HttpErrorResponse) => {
-          this.message = null;
-          if (err.status === 400 && err.error?.message) {
-            this.errorMessage = err.error.message;
-          } else {
-            this.errorMessage = 'Ocorreu um erro ao cadastrar. Tente novamente.';
-          }
+          this.errorMessage = err.status === 400 && err.error?.message
+            ? err.error.message
+            : 'Ocorreu um erro ao cadastrar. Tente novamente.';
         },
       });
     } else {
