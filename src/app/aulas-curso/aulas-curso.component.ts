@@ -1,4 +1,3 @@
-// ... imports mantidos
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -21,6 +20,8 @@ export class AulasCursoComponent implements OnInit {
   userId: number = parseInt(localStorage.getItem('_idUser') || '0');
   progresso: number | null = null;
   certificadoEmitido: boolean = false;
+  jaAvaliou: boolean = false;
+  avaliacaoExistente: any = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,6 +36,7 @@ export class AulasCursoComponent implements OnInit {
       next: (curso: any) => {
         this.curso = curso;
         this.carregarModulos(idCurso);
+        this.verificarAvaliacao(idCurso);
       },
       error: (err: any) => {
         console.error('Erro ao carregar curso:', err);
@@ -155,5 +157,61 @@ export class AulasCursoComponent implements OnInit {
 
   getCheckboxValue(event: Event): boolean {
     return (event.target as HTMLInputElement).checked;
+  }
+
+  verificarAvaliacao(idCurso: number): void {
+    this.bservice.getMinhaAvaliacao(idCurso).subscribe({
+      next: (avaliacao: any) => {
+        this.avaliacaoExistente = avaliacao; // salva o objeto inteiro!
+        this.jaAvaliou = !!avaliacao;
+      },
+      error: (err) => {
+        console.error('Erro ao verificar avaliação:', err);
+        this.avaliacaoExistente = null;
+        this.jaAvaliou = false;
+      }
+    });
+  }
+
+  avaliarCurso(): void {
+    const nota = prompt('Dê uma nota de 1 a 5:');
+    const comentario = prompt('Deixe um comentário:');
+
+    if (!nota || isNaN(+nota) || +nota < 1 || +nota > 5) {
+      alert('Nota inválida!');
+      return;
+    }
+
+    const payload = {
+      nota: +nota,
+      comentario: comentario || '',
+      cursoId: this.curso.id
+    };
+
+    if (this.avaliacaoExistente && this.avaliacaoExistente.id) {
+      // PATCH para alterar
+      this.bservice.atualizarAvaliacao(this.avaliacaoExistente.id, payload).subscribe({
+        next: () => {
+          alert('Avaliação atualizada com sucesso!');
+          this.verificarAvaliacao(this.curso.id); // revalida para manter o ID atualizado!
+        },
+        error: (err) => {
+          console.error('Erro ao atualizar avaliação:', err);
+          alert('Erro ao atualizar avaliação.');
+        }
+      });
+    } else {
+      // POST para criar
+      this.bservice.avaliarCurso(payload).subscribe({
+        next: () => {
+          alert('Avaliação enviada com sucesso!');
+          this.verificarAvaliacao(this.curso.id); // revalida para capturar o ID novo!
+        },
+        error: (err) => {
+          console.error('Erro ao enviar avaliação:', err);
+          alert('Erro ao enviar avaliação.');
+        }
+      });
+    }
   }
 }

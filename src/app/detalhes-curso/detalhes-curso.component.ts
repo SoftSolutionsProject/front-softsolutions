@@ -17,6 +17,7 @@ export class DetalhesCursoComponent implements OnInit {
   inscricoes: any[] = [];
   isLoading = true;
   userId = Number(localStorage.getItem('_idUser'));
+  avaliacoes: any[] = []; // ✅ Comentários do curso
 
   constructor(
     private route: ActivatedRoute,
@@ -37,11 +38,23 @@ export class DetalhesCursoComponent implements OnInit {
     this.bservice.obterCurso(idCurso).subscribe({
       next: (curso) => {
         this.curso = curso;
+        this.carregarAvaliacoes(idCurso); // ✅ Busca avaliações junto
         this.isLoading = false;
       },
       error: (err) => {
         console.error('Erro ao carregar curso:', err);
         this.isLoading = false;
+      }
+    });
+  }
+
+  carregarAvaliacoes(idCurso: number): void {
+    this.bservice.listarAvaliacoesPorCurso(idCurso).subscribe({
+      next: (avaliacoes) => {
+        this.avaliacoes = avaliacoes || [];
+      },
+      error: (err) => {
+        console.error('Erro ao carregar avaliações:', err);
       }
     });
   }
