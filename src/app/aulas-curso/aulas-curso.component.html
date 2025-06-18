@@ -18,13 +18,22 @@
       </div>
     </div>
 
-    <!-- Botão de ver certificado abaixo da barra de progresso -->
+    <!-- Botões de certificado e avaliação -->
     <div *ngIf="inscricao && progresso === 100" class="certificado-btn-container">
       <button (click)="verCertificado()" class="btn-certificado">
         {{ certificadoEmitido ? 'Ver Certificado' : 'Gerar Certificado' }}
       </button>
+
+      <!-- Botão Avaliar/Alterar -->
+      <button
+        *ngIf="certificadoEmitido"
+        (click)="avaliarCurso()"
+        class="btn-certificado"
+        style="margin-left: 10px; background-color: #2ecc71;">
+        {{ jaAvaliou ? 'Alterar Avaliação' : 'Avaliar Curso' }}
+      </button>
     </div>
-  </div> <!-- FECHAMENTO CORRETO DA VIDEO-PLAYER -->
+  </div>
 
   <!-- Lista de módulos e aulas -->
   <div class="lista-modulos">

@@ -31,10 +31,7 @@
           <div class="botoes-inscricao">
             <div *ngIf="isInscrito()">
               <button class="btn cancelar-inscricao" (click)="cancelarInscricao()">Cancelar inscrição</button>
-              <button class="btn assistir-curso" (click)="assistirCurso()">
-                Assistir curso
-              </button>
-
+              <button class="btn assistir-curso" (click)="assistirCurso()">Assistir curso</button>
             </div>
             <div *ngIf="!isInscrito()">
               <button class="btn inscrever" (click)="inscrever()">Inscrever-se</button>
@@ -61,7 +58,21 @@
       </ul>
     </div>
   </section>
-</div>
+
+<!-- Avaliações dos Alunos -->
+<section class="ementa" *ngIf="avaliacoes.length > 0" style="margin-top: 2rem;">
+  <h2>Avaliações dos Alunos</h2>
+  <div *ngFor="let a of avaliacoes" class="avaliacao-item">
+    <p class="autor">{{ a.autor || 'Usuário' }}</p>
+    <div class="estrelas">
+      <ng-container *ngFor="let s of [].constructor(5); let i = index">
+        <span [class.filled]="i < a.nota">★</span>
+      </ng-container>
+    </div>
+    <p class="comentario">"{{ a.comentario }}"</p>
+  </div>
+</section>
+
 
 <div *ngIf="isLoading" class="loading">
   <p>Carregando detalhes do curso...</p>

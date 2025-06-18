@@ -176,4 +176,31 @@ verificarCertificado(idInscricao: number): Observable<any> {
   });
 }
 
+consultarCertificadoPorNumeroSerie(numeroSerie: string) {
+  return this.http.get(`${this.API_URL}/certificados/publico/${numeroSerie}`);
+}
+
+avaliarCurso(data: any): Observable<any> {
+  return this.http.post(`${this.API_URL}/avaliacoes`, data, this.getAuthHeaders())
+    .pipe(catchError(this.handleError));
+}
+
+getMinhaAvaliacao(cursoId: number): Observable<any> {
+  return this.http.get(`${this.API_URL}/avaliacoes/curso/${cursoId}/minha`, this.getAuthHeaders())
+    .pipe(catchError(this.handleError));
+}
+
+atualizarAvaliacao(avaliacaoId: number, data: any): Observable<any> {
+  return this.http.patch(`${this.API_URL}/avaliacoes/${avaliacaoId}`, data, this.getAuthHeaders())
+    .pipe(catchError(this.handleError));
+}
+
+
+listarAvaliacoesPorCurso(cursoId: number): Observable<any[]> {
+  return this.http.get<any[]>(`${this.API_URL}/avaliacoes/curso/${cursoId}`, this.getAuthHeaders()).pipe(
+    catchError(this.handleError)
+  );
+}
+
+
 }
