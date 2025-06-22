@@ -1,27 +1,114 @@
-# SoftSolutionsApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+# 🎨 Frontend - SoftSolutions
 
-## Development server
+> Interface web desenvolvida e projetada para interagir com o backend da plataforma SoftSolutions.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## 🚀 Como Executar
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### ⚙️ Pré-requisitos
 
-## Build
+- **Node.js** >= 18.x
+- **Angular CLI** >= 15.x
+- **Docker** >= 20.x
+- **Docker Compose** >= 2.x
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+### 🐳 Execução com Docker (Recomendado)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. **Clone o repositório**
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   cd front-softsolutions-develop
+   ```
 
-## Running end-to-end tests
+2. **Construa e suba os containers**
+   ```bash
+   docker-compose up -d --build
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. **Acesse a aplicação**
+   - **Frontend**: http://localhost:4200
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### 💻 Execução local sem Docker
+
+1. **Clone o repositório**
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   cd front-softsolutions-develop
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
+
+3. **Inicie o servidor de desenvolvimento**
+   ```bash
+   ng serve
+   ```
+
+4. **Acesse a aplicação**
+   - Abra o navegador e acesse: `http://localhost:4200`
+
+
+## 🐋 Comandos Docker úteis
+
+```bash
+docker-compose up -d --build    # Subir containers
+docker-compose down             # Parar containers
+docker-compose logs -f          # Visualizar logs
+docker exec -it front bash      # Acessar o container (caso tenha nomeado como 'front')
+```
+
+
+## 📜 Scripts Disponíveis
+
+```bash
+# Desenvolvimento
+ng serve                         # Servidor local Angular
+
+# Produção
+ng build                         # Build para produção
+
+# Testes
+ng test                          # Executar testes unitários
+ng e2e                           # Executar testes end-to-end (caso configurado)
+
+# Lint
+ng lint                          # Verificação de estilo e boas práticas
+```
+
+
+## 🧰 Tecnologias Utilizadas
+
+- **Framework**: Angular
+- **Linguagem**: TypeScript
+- **Estilos**: CSS
+- **Empacotamento**: Angular CLI
+- **Containerização**: Docker
+- **CI/CD**: GitHub Actions
+
+
+## 📂 Estrutura do Projeto
+
+```bash
+src/
+├── app/                     # Componentes principais da aplicação
+├── assets/                  # Imagens, fontes, etc.
+├── main.ts                  # Ponto de entrada
+├── index.html               # HTML base
+└── styles.css               # Estilo global
+```
+
+---
+## Equipe
+
+| Função          | Membro                   |  Conecte-se                  |
+|-----------------|--------------------------|----------------------------------------------------------------------------------------------------------------------|
+|  Desenvolvedor  | Caio Henrique Rodrigues  | [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/CaioRodrigues12)              |
+|  Desenvolvedor  | Évellin de Lima Jacinto  | [![GitHub Badge](https://img.shields.io/badge/GitHub-000000?style=flat&logo=github)](https://github.com/evllinlima)  |
+|  Desenvolvedor  | Lucas Salvador Notaro    | [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/LucasNotaro)     |
+|  Desenvolvedor  | Lucas Santo Gomes        | [![GitHub Badge](https://img.shields.io/badge/GitHub-000000?style=flat&logo=github)](https://github.com/lucassantosgomes02) |
+|  Desenvolvedor  | Rafael da Costa Castro   | [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/RafaelCostaCastro)        |
