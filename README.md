@@ -3,7 +3,6 @@
 
 > Interface web desenvolvida e projetada para interagir com o backend da plataforma SoftSolutions.
 
----
 
 ## 🚀 Como Executar
 
@@ -14,7 +13,6 @@
 - **Docker** >= 20.x
 - **Docker Compose** >= 2.x
 
----
 
 ### 🐳 Execução com Docker (Recomendado)
 
@@ -32,7 +30,6 @@
 3. **Acesse a aplicação**
    - **Frontend**: http://localhost:4200
 
----
 
 ### 💻 Execução local sem Docker
 
@@ -55,7 +52,6 @@
 4. **Acesse a aplicação**
    - Abra o navegador e acesse: `http://localhost:4200`
 
----
 
 ## 🐋 Comandos Docker úteis
 
@@ -66,7 +62,6 @@ docker-compose logs -f          # Visualizar logs
 docker exec -it front bash      # Acessar o container (caso tenha nomeado como 'front')
 ```
 
----
 
 ## 📜 Scripts Disponíveis
 
@@ -85,7 +80,6 @@ ng e2e                           # Executar testes end-to-end (caso configurado)
 ng lint                          # Verificação de estilo e boas práticas
 ```
 
----
 
 ## 🧰 Tecnologias Utilizadas
 
@@ -96,7 +90,6 @@ ng lint                          # Verificação de estilo e boas práticas
 - **Containerização**: Docker
 - **CI/CD**: GitHub Actions
 
----
 
 ## 📂 Estrutura do Projeto
 
@@ -110,3 +103,12 @@ src/
 ```
 
 ---
+## Equipe
+
+| Função          | Membro                   |  Conecte-se                  |
+|-----------------|--------------------------|----------------------------------------------------------------------------------------------------------------------|
+|  Desenvolvedor  | Caio Henrique Rodrigues  | [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/CaioRodrigues12)              |
+|  Desenvolvedor  | Évellin de Lima Jacinto  | [![GitHub Badge](https://img.shields.io/badge/GitHub-000000?style=flat&logo=github)](https://github.com/evllinlima)  |
+|  Desenvolvedor  | Lucas Salvador Notaro    | [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/LucasNotaro)     |
+|  Desenvolvedor  | Lucas Santo Gomes        | [![GitHub Badge](https://img.shields.io/badge/GitHub-000000?style=flat&logo=github)](https://github.com/lucassantosgomes02) |
+|  Desenvolvedor  | Rafael da Costa Castro   | [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/RafaelCostaCastro)        |
