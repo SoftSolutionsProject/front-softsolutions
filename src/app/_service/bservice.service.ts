@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class BService {
-  private readonly API_URL = 'http://localhost:4000';
+  private readonly API_URL = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
