@@ -1,0 +1,90 @@
+<div class="dashboard-container">
+
+<div *ngIf="carregando" class="text-center mt-4">
+  <p>Carregando dashboard...</p>
+</div>
+
+<div *ngIf="erro" class="text-center text-danger mt-4">
+  <p>Erro ao carregar dados do dashboard.</p>
+</div>
+
+<div *ngIf="!carregando && !erro && dashboardData">
+
+  <div class="dashboard-cards">
+    <mat-card class="dashboard-card">
+      <h3>Total de Cursos Inscritos</h3>
+      <p>{{ dashboardData.totalCursosInscritos }}</p>
+    </mat-card>
+
+    <mat-card class="dashboard-card">
+      <h3>Total de Certificados</h3>
+      <p>{{ dashboardData.totalCertificados }}</p>
+    </mat-card>
+
+    <mat-card class="dashboard-card">
+      <h3>Tempo Total de Estudo</h3>
+      <p>{{ dashboardData.tempoTotalEstudoMinutos }} min</p>
+    </mat-card>
+
+    <mat-card class="dashboard-card">
+      <h3>Dias Ativos de Estudo</h3>
+      <p>{{ dashboardData.diasAtivosEstudo }}</p>
+    </mat-card>
+
+    <mat-card class="dashboard-card">
+      <h3>Último Dia de Atividade</h3>
+      <p>{{ dashboardData.ultimoDiaAtividade | date: 'dd/MM/yyyy' }}</p>
+    </mat-card>
+
+    <mat-card class="dashboard-card destaque">
+      <h3>Dias Consecutivos de Estudo</h3>
+      <p>{{ dashboardData.diasConsecutivosEstudo }}</p>
+    </mat-card>
+
+    <mat-card class="dashboard-card">
+  <h3>Sequência Atual de Dias com Estudo</h3>
+  <p>{{ dashboardData.sequenciaAtualDiasConsecutivos }}</p>
+</mat-card>
+
+  </div>
+
+<!-- 📊 Gráficos lado a lado em tela grande -->
+<div class="chart-row">
+  <apx-chart
+    class="chart-item"
+    *ngIf="seriesProgresso && chartProgresso && xaxisProgresso"
+    [series]="seriesProgresso"
+    [chart]="chartProgresso"
+    [xaxis]="xaxisProgresso"
+    [plotOptions]="plotOptionsProgresso"
+    [title]="titleProgresso">
+  </apx-chart>
+
+  <apx-chart
+    class="chart-item"
+    *ngIf="seriesCategoria && chartCategoria && labelsCategoria"
+    [series]="seriesCategoria"
+    [chart]="chartCategoria"
+    [labels]="labelsCategoria"
+    [title]="titleCategoria">
+  </apx-chart>
+</div>
+
+<!-- 📈 Gráfico de histórico de estudo por dia -->
+<apx-chart
+  *ngIf="seriesEstudo && chartEstudo && xaxisEstudo"
+  [series]="seriesEstudo"
+  [chart]="chartEstudo"
+  [xaxis]="xaxisEstudo"
+  [title]="titleEstudo">
+</apx-chart>
+
+
+
+<div class="dashboard-info-button">
+  <button mat-raised-button (click)="abrirExplicacoes()">ℹ️ Entenda os dados exibidos</button>
+</div>
+  </div>
+
+  </div>
+
