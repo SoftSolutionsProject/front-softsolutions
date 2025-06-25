@@ -22,6 +22,13 @@ export const routes: Routes = [
     loadComponent: () => import('./profile/profile.component')
       .then(m => m.ProfileComponent)
   },
+
+  {
+  path: 'dashboard',
+  loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
+  canActivate: [AuthGuard] // ✅ Protege a rota
+},
+
   { path: 'curso/:id', component: DetalhesCursoComponent },
   { path: 'curso/:id/aulas', component: AulasCursoComponent, canActivate: [CourseGuard],},
 

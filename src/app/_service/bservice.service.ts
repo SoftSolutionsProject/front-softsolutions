@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { DashboardResponse } from '../dashboard/dashboard.model';
 
 @Injectable({ providedIn: 'root' })
 export class BService {
@@ -203,5 +204,12 @@ listarAvaliacoesPorCurso(cursoId: number): Observable<any[]> {
   );
 }
 
+//------------ DASHBOARD ----------
 
+getDashboard(idUsuario: number): Observable<DashboardResponse> {
+  return this.http.get<DashboardResponse>(
+    `${this.API_URL}/usuarios/${idUsuario}/dashboard`,
+    this.getAuthHeaders()
+  );
+}
 }
