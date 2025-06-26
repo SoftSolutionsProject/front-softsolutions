@@ -11,3 +11,35 @@
   justify-content: center;
 }
 
+.paginacao-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.paginacao-container button {
+  background-color: #222;
+  color: #eee;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.paginacao-container button:hover:not(:disabled) {
+  background-color: #333;
+}
+
+.paginacao-container button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.paginacao-container span {
+  color: #ccc;
+  font-size: 0.9rem;
+}
