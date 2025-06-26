@@ -12,15 +12,15 @@ import { MaterialModule } from '../material.module';
 export class HomeComponent implements OnInit {
   featuredCourses = [
     {
-      title: 'Desenvolvimento Web',
-      description: 'Aprenda do zero ao avançado com HTML, CSS, JavaScript e frameworks modernos',
-      image: 'assets/images/cursos/desenvolvimento-web.jpg',
-      instructor: 'Paulo Sérgio',
+      title: 'Fundamentos em Python',
+      description: 'Estude os principais fundamentos da linguagem Python.',
+      image: 'assets/images/cursos/python.png',
+      instructor: 'Dilermando Piva',
       instructorImage: 'assets/images/instructors/paulo.jpg',
-      duration: '40h',
-      modules: 4,
+      duration: '10h',
+      modules: 8,
       level: 'Iniciante',
-      id:7
+      id:13
     },
     {
       title: 'Introdução ao React Native Para Mobile',
@@ -28,21 +28,21 @@ export class HomeComponent implements OnInit {
       image: 'assets/images/cursos/desenvolvimento-apps.jpg',
       instructor: 'Marcos Andrade',
       instructorImage: 'assets/images/instructors/marcos.jpg',
-      duration: '40h',
-      modules: 4,
+      duration: '50h',
+      modules: 5,
       level: 'Intermediário',
-      id:8
+      id:2
     },
     {
-      title: 'Python para Análise de Dados',
+      title: 'JavaScript Avançado para Web',
       description: 'Análise de dados, machine learning e visualização com Python',
-      image: 'assets/images/cursos/python.png',
-      instructor: 'Júlio Santos',
+      image: 'assets/images/cursos/desenvolvimento-web.jpg',
+      instructor: 'Camila Oliveira',
       instructorImage: 'assets/images/instructors/julio.jpg',
-      duration: '50h',
-      modules: 4,
+      duration: '55h',
+      modules: 5,
       level: 'Avançado',
-      id:8
+      id:12
     }
   ];
 

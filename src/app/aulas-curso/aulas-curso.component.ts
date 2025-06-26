@@ -57,16 +57,26 @@ export class AulasCursoComponent implements OnInit {
     });
   }
 
-  carregarModulos(idCurso: number): void {
-    this.bservice.listarModulosEAulasDoCurso(idCurso).subscribe({
-      next: (modulos: any[]) => {
-        this.modulos = modulos;
-        this.curso.modulos = modulos;
-        this.definirAulaInicial();
-      },
-      error: (err: any) => console.error('Erro ao carregar módulos e aulas:', err)
-    });
-  }
+carregarModulos(idCurso: number): void {
+  this.bservice.listarModulosEAulasDoCurso(idCurso).subscribe({
+    next: (modulos: any[]) => {
+      // Ordena os módulos por ID (menor para maior)
+      modulos.sort((a, b) => a.id - b.id);
+
+      // Ordena as aulas de cada módulo por ID (menor para maior)
+      modulos.forEach(modulo => {
+        if (modulo.aulas?.length) {
+          modulo.aulas.sort((a: any, b: any) => a.id - b.id);
+        }
+      });
+
+      this.modulos = modulos;
+      this.curso.modulos = modulos;
+      this.definirAulaInicial();
+    },
+    error: (err: any) => console.error('Erro ao carregar módulos e aulas:', err)
+  });
+}
 
   definirAulaInicial(): void {
     const aulasLineares = this.getTodasAulasLineares();
