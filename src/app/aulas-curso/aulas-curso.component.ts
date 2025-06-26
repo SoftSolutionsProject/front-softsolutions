@@ -4,11 +4,13 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 import { BService } from '../_service/bservice.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-aulas-curso',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, FormsModule],
   templateUrl: './aulas-curso.component.html',
   styleUrl: './aulas-curso.component.css'
 })
@@ -27,7 +29,8 @@ export class AulasCursoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private bservice: BService
+    private bservice: BService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -188,33 +191,95 @@ export class AulasCursoComponent implements OnInit {
   }
 
   avaliarCurso(): void {
-    const nota = prompt('Dê uma nota de 1 a 5:');
-    const comentario = prompt('Deixe um comentário:');
-
-    if (!nota || isNaN(+nota) || +nota < 1 || +nota > 5) {
-      alert('Nota inválida!');
-      return;
-    }
-
-    const payload = {
-      nota: +nota,
-      comentario: comentario || '',
-      cursoId: this.curso.id
-    };
-
-    const request = this.avaliacaoExistente?.id
-      ? this.bservice.atualizarAvaliacao(this.avaliacaoExistente.id, payload)
-      : this.bservice.avaliarCurso(payload);
-
-    request.subscribe({
-      next: () => {
-        alert('Avaliação registrada com sucesso!');
-        this.verificarAvaliacao(this.curso.id);
-      },
-      error: (err) => {
-        console.error('Erro ao registrar avaliação:', err);
-        alert('Erro ao enviar avaliação.');
-      }
+    const dialogRef = this.dialog.open(AvaliacaoDialogInline, {
+      width: '400px',
+      data: { avaliacao: this.avaliacaoExistente }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+
+      const payload = {
+        nota: result.nota,
+        comentario: result.comentario,
+        cursoId: this.curso.id
+      };
+
+      const request = this.avaliacaoExistente?.id
+        ? this.bservice.atualizarAvaliacao(this.avaliacaoExistente.id, payload)
+        : this.bservice.avaliarCurso(payload);
+
+      request.subscribe({
+        next: () => this.verificarAvaliacao(this.curso.id),
+        error: (err) => console.error('Erro ao enviar avaliação:', err)
+      });
+    });
+  }
+}
+
+/* Componente inline para avaliação */
+import { Component as DialogComponent, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+
+@DialogComponent({
+  selector: 'app-avaliacao-dialog-inline',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule
+  ],
+  template: `
+    <h2 mat-dialog-title>Avaliar Curso</h2>
+    <mat-dialog-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nota (1 a 5)</mat-label>
+        <mat-select [(value)]="nota">
+          <mat-option *ngFor="let n of [1, 2, 3, 4, 5]" [value]="n">{{n}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Comentário</mat-label>
+        <textarea matInput [(ngModel)]="comentario" rows="3"></textarea>
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="fechar()">Cancelar</button>
+      <button mat-flat-button color="primary" (click)="salvar()" [disabled]="!nota">Salvar</button>
+    </mat-dialog-actions>
+  `,
+  styles: [`.full-width { width: 100%; margin-top: 1rem; }`]
+})
+export class AvaliacaoDialogInline {
+  nota: number | null = null;
+  comentario = '';
+
+  constructor(
+    private dialogRef: MatDialogRef<AvaliacaoDialogInline>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    if (data?.avaliacao) {
+      this.nota = data.avaliacao.nota;
+      this.comentario = data.avaliacao.comentario;
+    }
+  }
+
+  fechar() {
+    this.dialogRef.close();
+  }
+
+  salvar() {
+    this.dialogRef.close({ nota: this.nota, comentario: this.comentario });
   }
 }

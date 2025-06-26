@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     imports: [MatSidenavModule, MatListModule, MatCheckboxModule,
@@ -23,13 +24,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
               MatTableModule, RouterLink,
               MatDialogModule,  MatCardModule, ReactiveFormsModule,
               MatInputModule, MatDividerModule, MatSidenav, MatMenuModule, RouterOutlet, CommonModule,
-              HttpClientModule, MatSnackBarModule ],
+              HttpClientModule, MatSnackBarModule, MatSelectModule ],
 
     exports: [MatSidenavModule, MatListModule, MatCheckboxModule,
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
               MatTableModule, RouterLink,
               MatDialogModule, MatCardModule, ReactiveFormsModule,
-              MatInputModule, MatDividerModule, MatSidenav, MatMenuModule, HttpClientModule, MatSnackBarModule],
+              MatInputModule, MatDividerModule, MatSidenav, MatMenuModule, HttpClientModule, MatSnackBarModule, MatSelectModule],
 })
 
 export class MaterialModule {
