@@ -1,31 +1,26 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6 half-screen order-md-1 image-container">
+    <!-- Imagem visível apenas em telas médias e grandes -->
+    <div class="col-md-6 half-screen order-md-1 image-container d-none d-md-block">
       <img src="assets/images/cadastro/bg-cadastro.png" class="img-fluid" alt="Imagem">
     </div>
-    <div class="col-md-6 half-screen d-flex justify-content-center align-items-center order-md-2 form-container">
-      <div class="col-md-10">
+
+    <!-- Formulário -->
+    <div class="col-md-6 col-12 half-screen d-flex justify-content-center align-items-center order-md-2 form-container">
+      <div class="col-md-10 col-11">
         <h1 class="text-center mb-4">CADASTRE-SE</h1>
         <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
           <div class="secao">
-            <!-- Campo Nome -->
-            <div class="mb-5">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="nomeUsuario"
-                placeholder="Nome">
+            <!-- Nome -->
+            <div class="mb-4">
+              <input type="text" class="form-control" formControlName="nomeUsuario" placeholder="Nome">
               <small class="text-danger" *ngIf="cadastroForm.get('nomeUsuario')?.invalid && cadastroForm.get('nomeUsuario')?.touched">
                 Nome é obrigatório.
               </small>
             </div>
-            <!-- Campo Email -->
-            <div class="mb-5">
-              <input
-                type="email"
-                class="form-control"
-                formControlName="email"
-                placeholder="Email">
+            <!-- Email -->
+            <div class="mb-4">
+              <input type="email" class="form-control" formControlName="email" placeholder="Email">
               <small class="text-danger" *ngIf="cadastroForm.get('email')?.hasError('required') && cadastroForm.get('email')?.touched">
                 Email é obrigatório.
               </small>
@@ -33,13 +28,9 @@
                 Formato de email inválido.
               </small>
             </div>
-            <!-- Campo Senha -->
-            <div class="mb-5">
-              <input
-                type="password"
-                class="form-control"
-                formControlName="senha"
-                placeholder="Senha">
+            <!-- Senha -->
+            <div class="mb-4">
+              <input type="password" class="form-control" formControlName="senha" placeholder="Senha">
               <small class="text-danger" *ngIf="cadastroForm.get('senha')?.hasError('required') && cadastroForm.get('senha')?.touched">
                 Senha é obrigatória.
               </small>
@@ -47,13 +38,9 @@
                 Senha deve ter pelo menos 6 caracteres.
               </small>
             </div>
-            <!-- Campo CPF -->
-            <div class="mb-5">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="cpfUsuario"
-                placeholder="CPF (somente números)">
+            <!-- CPF -->
+            <div class="mb-4">
+              <input type="text" class="form-control" formControlName="cpfUsuario" placeholder="CPF (somente números)">
               <small class="text-danger" *ngIf="cadastroForm.get('cpfUsuario')?.hasError('required') && cadastroForm.get('cpfUsuario')?.touched">
                 CPF é obrigatório.
               </small>
@@ -62,13 +49,13 @@
               </small>
             </div>
           </div>
-          <!-- Botão de Cadastro -->
-          <div class="text-center secao">
-            <div class="mb-5">
-              <button type="submit" class="btn btn-secondary btn-md w-50" [disabled]="false">Cadastrar</button>
-            </div>
+
+          <!-- Botão -->
+          <div class="text-center secao mb-4">
+            <button type="submit" class="btn btn-secondary w-50" [disabled]="false">Cadastrar</button>
           </div>
-          <!-- Mensagem Global de Erro -->
+
+          <!-- Erro global -->
           <div class="text-center">
             <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
           </div>
