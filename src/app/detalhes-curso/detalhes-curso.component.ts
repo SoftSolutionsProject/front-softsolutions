@@ -36,26 +36,36 @@ export class DetalhesCursoComponent implements OnInit {
     }
   }
 
-  carregarCurso(idCurso: number): void {
-    this.bservice.obterCurso(idCurso).subscribe({
-      next: (curso) => {
-        this.curso = curso;
-        this.carregarAvaliacoes(idCurso);
+carregarCurso(idCurso: number): void {
+  this.bservice.obterCurso(idCurso).subscribe({
+    next: (curso) => {
+      this.curso = curso;
 
-        // ✅ Buscar quantidade de inscritos
-        this.bservice.obterQuantidadeInscritos(idCurso).subscribe({
-          next: (res) => this.quantidadeInscritos = res.quantidadeInscritos,
-          error: (err) => console.error('Erro ao buscar inscritos:', err)
+      if (this.curso?.modulos?.length) {
+        this.curso.modulos.sort((a: any, b: any) => a.id - b.id);
+        this.curso.modulos.forEach((modulo: any) => {
+          if (modulo.aulas?.length) {
+            modulo.aulas.sort((a: any, b: any) => a.id - b.id);
+          }
         });
-
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Erro ao carregar curso:', err);
-        this.isLoading = false;
       }
-    });
-  }
+
+      this.carregarAvaliacoes(idCurso);
+
+      this.bservice.obterQuantidadeInscritos(idCurso).subscribe({
+        next: (res) => this.quantidadeInscritos = res.quantidadeInscritos,
+        error: (err) => console.error('Erro ao buscar inscritos:', err)
+      });
+
+      this.isLoading = false;
+    },
+    error: (err) => {
+      console.error('Erro ao carregar curso:', err);
+      this.isLoading = false;
+    }
+  });
+}
+
 
   carregarAvaliacoes(idCurso: number): void {
     this.bservice.listarAvaliacoesPorCurso(idCurso).subscribe({

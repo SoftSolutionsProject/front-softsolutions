@@ -1,10 +1,17 @@
 <div class="cont">
   <app-card-cursos *ngFor="let curso of cursos"
-  [titulo]="curso.titulo"
-  [professor]="curso.professor"
-  [imagemCurso]="curso.imagemCurso"
-  [avaliacao]="curso.avaliacao"
-  [id]="curso.id"
-  [estrelas]="curso.estrelas">
+    [titulo]="curso.titulo"
+    [professor]="curso.professor"
+    [imagemCurso]="curso.imagemCurso"
+    [avaliacao]="curso.avaliacao"
+    [id]="curso.id"
+    [estrelas]="curso.estrelas">
   </app-card-cursos>
- </div>
+</div>
+
+<!-- Paginação -->
+<div class="paginacao-container">
+  <button (click)="mudarPagina(-1)" [disabled]="paginaAtual === 1">Anterior</button>
+  <span>Página {{ paginaAtual }} de {{ totalPaginas }}</span>
+  <button (click)="mudarPagina(1)" [disabled]="paginaAtual === totalPaginas">Próxima</button>
+</div>
