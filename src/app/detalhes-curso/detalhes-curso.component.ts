@@ -17,7 +17,8 @@ export class DetalhesCursoComponent implements OnInit {
   inscricoes: any[] = [];
   isLoading = true;
   userId = Number(localStorage.getItem('_idUser'));
-  avaliacoes: any[] = []; // ✅ Comentários do curso
+  avaliacoes: any[] = [];
+  quantidadeInscritos = 0; // ✅ Nova propriedade
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +30,8 @@ export class DetalhesCursoComponent implements OnInit {
   ngOnInit(): void {
     const idCurso = this.route.snapshot.paramMap.get('id');
     if (idCurso) {
-      this.carregarCurso(Number(idCurso));
+      const id = Number(idCurso);
+      this.carregarCurso(id);
       this.carregarInscricoes();
     }
   }
@@ -38,7 +40,14 @@ export class DetalhesCursoComponent implements OnInit {
     this.bservice.obterCurso(idCurso).subscribe({
       next: (curso) => {
         this.curso = curso;
-        this.carregarAvaliacoes(idCurso); // ✅ Busca avaliações junto
+        this.carregarAvaliacoes(idCurso);
+
+        // ✅ Buscar quantidade de inscritos
+        this.bservice.obterQuantidadeInscritos(idCurso).subscribe({
+          next: (res) => this.quantidadeInscritos = res.quantidadeInscritos,
+          error: (err) => console.error('Erro ao buscar inscritos:', err)
+        });
+
         this.isLoading = false;
       },
       error: (err) => {
@@ -86,6 +95,7 @@ export class DetalhesCursoComponent implements OnInit {
           panelClass: ['snackbar-success']
         });
         this.carregarInscricoes();
+        this.carregarCurso(this.curso.id); // ✅ Recarrega curso p/ atualizar inscritos
       },
       error: (err) => {
         console.error('Erro ao se inscrever:', err);
@@ -115,6 +125,7 @@ export class DetalhesCursoComponent implements OnInit {
           panelClass: ['snackbar-success']
         });
         this.carregarInscricoes();
+        this.carregarCurso(this.curso.id); // ✅ Recarrega curso p/ atualizar inscritos
       },
       error: (err) => {
         console.error('Erro ao cancelar inscrição:', err);

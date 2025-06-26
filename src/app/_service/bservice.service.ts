@@ -76,6 +76,11 @@ export class BService {
     return this.http.get<any[]>(`${this.API_URL}/cursos/${idCurso}/aulas`).pipe(catchError(this.handleError));
   }
 
+  obterQuantidadeInscritos(idCurso: number): Observable<{ quantidadeInscritos: number }> {
+  return this.http.get<{ quantidadeInscritos: number }>(`${this.API_URL}/cursos/${idCurso}/inscritos`)
+    .pipe(catchError(this.handleError));
+}
+
   // ---------- INSCRIÇÕES ----------
 
   listarInscricoesUsuario(): Observable<any[]> {
