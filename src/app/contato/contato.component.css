@@ -28,13 +28,22 @@ body {
   margin-bottom: 20px;
 }
 
-input.form-control {
+input.form-control,
+textarea.form-control {
   border-radius: 0;
   background-color: #D9D9D9;
   transition: box-shadow 0.3s ease-in-out;
+  font-size: 1rem;
+  width: 100%;
+  resize: none;
 }
 
-input.form-control:focus {
+textarea.form-control {
+  min-height: 140px;
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -78,15 +87,47 @@ h1, label, a {
 
 @media (max-width: 768px) {
   .half-screen {
-      width: 100%;
+    width: 100%;
+    height: auto;
   }
 
   .image-container {
-      order: -1;
-      height: 20vh;
+    display: none;
   }
 
-  .image-container img {
-      height: auto;
+  .form-container {
+    padding: 1.5rem 1rem 2rem 1rem;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .form-container > .col-md-10 {
+    width: 100%;
+    max-width: 92%;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  input.form-control,
+  textarea.form-control {
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .mb-5 {
+    margin-bottom: 1.8rem;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
   }
 }
