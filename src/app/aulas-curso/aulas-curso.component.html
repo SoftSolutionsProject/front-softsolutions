@@ -2,6 +2,11 @@
 
   <!-- Player de vídeo -->
   <div class="video-player">
+
+    <h3 class="titulo-aula-atual" *ngIf="aulaAtual?.nomeAula">
+      Aula atual: {{ aulaAtual.nomeAula }}
+    </h3>
+
     <iframe
       *ngIf="currentVideoUrl"
       [src]="currentVideoUrl"
@@ -9,6 +14,7 @@
       allowfullscreen
       class="video-frame"
     ></iframe>
+
     <p *ngIf="!currentVideoUrl" class="texto-instrucao">Selecione uma aula para assistir.</p>
 
     <div class="progresso-geral" *ngIf="progresso !== null">
@@ -18,13 +24,11 @@
       </div>
     </div>
 
-    <!-- Botões de certificado e avaliação -->
     <div *ngIf="inscricao && progresso === 100" class="certificado-btn-container">
       <button (click)="verCertificado()" class="btn-certificado">
         {{ certificadoEmitido ? 'Ver Certificado' : 'Gerar Certificado' }}
       </button>
 
-      <!-- Botão Avaliar/Alterar -->
       <button
         *ngIf="certificadoEmitido"
         (click)="avaliarCurso()"
@@ -42,7 +46,7 @@
         <h4>{{ modulo.nomeModulo }}</h4>
         <ul class="aulas-lista">
           <li *ngFor="let aula of modulo.aulas" class="aula-item">
-            <div class="aula-info" (click)="playAula(aula.videoUrl)">
+            <div class="aula-info" (click)="playAula(aula.videoUrl, aula)">
               <span class="aula-nome">{{ aula.nomeAula }}</span>
             </div>
             <input
@@ -59,5 +63,4 @@
       <p>Nenhum módulo encontrado para este curso.</p>
     </ng-template>
   </div>
-
 </div>

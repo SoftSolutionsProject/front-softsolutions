@@ -141,3 +141,10 @@ input[type="checkbox"] {
 .btn-certificado:hover {
   background-color: #2980b9;
 }
+
+.titulo-aula-atual {
+  font-size: 1.2rem;
+  font-weight: 450;
+  color: #333;
+  margin-bottom: 1rem;
+}

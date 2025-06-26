@@ -17,6 +17,7 @@ export class AulasCursoComponent implements OnInit {
   modulos: any[] = [];
   inscricao: any;
   currentVideoUrl: SafeResourceUrl | undefined;
+  aulaAtual: any = null;
   userId: number = parseInt(localStorage.getItem('_idUser') || '0');
   progresso: number | null = null;
   certificadoEmitido: boolean = false;
@@ -38,22 +39,18 @@ export class AulasCursoComponent implements OnInit {
         this.carregarModulos(idCurso);
         this.verificarAvaliacao(idCurso);
       },
-      error: (err: any) => {
-        console.error('Erro ao carregar curso:', err);
-      }
+      error: (err: any) => console.error('Erro ao carregar curso:', err)
     });
 
     this.bservice.listarInscricoesUsuario().subscribe({
       next: (inscricoes: any[]) => {
-        this.inscricao = inscricoes.find((i: any) => i.curso?.id === idCurso && i.status === 'ativo');
+        this.inscricao = inscricoes.find(i => i.curso?.id === idCurso && i.status === 'ativo');
         if (this.inscricao) {
           this.atualizarProgresso();
           this.verificarCertificadoBackend();
         }
       },
-      error: (err: any) => {
-        console.error('Erro ao carregar inscrições:', err);
-      }
+      error: (err: any) => console.error('Erro ao carregar inscrições:', err)
     });
   }
 
@@ -62,26 +59,40 @@ export class AulasCursoComponent implements OnInit {
       next: (modulos: any[]) => {
         this.modulos = modulos;
         this.curso.modulos = modulos;
+        this.definirAulaInicial();
       },
-      error: (err: any) => {
-        console.error('Erro ao carregar módulos e aulas:', err);
-      }
+      error: (err: any) => console.error('Erro ao carregar módulos e aulas:', err)
     });
   }
 
-  playAula(videoUrl: string): void {
+  definirAulaInicial(): void {
+    const aulasLineares = this.getTodasAulasLineares();
+    const progresso = this.inscricao?.progressoAulas || [];
+
+    const aulaNaoConcluida = aulasLineares.find((aula: any) =>
+      !progresso.some((p: any) => p.aula?.id === aula.id && p.concluida)
+    );
+
+    const aulaInicial = aulaNaoConcluida || aulasLineares[0];
+    if (aulaInicial?.videoUrl) {
+      this.playAula(aulaInicial.videoUrl, aulaInicial);
+    }
+  }
+
+  playAula(videoUrl: string, aula?: any): void {
     if (videoUrl) {
       this.currentVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
+      this.aulaAtual = aula || null;
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 0);
     } else {
       console.warn('URL de vídeo inválida.');
     }
   }
 
   alternarConclusaoAula(idAula: number, concluida: boolean): void {
-    if (!this.inscricao) {
-      console.warn('Usuário não inscrito no curso.');
-      return;
-    }
+    if (!this.inscricao) return;
 
     if (this.certificadoEmitido && !concluida) {
       alert('Não é possível desmarcar aulas após a emissão do certificado.');
@@ -89,41 +100,51 @@ export class AulasCursoComponent implements OnInit {
     }
 
     const acao = concluida ? this.bservice.concluirAula : this.bservice.desmarcarAula;
+    const aulaMarcada = this.getTodasAulasLineares().find(a => a.id === idAula);
 
     acao.call(this.bservice, this.inscricao.id, idAula).subscribe({
       next: () => {
         this.atualizarInscricao();
         this.atualizarProgresso();
+        if (concluida && aulaMarcada) {
+          this.playProximaAula(aulaMarcada);
+        }
       },
-      error: (err) => {
-        console.error('Erro ao atualizar aula:', err);
-      }
+      error: (err) => console.error('Erro ao atualizar aula:', err)
     });
+  }
+
+  playProximaAula(aulaAtual: any): void {
+    const aulasLineares = this.getTodasAulasLineares();
+    const indexAtual = aulasLineares.findIndex(a => a.id === aulaAtual.id);
+    const proximaAula = aulasLineares[indexAtual + 1];
+    if (proximaAula?.videoUrl) {
+      this.playAula(proximaAula.videoUrl, proximaAula);
+    }
+  }
+
+  getTodasAulasLineares(): any[] {
+    return this.curso?.modulos?.flatMap((modulo: any) => modulo.aulas) || [];
   }
 
   isAulaConcluida(idAula: number): boolean {
     const progresso = this.inscricao?.progressoAulas || [];
-    const aulaProgresso = progresso.find((p: any) => p.aula?.id === idAula);
-    return aulaProgresso?.concluida || false;
+    return progresso.some((p: any) => p.aula?.id === idAula && p.concluida);
   }
 
   atualizarInscricao(): void {
     this.bservice.listarInscricoesUsuario().subscribe({
       next: (inscricoes: any[]) => {
-        this.inscricao = inscricoes.find((i: any) => i.curso?.id === this.curso.id && i.status === 'ativo');
+        this.inscricao = inscricoes.find(i => i.curso?.id === this.curso.id && i.status === 'ativo');
       },
-      error: (err: any) => {
-        console.error('Erro ao atualizar inscrição:', err);
-      }
+      error: (err: any) => console.error('Erro ao atualizar inscrição:', err)
     });
   }
 
   atualizarProgresso(): void {
     if (!this.inscricao) return;
     this.bservice.obterProgresso(this.inscricao.id).subscribe({
-      next: (dados: any) => {
-        this.progresso = Math.round(dados.progresso);
-      },
+      next: (dados: any) => this.progresso = Math.round(dados.progresso),
       error: (err) => console.error('Erro ao obter progresso:', err)
     });
   }
@@ -136,22 +157,15 @@ export class AulasCursoComponent implements OnInit {
   }
 
   verCertificado(): void {
-    if (!this.inscricao) {
-      console.warn('Inscrição não encontrada!');
-      return;
-    }
+    if (!this.inscricao) return;
 
-    const idInscricao = this.inscricao.id;
-
-    this.bservice.getCertificado(idInscricao).subscribe({
+    this.bservice.getCertificado(this.inscricao.id).subscribe({
       next: (blob: Blob) => {
         const url = window.URL.createObjectURL(blob);
         window.open(url, '_blank');
         this.certificadoEmitido = true;
       },
-      error: (err) => {
-        console.error('Erro ao abrir certificado:', err);
-      }
+      error: (err) => console.error('Erro ao abrir certificado:', err)
     });
   }
 
@@ -162,7 +176,7 @@ export class AulasCursoComponent implements OnInit {
   verificarAvaliacao(idCurso: number): void {
     this.bservice.getMinhaAvaliacao(idCurso).subscribe({
       next: (avaliacao: any) => {
-        this.avaliacaoExistente = avaliacao; // salva o objeto inteiro!
+        this.avaliacaoExistente = avaliacao;
         this.jaAvaliou = !!avaliacao;
       },
       error: (err) => {
@@ -188,30 +202,19 @@ export class AulasCursoComponent implements OnInit {
       cursoId: this.curso.id
     };
 
-    if (this.avaliacaoExistente && this.avaliacaoExistente.id) {
-      // PATCH para alterar
-      this.bservice.atualizarAvaliacao(this.avaliacaoExistente.id, payload).subscribe({
-        next: () => {
-          alert('Avaliação atualizada com sucesso!');
-          this.verificarAvaliacao(this.curso.id); // revalida para manter o ID atualizado!
-        },
-        error: (err) => {
-          console.error('Erro ao atualizar avaliação:', err);
-          alert('Erro ao atualizar avaliação.');
-        }
-      });
-    } else {
-      // POST para criar
-      this.bservice.avaliarCurso(payload).subscribe({
-        next: () => {
-          alert('Avaliação enviada com sucesso!');
-          this.verificarAvaliacao(this.curso.id); // revalida para capturar o ID novo!
-        },
-        error: (err) => {
-          console.error('Erro ao enviar avaliação:', err);
-          alert('Erro ao enviar avaliação.');
-        }
-      });
-    }
+    const request = this.avaliacaoExistente?.id
+      ? this.bservice.atualizarAvaliacao(this.avaliacaoExistente.id, payload)
+      : this.bservice.avaliarCurso(payload);
+
+    request.subscribe({
+      next: () => {
+        alert('Avaliação registrada com sucesso!');
+        this.verificarAvaliacao(this.curso.id);
+      },
+      error: (err) => {
+        console.error('Erro ao registrar avaliação:', err);
+        alert('Erro ao enviar avaliação.');
+      }
+    });
   }
 }
