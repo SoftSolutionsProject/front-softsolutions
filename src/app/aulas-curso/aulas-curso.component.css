@@ -141,3 +141,68 @@ input[type="checkbox"] {
 .btn-certificado:hover {
   background-color: #2980b9;
 }
+
+.titulo-aula-atual {
+  font-size: 1.2rem;
+  font-weight: 450;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+
+/* teste------------------ */
+
+@media (max-width: 768px) {
+  .aulas-curso-container {
+    flex-direction: column;
+    height: auto;
+    padding: 0.5rem;
+  }
+
+  .video-player {
+    flex: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .lista-modulos {
+    flex: 1;
+    width: 100%;
+    overflow-y: auto;
+    max-height: calc(100vh - 350px); /* ajusta conforme altura do vídeo e outros elementos */
+    padding-bottom: 1rem;
+  }
+
+  .titulo-aula-atual {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+.certificado-btn-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap; /* evita quebra feia em telas muito estreitas */
+  margin-top: 1rem;
+}
+
+.btn-certificado {
+  flex: 1 1 45%;
+  min-width: 140px;
+  padding: 10px;
+  font-size: 15px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+  .aula-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  input[type="checkbox"] {
+    align-self: flex-end;
+  }
+}

@@ -6,8 +6,8 @@
     crossorigin="anonymous"
   />
 
-  <!-- Imagem à esquerda -->
-  <div class="half-screen image-container">
+  <!-- Imagem à esquerda (desktop) -->
+  <div class="half-screen image-container d-none d-md-block">
     <img src="assets/images/login/bg-login.png" class="img-fluid" alt="Imagem" />
   </div>
 
@@ -27,7 +27,7 @@
                 id="inputEmail"
                 placeholder="Digite seu email"
               />
-              <small class="text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+              <small class="text-danger d-block mt-1" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
                 Email é obrigatório e deve ser válido.
               </small>
             </div>
@@ -40,7 +40,7 @@
                 id="inputSenha"
                 placeholder="Digite sua senha"
               />
-              <small class="text-danger" *ngIf="loginForm.get('senha')?.invalid && loginForm.get('senha')?.touched">
+              <small class="text-danger d-block mt-1" *ngIf="loginForm.get('senha')?.invalid && loginForm.get('senha')?.touched">
                 Senha é obrigatória.
               </small>
             </div>
