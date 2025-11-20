@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build -- --configuration=docker
+RUN npm run build -- --configuration=aws
 
 # Etapa 2: Servir com NGINX
 FROM nginx:alpine
