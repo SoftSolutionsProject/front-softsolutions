@@ -71,6 +71,32 @@
                   "with": "src/environments/environment.docker.ts"
                 }
               ]
+            },
+            "aws": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "10mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2mb",
+                  "maximumError": "2mb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.aws.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -86,6 +112,9 @@
             },
             "docker": {
               "buildTarget": "SoftSolutions-app:build:docker"
+            },
+            "aws": {
+              "buildTarget": "SoftSolutions-app:build:aws"
             }
           },
           "defaultConfiguration": "development"
