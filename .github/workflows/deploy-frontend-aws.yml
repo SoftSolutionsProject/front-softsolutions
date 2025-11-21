@@ -1,0 +1,37 @@
+name: deploy-frontend-aws
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Atualizar frontend na EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_FRONT_HOST }}
+          username: ${{ secrets.EC2_FRONT_USER }}
+          key: ${{ secrets.EC2_FRONT_SSH_KEY }}
+          script: |
+            echo ">> Login no Docker Hub"
+            docker login -u ${{ secrets.USUARIO_DOCKER }} -p ${{ secrets.SENHA_DOCKER }}
+
+            echo ">> Pull da nova imagem do frontend"
+            docker pull softsolutionsfatecvotorantim/frontend:latest
+
+            echo ">> Parando container antigo (se existir)"
+            docker stop front-softsolutions || true
+            docker rm front-softsolutions || true
+
+            echo ">> Subindo novo container do frontend (com restart automático)"
+            docker run -d --name front-softsolutions \
+              --restart unless-stopped \
+              -p 80:80 \
+              softsolutionsfatecvotorantim/frontend:latest
+
+            echo ">> Containers em execução:"
+            docker ps
