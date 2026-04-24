@@ -128,12 +128,17 @@ jobs:
             -t ${{ secrets.USUARIO_DOCKER }}/frontend:${{ env.new_version }} \
             -t ${{ secrets.USUARIO_DOCKER }}/frontend:latest \
             .
+          docker build \
+            --build-arg BUILD_CONFIG=azure \
+            -t ${{ secrets.USUARIO_DOCKER }}/frontend:azure \
+            .
 
       - name: Push para o Docker Hub
         if: github.ref == 'refs/heads/main' && env.new_version != ''
         run: |
           docker push ${{ secrets.USUARIO_DOCKER }}/frontend:${{ env.new_version }}
           docker push ${{ secrets.USUARIO_DOCKER }}/frontend:latest
+          docker push ${{ secrets.USUARIO_DOCKER }}/frontend:azure
 
       - name: Commit and push new version
         if: github.ref == 'refs/heads/main' && env.new_version != ''
