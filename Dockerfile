@@ -7,7 +7,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build -- --configuration=production
+ARG BUILD_CONFIG=production
+RUN npm run build -- --configuration=${BUILD_CONFIG}
 
 # Etapa 2: Servir com NGINX
 FROM nginx:alpine
