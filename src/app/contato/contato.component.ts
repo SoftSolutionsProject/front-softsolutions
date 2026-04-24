@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-contato',
@@ -15,7 +16,7 @@ export class ContatoComponent implements OnInit {
   message: string | null = null;
   errorMessage: string | null = null;
 
-  private apiUrl = 'http://localhost:4000/email/suporte';
+  private apiUrl = `${environment.apiUrl}/email/suporte`;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
 
