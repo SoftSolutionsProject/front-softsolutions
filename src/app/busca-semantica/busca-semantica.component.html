@@ -1,0 +1,86 @@
+<div class="busca-box">
+  <div class="busca-texto">
+    <input
+      type="text"
+      [(ngModel)]="termo"
+      placeholder="Digite o curso, tema ou palavra-chave"
+      aria-label="Campo de busca"
+      (keyup.enter)="buscarTexto()"
+    />
+
+    <button type="button" (click)="buscarTexto()" [disabled]="carregando">
+      Buscar
+    </button>
+
+    <button
+      *ngIf="navegadorSuportaVoz && !ouvindo"
+      type="button"
+      (click)="iniciarBuscaVoz()"
+      [disabled]="carregando"
+      [class.voice-processing]="carregando"
+    >
+      🎤 Falar
+    </button>
+
+    <button
+      *ngIf="navegadorSuportaVoz && ouvindo"
+      type="button"
+      (click)="pararBuscaVoz()"
+      class="voice-listening"
+    >
+      ⏹ Parar
+    </button>
+  </div>
+
+  <div *ngIf="!navegadorSuportaVoz" class="estado-busca">
+    Seu navegador não suporta busca por voz.
+  </div>
+
+  <div *ngIf="ouvindo" class="estado-busca">
+    Ouvindo sua voz...
+  </div>
+
+  <div *ngIf="carregando" class="estado-busca">
+    Buscando...
+  </div>
+
+  <div *ngIf="erro" class="erro-box">
+    {{ erro }}
+  </div>
+
+  <div *ngIf="transcricao" class="transcricao-box">
+    <h3>Texto reconhecido</h3>
+    <p>{{ transcricao }}</p>
+  </div>
+
+  <div *ngIf="voiceMeta" class="transcricao-box">
+    <h3>Busca por voz</h3>
+    <p><strong>Intenção:</strong> {{ voiceMeta.intent }}</p>
+    <p><strong>Confiança:</strong> {{ voiceMeta.confidence }}</p>
+    <p><strong>Query final:</strong> {{ voiceMeta.searchQuery }}</p>
+  </div>
+
+  <div *ngIf="resultados.length; else estadoVazio" class="resultados-box">
+    <h3>Resultados</h3>
+
+    <div *ngFor="let item of resultados" class="resultado-item">
+      <strong>{{ item.titulo }}</strong>
+      <p>{{ item.descricao }}</p>
+
+      <p *ngIf="item.tipo"><strong>Tipo:</strong> {{ item.tipo }}</p>
+      <p *ngIf="item.curso"><strong>Curso:</strong> {{ item.curso }}</p>
+      <p *ngIf="item.modulo"><strong>Módulo:</strong> {{ item.modulo }}</p>
+      <p *ngIf="item.professor"><strong>Professor:</strong> {{ item.professor }}</p>
+
+      <a *ngIf="item.url" [href]="item.url" target="_blank" rel="noopener noreferrer">
+        Abrir resultado
+      </a>
+    </div>
+  </div>
+
+  <ng-template #estadoVazio>
+    <div *ngIf="!carregando && !erro && !transcricao && !voiceMeta" class="estado-busca">
+      Digite um termo ou use o microfone para iniciar a busca.
+    </div>
+  </ng-template>
+</div>

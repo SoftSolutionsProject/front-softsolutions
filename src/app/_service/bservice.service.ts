@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../environments/environment';
 import { DashboardResponse } from '../dashboard/dashboard.model';
 
 @Injectable({ providedIn: 'root' })
 export class BService {
   private readonly API_URL = environment.apiUrl;
+  private platformId = inject(PLATFORM_ID);
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   private handleError(error: HttpErrorResponse) {
     console.error('Erro BService:', error);
@@ -17,9 +19,9 @@ export class BService {
   }
 
   private getAuthHeaders() {
-    const token = localStorage.getItem('token');
+    const token = isPlatformBrowser(this.platformId) ? localStorage.getItem('token') : null;
     return {
-      headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
+      headers: new HttpHeaders({ Authorization: token ? `Bearer ${token}` : '' }),
     };
   }
 
@@ -28,9 +30,11 @@ export class BService {
   login(email: string, senha: string): Observable<{ usuario: any; access_token: string }> {
   return this.http.post<{ usuario: any; access_token: string }>(`${this.API_URL}/usuarios/login`, { email, senha }).pipe(
     tap((res) => {
-      localStorage.setItem('token', res.access_token); // Corrigido
-      localStorage.setItem('_idUser', res.usuario.id.toString());
-      localStorage.setItem('tipoUser', res.usuario.tipo);
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem('token', res.access_token);
+        localStorage.setItem('_idUser', res.usuario.id.toString());
+        localStorage.setItem('tipoUser', res.usuario.tipo);
+      }
     }),
     catchError(this.handleError)
   );
@@ -44,9 +48,11 @@ export class BService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('_idUser');
-    localStorage.removeItem('tipoUser');
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('_idUser');
+      localStorage.removeItem('tipoUser');
+    }
   }
 
   // ---------- PERFIL ----------

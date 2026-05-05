@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
+import { BuscaSemanticaComponent } from '../busca-semantica/busca-semantica.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MaterialModule, CommonModule],
+  imports: [MaterialModule, CommonModule, FormsModule, BuscaSemanticaComponent, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -20,7 +23,7 @@ export class HomeComponent implements OnInit {
       duration: '10h',
       modules: 8,
       level: 'Iniciante',
-      id:13
+      id: 13
     },
     {
       title: 'Introdução ao React Native Para Mobile',
@@ -31,7 +34,7 @@ export class HomeComponent implements OnInit {
       duration: '50h',
       modules: 5,
       level: 'Intermediário',
-      id:2
+      id: 2
     },
     {
       title: 'JavaScript Avançado para Web',
@@ -42,7 +45,7 @@ export class HomeComponent implements OnInit {
       duration: '55h',
       modules: 5,
       level: 'Avançado',
-      id:12
+      id: 12
     }
   ];
 

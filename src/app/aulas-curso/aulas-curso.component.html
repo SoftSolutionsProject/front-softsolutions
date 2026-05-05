@@ -1,12 +1,5 @@
 <div class="aulas-curso-container">
-
-  <!-- Player de vídeo -->
   <div class="video-player">
-
-    <h3 class="titulo-aula-atual" *ngIf="aulaAtual?.nomeAula">
-      Aula atual: {{ aulaAtual.nomeAula }}
-    </h3>
-
     <iframe
       *ngIf="currentVideoUrl"
       [src]="currentVideoUrl"
@@ -14,47 +7,19 @@
       allowfullscreen
       class="video-frame"
     ></iframe>
-
-    <p *ngIf="!currentVideoUrl" class="texto-instrucao">Selecione uma aula para assistir.</p>
-
-    <div class="progresso-geral" *ngIf="progresso !== null">
-      <p>Progresso do curso: {{ progresso }}%</p>
-      <div class="barra-externa">
-        <div class="barra-interna" [style.width.%]="progresso"></div>
-      </div>
-    </div>
-
-    <div *ngIf="inscricao && progresso === 100" class="certificado-btn-container">
-      <button (click)="verCertificado()" class="btn-certificado">
-        {{ certificadoEmitido ? 'Ver Certificado' : 'Gerar Certificado' }}
-      </button>
-
-      <button
-        *ngIf="certificadoEmitido"
-        (click)="avaliarCurso()"
-        class="btn-certificado"
-        style="margin-left: 10px; background-color: #2ecc71;">
-        {{ jaAvaliou ? 'Alterar Avaliação' : 'Avaliar Curso' }}
-      </button>
-    </div>
+    <p *ngIf="!currentVideoUrl">Selecione uma aula para assistir.</p>
   </div>
 
-  <!-- Lista de módulos e aulas -->
   <div class="lista-modulos">
+    <h3>Lista de Módulos</h3>
     <div *ngIf="curso?.modulos; else noModulos">
       <div *ngFor="let modulo of curso?.modulos" class="modulo">
         <h4>{{ modulo.nomeModulo }}</h4>
-        <ul class="aulas-lista">
-          <li *ngFor="let aula of modulo.aulas" class="aula-item">
-            <div class="aula-info" (click)="playAula(aula.videoUrl, aula)">
-              <span class="aula-nome">{{ aula.nomeAula }}</span>
-            </div>
-            <input
-              type="checkbox"
-              [checked]="isAulaConcluida(aula.id)"
-              (change)="alternarConclusaoAula(aula.id, getCheckboxValue($event))"
-              [disabled]="certificadoEmitido"
-            />
+        <ul>
+          <li *ngFor="let aula of modulo.aulas">
+            <span (click)="playAula(aula.videoUrl)" class="aula-nome">
+              {{ aula.nomeAula }}
+            </span>
           </li>
         </ul>
       </div>

@@ -1,0 +1,43 @@
+.custom-toolbar {
+  background-color: var(--cor-componentes);
+  border-bottom: 1px solid #565252;
+  color: white; /* Cor do texto da toolbar */
+}
+
+.toolbar-logo {
+  max-height: 40px;
+  width: auto;
+  border-top: 20px;
+}
+
+.menu-button {
+  display: none; /* Ocultar o botão de menu por padrão em telas maiores */
+}
+
+.toolbar-items {
+  display: flex;
+  gap: 16px; /* Espaçamento entre os itens da toolbar */
+}
+
+.toolbar-items .toolbar-link {
+  color: white !important; /* Cor do texto dos links da toolbar */
+}
+
+.spacer {
+  flex: 1 1 auto; /* Espaço flexível para alinhar itens à direita */
+}
+
+@media (max-width: 768px) {
+  .menu-button {
+    display: block; /* Mostrar o botão de menu em telas menores */
+  }
+
+  .toolbar-items {
+    display: none; /* Ocultar itens da toolbar em telas menores */
+  }
+
+  .drawer-container {
+    width: 100%; /* Utilizar toda a largura disponível para o drawer container */
+  }
+}
+

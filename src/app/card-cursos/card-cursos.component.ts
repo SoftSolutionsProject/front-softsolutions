@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { MaterialModule } from '../material.module';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../material.module';
 
 @Component({
   selector: 'app-card-cursos',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, RouterModule],
   templateUrl: './card-cursos.component.html',
   styleUrl: './card-cursos.component.css'
 })
@@ -16,5 +17,4 @@ export class CardCursosComponent {
   @Input() avaliacao: number = 0;
   @Input() estrelas: string[] = [];
   @Input() id: number = 0;
-
 }

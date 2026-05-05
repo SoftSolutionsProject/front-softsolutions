@@ -1,4 +1,3 @@
-
 <div class="home-container">
   <div class="bloco-principal">
     <div class="conteudo-destaque">
@@ -7,23 +6,28 @@
         <p>
           Aprenda programação com professores experientes e conteúdo atualizado.
         </p>
+
         <div class="lista-metricas">
           <div class="metadado">
             <h3>+1000</h3>
             <p>Alunos Formados</p>
           </div>
+
           <div class="metadado">
             <h3>100%</h3>
             <p>Cursos Online</p>
           </div>
+
           <div class="metadado">
             <h3 style="font-size: 4em;">∞</h3>
             <p>Acesso Vitalício</p>
           </div>
         </div>
+
         <button [routerLink]="['/login']" class="botao-acoes">Iniciar Jornada</button>
       </div>
     </div>
+
     <div class="imagem-destaque">
       <img
         src="https://www.valuehost.com.br/blog/wp-content/uploads/2016/10/linguagens-de-programacao.jpeg.webp"
@@ -32,27 +36,40 @@
     </div>
   </div>
 
+  <section class="search-section">
+    <div class="section-header">
+      <h2>Buscar cursos e conteúdos</h2>
+      <p>Pesquise por texto ou envie um áudio para encontrar o que procura.</p>
+    </div>
+
+    <app-busca-semantica></app-busca-semantica>
+  </section>
+
   <section class="courses-section">
     <div class="section-header">
       <h2>Nossos Cursos em Destaque</h2>
       <p>Escolha o caminho certo para sua carreira em tecnologia</p>
     </div>
+
     <div class="course-grid">
       <div class="course-card" *ngFor="let course of featuredCourses">
         <div class="course-card-header">
           <img [src]="course.image" [alt]="course.title">
-          <div class="course-badge">{{course.level}}</div>
+          <div class="course-badge">{{ course.level }}</div>
         </div>
-        <div class="course-card-body">
-          <h3>{{course.title}}</h3>
-          <div class="course-meta">
-            <span><i class="icon-clock"></i> {{course.duration}}</span>
-            <span><i class="icon-chart"></i> {{course.modules}} Módulos</span>
-          </div>
-          <p>{{course.description}}</p>
-          <div class="course-footer">
-            <button class="botao-card-home mb-2" [routerLink]="['/curso', course.id]" >Detalhes</button>
 
+        <div class="course-card-body">
+          <h3>{{ course.title }}</h3>
+
+          <div class="course-meta">
+            <span><i class="icon-clock"></i> {{ course.duration }}</span>
+            <span><i class="icon-chart"></i> {{ course.modules }} Módulos</span>
+          </div>
+
+          <p>{{ course.description }}</p>
+
+          <div class="course-footer">
+            <button class="botao-card-home mb-2" [routerLink]="['/curso', course.id]">Detalhes</button>
           </div>
         </div>
       </div>
@@ -63,22 +80,26 @@
     <div class="section-header">
       <h2>Por que Escolher Nossa Plataforma?</h2>
     </div>
+
     <div class="features-grid">
       <div class="feature-card">
         <i class="icon-video"></i>
         <h3>Aulas ao Vivo</h3>
         <p>Interação em tempo real com professores especializados</p>
       </div>
+
       <div class="feature-card">
         <i class="icon-certificate"></i>
         <h3>Certificados Reconhecidos</h3>
         <p>Certificados válidos no mercado de trabalho</p>
       </div>
+
       <div class="feature-card">
         <i class="icon-community"></i>
         <h3>Comunidade Ativa</h3>
         <p>Networking e suporte de outros alunos</p>
       </div>
+
       <div class="feature-card">
         <i class="icon-laptop"></i>
         <h3>Conteúdo Atualizado</h3>
