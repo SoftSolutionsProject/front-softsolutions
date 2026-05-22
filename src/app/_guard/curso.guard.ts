@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { BService } from '../_service/bservice.service';
 
@@ -6,9 +7,17 @@ import { BService } from '../_service/bservice.service';
   providedIn: 'root',
 })
 export class CourseGuard implements CanActivate {
-  constructor(private bservice: BService, private router: Router) {}
+  constructor(
+    private bservice: BService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {}
 
   async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
+    if (!isPlatformBrowser(this.platformId)) {
+      return false;
+    }
+
     const cursoId = Number(route.params['id']);
     const userId = localStorage.getItem('_idUser');
 
