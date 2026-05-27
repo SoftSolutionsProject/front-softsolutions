@@ -89,7 +89,7 @@
   transform: scale(1.05);
 }
 
-.courses-section, .features-section {
+.search-section, .courses-section, .features-section {
   padding: 5rem 2rem;
   text-align: center;
   background-color: #0b0b0bdb;
@@ -301,6 +301,10 @@ body {
 
   .imagem-destaque {
     max-height: 200px;
+  }
+
+  .search-section {
+    padding: 3rem 1rem;
   }
 }
 

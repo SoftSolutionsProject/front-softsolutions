@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
+import { RouterModule } from '@angular/router';
+import { BuscaSemanticaComponent } from '../busca-semantica/busca-semantica.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MaterialModule, CommonModule],
+  imports: [MaterialModule, CommonModule, RouterModule, BuscaSemanticaComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
