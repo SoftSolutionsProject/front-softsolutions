@@ -1,0 +1,100 @@
+<button
+  class="chat-fab"
+  type="button"
+  aria-label="Abrir assistente virtual"
+  (click)="toggleChat()"
+>
+  <span *ngIf="!open">AI</span>
+  <span *ngIf="open">×</span>
+</button>
+
+<section class="chat-panel" *ngIf="open" aria-label="Assistente virtual SoftSolutions">
+  <div class="chat-header">
+    <div class="chat-avatar">AI</div>
+    <div>
+      <h2>SoftSolutions AI</h2>
+      <span>Assistente virtual online</span>
+    </div>
+
+    <button class="clear-chat-btn" type="button" (click)="clearChat()">
+      Limpar
+    </button>
+  </div>
+
+  <div class="chat-body" #chatBody>
+    <div
+      *ngFor="let msg of messages"
+      class="message-wrapper"
+      [ngClass]="{
+        'user-wrapper': msg.sender === 'user',
+        'bot-wrapper': msg.sender === 'bot'
+      }"
+    >
+      <div
+        class="message"
+        [ngClass]="{
+          'user-message': msg.sender === 'user',
+          'bot-message': msg.sender === 'bot'
+        }"
+      >
+        <div class="message-text">{{ msg.text }}</div>
+
+        <div *ngIf="msg.suggestions?.length" class="suggestions">
+          <button
+            type="button"
+            *ngFor="let suggestion of msg.suggestions"
+            (click)="selectSuggestion(suggestion)"
+          >
+            {{ suggestion }}
+          </button>
+        </div>
+
+        <div *ngIf="msg.relatedCourses?.length" class="related-courses">
+          <div class="section-title">Cursos relacionados</div>
+          <div *ngFor="let course of msg.relatedCourses" class="course-pill">
+            {{ course }}
+          </div>
+        </div>
+
+        <div *ngIf="msg.navigation?.length" class="navigation-links">
+          <div class="section-title">Acessos rápidos</div>
+
+          <div *ngFor="let nav of msg.navigation" class="navigation-card">
+            <div class="navigation-info">
+              <div class="navigation-title">{{ nav.label }}</div>
+              <div class="navigation-description">{{ nav.description }}</div>
+              <div class="navigation-route">{{ nav.route }}</div>
+            </div>
+
+            <button
+              class="navigation-button"
+              type="button"
+              (click)="navigateTo(nav.route)"
+            >
+              Acessar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="typing">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      type="text"
+      placeholder="Digite sua mensagem..."
+      [(ngModel)]="userMessage"
+      (keyup.enter)="sendMessage()"
+    />
+
+    <button type="button" (click)="sendMessage()">
+      Enviar
+    </button>
+  </div>
+</section>
