@@ -1,42 +1,35 @@
+# 🎨 Frontend SoftSolutions
 
-# 🎨 Frontend - SoftSolutions
+> Interface web da plataforma SoftSolutions, desenvolvida em Angular para consumir a API do projeto e entregar suas funcionalidades.
 
-> Interface web desenvolvida e projetada para interagir com o backend da plataforma SoftSolutions.
+## 📚 Links e documentação
 
+> 📘 **Documentação completa do projeto:**  
+> [Acesse a documentação oficial do SoftSolutions](https://github.com/SoftSolutionsProject/Documentacao/blob/main/README.md)
 
-## 🚀 Como Executar
+### Links úteis
+
+- [🌐 Frontend em produção na Azure](https://softsolutions-front-prod-brs-ewgbctepdgggewde.canadacentral-01.azurewebsites.net)
+- [☁️ API em produção na Azure](https://softsolutions-api-prod-brs-fycdfxh4b2g7evgn.canadacentral-01.azurewebsites.net)
+- [📘 Swagger da API na Azure](https://softsolutions-api-prod-brs-fycdfxh4b2g7evgn.canadacentral-01.azurewebsites.net/api)
+- [🌐 Frontend em produção na Vercel](https://solutionssoft.vercel.app)
+- [🚀 API em produção no Render](https://api-softsolutions.onrender.com)
+
+## 🚀 Como executar
 
 ### ⚙️ Pré-requisitos
 
 - **Node.js** >= 18.x
-- **Angular CLI** >= 15.x
+- **Angular CLI** >= 17.x
 - **Docker** >= 20.x
 - **Docker Compose** >= 2.x
 
-
-### 🐳 Execução com Docker (Recomendado)
-
-1. **Clone o repositório**
-   ```bash
-   git clone <URL_DO_REPOSITORIO>
-   cd front-softsolutions-develop
-   ```
-
-2. **Construa e suba os containers**
-   ```bash
-   docker-compose up -d --build
-   ```
-
-3. **Acesse a aplicação**
-   - **Frontend**: http://localhost:4200
-
-
-### 💻 Execução local sem Docker
+### 💻 Execução local
 
 1. **Clone o repositório**
    ```bash
-   git clone <URL_DO_REPOSITORIO>
-   cd front-softsolutions-develop
+   git clone https://github.com/SoftSolutionsProject/front-softsolutions
+   cd front-softsolutions
    ```
 
 2. **Instale as dependências**
@@ -44,65 +37,121 @@
    npm install
    ```
 
-3. **Inicie o servidor de desenvolvimento**
-   ```bash
-   ng serve
+3. **Confira a URL da API local**
+
+   O ambiente local usa a API em:
+
+   ```ts
+   http://localhost:4000
    ```
 
-4. **Acesse a aplicação**
-   - Abra o navegador e acesse: `http://localhost:4200`
+   Essa configuração fica em:
 
+   ```bash
+   src/environments/environment.ts
+   ```
 
-## 🐋 Comandos Docker úteis
+4. **Inicie o servidor de desenvolvimento**
+   ```bash
+   npm start
+   ```
 
-```bash
-docker-compose up -d --build    # Subir containers
-docker-compose down             # Parar containers
-docker-compose logs -f          # Visualizar logs
-docker exec -it front bash      # Acessar o container (caso tenha nomeado como 'front')
-```
+5. **Acesse a aplicação**
+   ```bash
+   http://localhost:4200
+   ```
 
+### 🐳 Execução com Docker
 
-## 📜 Scripts Disponíveis
+1. **Construa e suba os containers**
+   ```bash
+   docker-compose up -d --build
+   ```
+
+2. **Acesse a aplicação**
+   ```bash
+   http://localhost:4200
+   ```
+
+3. **Pare os containers quando necessário**
+   ```bash
+   docker-compose down
+   ```
+
+## 📜 Scripts disponíveis
 
 ```bash
 # Desenvolvimento
-ng serve                         # Servidor local Angular
+npm start              # Inicia o Angular em modo desenvolvimento
+npm run watch          # Executa build em modo watch
 
-# Produção
-ng build                         # Build para produção
+# Build
+npm run build          # Gera build de produção
 
-# Testes
-ng test                          # Executar testes unitários
-ng e2e                           # Executar testes end-to-end (caso configurado)
-
-# Lint
-ng lint                          # Verificação de estilo e boas práticas
+# Qualidade
+npm run lint           # Executa lint do projeto
+npm run test           # Executa testes unitários
+npm run test:ci        # Executa testes em modo CI com ChromeHeadless
 ```
 
+## 🧰 Tecnologias utilizadas
 
-## 🧰 Tecnologias Utilizadas
-
-- **Framework**: Angular
+- **Framework**: Angular 17
 - **Linguagem**: TypeScript
+- **UI**: Angular Material e Bootstrap
+- **Gráficos**: ApexCharts
+- **SSR**: Angular SSR com Express
 - **Estilos**: CSS
-- **Empacotamento**: Angular CLI
+- **Build**: Angular CLI
 - **Containerização**: Docker
 - **CI/CD**: GitHub Actions
 
+## 🌐 Ambientes
 
-## 📂 Estrutura do Projeto
+O frontend possui arquivos de ambiente para apontar a aplicação para APIs diferentes:
+
+```bash
+src/environments/
+├── environment.ts          # Desenvolvimento local
+├── environment.prod.ts     # Produção padrão
+├── environment.azure.ts    # Produção na Azure
+└── environment.docker.ts   # Execução com Docker Compose
+```
+
+Na Azure, o frontend consome a API publicada em:
+
+```bash
+https://softsolutions-api-prod-brs-fycdfxh4b2g7evgn.canadacentral-01.azurewebsites.net
+```
+
+## 📂 Estrutura do projeto
 
 ```bash
 src/
-├── app/                     # Componentes principais da aplicação
-├── assets/                  # Imagens, fontes, etc.
-├── main.ts                  # Ponto de entrada
-├── index.html               # HTML base
-└── styles.css               # Estilo global
+├── app/
+│   ├── _guard/             # Guards de autenticação e proteção de rotas
+│   ├── _service/           # Serviços de integração com a API
+│   ├── aulas-curso/        # Tela e lógica de aulas do curso
+│   ├── busca-semantica/    # Interface da busca semântica
+│   ├── chatbot/            # Interface do chatbot
+│   ├── cursos-lista/       # Listagem de cursos
+│   ├── detalhes-curso/     # Detalhes de um curso
+│   ├── dashboard/          # Área do usuário
+│   ├── certificados/       # Emissão e visualização de certificados
+│   ├── login/              # Autenticação
+│   ├── cadastro/           # Cadastro de usuários
+│   ├── profile/            # Perfil do usuário
+│   ├── interfaces/         # Tipagens compartilhadas
+│   ├── app.routes.ts       # Rotas da aplicação
+│   └── app.config.ts       # Configuração principal do Angular
+├── assets/                 # Imagens e arquivos estáticos
+├── environments/           # Configurações por ambiente
+├── main.ts                 # Entrada da aplicação no navegador
+├── main.server.ts          # Entrada para SSR
+├── index.html              # HTML base
+└── styles.css              # Estilos globais
 ```
 
----
 ## Equipe
 
 | Função          | Membro                   |  Conecte-se                  |
